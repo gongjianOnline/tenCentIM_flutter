@@ -284,7 +284,7 @@ class ImIndexView extends GetView<ImIndexController> {
           child: Column(
             children: [
               InkWell(
-                onTap: (){},
+                onTap: (){Get.offNamed("/im-add-user");},
                 child: Container(
                   padding: const EdgeInsets.only(bottom: 11),
                   decoration: const BoxDecoration(
@@ -303,41 +303,7 @@ class ImIndexView extends GetView<ImIndexController> {
                     ),
                   ),
                 ),
-              ),
-              InkWell(
-                onTap: (){print("创建群组");},
-                child: Container(
-                  padding: const EdgeInsets.only(bottom: 11,top: 11),
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Color.fromRGBO(225, 227, 229, 1),// 设置下边框颜色为红色
-                        width: 1, // 设置下边框宽度为 2
-                        style: BorderStyle.solid, // 设置下边框样式为实线
-                      ),
-                    ),
-                  ),
-                  child: const Text(
-                    "创建群组",
-                    style: TextStyle(
-                      fontSize: 18
-                    ),
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: (){print("扫一扫");},
-                child: Container(
-                  margin: const EdgeInsets.only(top: 11),
-                  child: const Text(
-                    "扫一扫",
-                    style: TextStyle(
-                      fontSize: 18
-                    ),
-                  ),
-                ),
               )
-
             ],
           ),
         );
