@@ -12,6 +12,7 @@ class ImIndexView extends GetView<ImIndexController> {
   Widget build(BuildContext context) {
     return Obx(()=>Scaffold(
       appBar: AppBar(
+        elevation:0,
         title:headerComponent(context),
         centerTitle: true,
         flexibleSpace: Container(
@@ -115,7 +116,7 @@ class ImIndexView extends GetView<ImIndexController> {
   messageListComponent(url,userName){
     return InkWell(
         onTap:(){
-          Get.toNamed("/dialogue");
+          Get.toNamed("/im-talk");
         },
         child: Container(
           margin: const EdgeInsets.only(top: 10,bottom: 10),

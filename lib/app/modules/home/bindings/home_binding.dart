@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';
 import "../../IM/im_index/controllers/im_index_controller.dart";
+import "../../MY/my_index/controllers/my_index_controller.dart";
 
 class HomeBinding extends Bindings {
   @override
@@ -12,5 +13,9 @@ class HomeBinding extends Bindings {
     Get.lazyPut<ImIndexController>(
       () => ImIndexController(),
     );
+    Get.lazyPut<MyIndexController>(
+      () => MyIndexController(),
+    );
+    
   }
 }

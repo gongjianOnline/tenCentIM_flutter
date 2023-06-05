@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 class MyIndexController extends GetxController {
   //TODO: Implement MyIndexController
 
-  final count = 0.obs;
+  RxString testName = "火蓝".obs;
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +19,4 @@ class MyIndexController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
 }
