@@ -53,9 +53,28 @@ class MyIndexView extends GetView<MyIndexController> {
                   userInfo("地址","河北省廊坊市"),
                 ],
               ),
+            ),
+
+            Container(
+              padding: const EdgeInsets.only(left: 16,right: 16),
+              margin: const EdgeInsets.only(top: 16),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red[400]
+                      ),
+                      onPressed: (){
+                        Get.offNamed("/login");
+                      },
+                      child: Text("退出账号"),
+                    )
+                  )
+                ],
+              ),
             )
-
-
 
           ],
         )
