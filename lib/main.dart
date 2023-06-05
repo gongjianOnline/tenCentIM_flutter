@@ -4,8 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'app/routes/app_pages.dart';
+import "./app/common/im_controller.dart";
 
-void main() {
+void main() async{
+  await Get.put(IMController());
   runApp(
     GetMaterialApp(
       theme: ThemeData(

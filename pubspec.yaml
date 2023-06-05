@@ -9,6 +9,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: 4.6.5
   kumi_popup_window: ^2.0.1
+  tencent_cloud_chat_sdk: ^5.1.7
+  tencent_im_sdk_plugin_desktop: ^0.1.19
   flutter: 
     sdk: flutter
 
