@@ -11,7 +11,7 @@ class HomeController extends GetxController {
   // navBar
   RxInt currentIndex = 0.obs;
   RxMap currentRouter = {
-    0:const ImIndexView(),
+    0:ImIndexView(),
     1:const BookIndexView(),
     2:const MyIndexView()
   }.obs;

@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'dart:ui';
 class ImIndexController extends GetxController {
   //TODO: Implement ImIndexController
 
-  final count = 0.obs;
+  RxString titleName = "火蓝".obs;
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +20,5 @@ class ImIndexController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+
 }

@@ -91,6 +91,14 @@ packages:
       url: "https://mirrors.tuna.tsinghua.edu.cn/dart-pub/"
     source: hosted
     version: "0.6.5"
+  kumi_popup_window:
+    dependency: "direct main"
+    description:
+      name: kumi_popup_window
+      sha256: "3159a2ee307850ab3520cfb162efc1e330aac2e560569e20227bf2ac93ec06d5"
+      url: "https://mirrors.tuna.tsinghua.edu.cn/dart-pub/"
+    source: hosted
+    version: "2.0.1"
   lints:
     dependency: transitive
     description:

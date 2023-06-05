@@ -18,7 +18,7 @@ class HomeView extends GetView<HomeController> {
         items: const [
           BottomNavigationBarItem(
             icon:Icon(Icons.home),
-            label:"首页"
+            label:"消息"
           ),
           BottomNavigationBarItem(
             icon:Icon(Icons.class_),
