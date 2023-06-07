@@ -1,10 +1,16 @@
 import 'package:get/get.dart';
+import 'package:tencent_mi_flutter/app/common/unifyUI.dart';
 import "../../../common/api/login.dart";
+import '../../../common/im_controller.dart';
 
 class LoginController extends GetxController {
   //TODO: Implement LoginController
+  IMController imController = Get.find();
 
   RxString title = "IM即时聊天".obs;
+
+  RxString userCode = "".obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -20,13 +26,22 @@ class LoginController extends GetxController {
     super.onClose();
   }
 
+  handelChange(value){
+    userCode.value = value;
+  }
+
   handelLogin()async{
+    print(userCode.value);
     // Get.offNamed("/home");
+    if(userCode.value == ""){
+      print(111);
+      UnifyUI.alter("用户名不能为空");
+      return;
+    }
     var response =await LoginApi.login({
-      "name":"admin"
+      "name":userCode.value
     });
-    print("登录参数打印");
-    print(response["data"]['sig']);
+    imController.tenCentLogin(userCode.value, response["data"]['sig']);
   }
 
 }

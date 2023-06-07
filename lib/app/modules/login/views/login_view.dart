@@ -22,11 +22,14 @@ class LoginView extends GetView<LoginController> {
             ),
             Container(
               padding: const EdgeInsets.only(left: 16,right: 16),
-              child: const TextField(
+              child:TextField(
                 decoration: InputDecoration(
                     hintText: "用户名", // 提示词
                     border: OutlineInputBorder(), // 带边框
-                )
+                ),
+                onChanged: (value){
+                  controller.handelChange(value);
+                },
               ),
             ),
             Container(

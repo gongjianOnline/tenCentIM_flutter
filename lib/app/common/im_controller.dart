@@ -139,6 +139,8 @@ import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_status.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_video_elem.dart';
 import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
+import 'package:tencent_mi_flutter/app/common/unifyUI.dart';
+import 'package:tencent_mi_flutter/app/common/utils/storage.dart';
 
 class IMController extends GetxController  {
   
@@ -207,9 +209,25 @@ class IMController extends GetxController  {
     super.onClose();
   }
 
-   
-    
-
+  // 腾讯云用户登录
+  tenCentLogin(userID,userSig)async{
+    V2TimCallback res = await TencentImSDKPlugin.v2TIMManager.login(userID: userID, userSig: userSig);
+    if(res.code == 0){
+      // 登录成功逻辑
+      Get.offNamed("/home");
+      tenCentUserInfo();
+    }else{
+      UnifyUI.alter("登录失败");
+    }
+  }
+  // 腾讯云获取用户信息
+  Future tenCentUserInfo()async{
+    V2TimValueCallback<String> getLoginUserRes = await TencentImSDKPlugin.v2TIMManager.getLoginUser();
+    if (getLoginUserRes.code == 0) {
+      // 存入本地(目前只能获取用户名)
+      Storage.setData("userInfo",getLoginUserRes.data);
+    }
+  }
 
 
 

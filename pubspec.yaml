@@ -12,6 +12,8 @@ dependencies:
   tencent_cloud_chat_sdk: ^5.1.7
   tencent_im_sdk_plugin_desktop: ^0.1.19
   dio: ^5.2.0
+  fluttertoast: ^8.2.2
+  shared_preferences: ^2.1.1
   flutter: 
     sdk: flutter
 
