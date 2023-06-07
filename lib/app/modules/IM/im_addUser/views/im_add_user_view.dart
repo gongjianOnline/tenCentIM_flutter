@@ -26,13 +26,23 @@ class ImAddUserView extends GetView<ImAddUserController> {
               ),
             ),
             searchComponent(context),
+            controller.searchStatus.value == 1? Container(
+              padding: const EdgeInsets.only(top: 40),
+              child: const Text(
+                "当前用户不存在",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black38
+                ),
+              ),
+            ):
             Expanded(
               flex: 1,
               child: ListView(
                 padding: const EdgeInsets.only(left: 16,right: 16,top: 16),
-                children: [
-                  userItem()
-                ],
+                children: controller.searchList.map((item){
+                  return userItem(item);
+                }).toList().cast<Widget>(),
               ),
             )
           ],
@@ -55,9 +65,6 @@ class ImAddUserView extends GetView<ImAddUserController> {
             child:Container(
               margin: EdgeInsets.only(right: 10),
               child: TextField(
-                
-                // focusNode:controller.inputFocusNode,
-                // onTap:controller.inputOnTap,
                 decoration: InputDecoration(
                   filled: true,
                   contentPadding:const EdgeInsets.symmetric(horizontal:10,vertical: 0),
@@ -71,24 +78,30 @@ class ImAddUserView extends GetView<ImAddUserController> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
+                onChanged: (value){
+                  controller.handelSearch(value);
+                },
                 
               ),
             )
           ),
-          Container(
-            width: 60,
-            height: 32,
-            margin: EdgeInsets.only(right: 10),
-            alignment: Alignment.center,
-            decoration:BoxDecoration(
-              color: const Color.fromRGBO(117, 197, 243, 1),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: const Text(
-              "搜索",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.white
+          InkWell(
+            onTap: (){controller.submitSearch();},
+            child: Container(
+              width: 60,
+              height: 32,
+              margin: EdgeInsets.only(right: 10),
+              alignment: Alignment.center,
+              decoration:BoxDecoration(
+                color: const Color.fromRGBO(117, 197, 243, 1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: const Text(
+                "搜索",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.white
+                ),
               ),
             ),
           )
@@ -98,27 +111,33 @@ class ImAddUserView extends GetView<ImAddUserController> {
   }
 
   // 搜索的用户
-  userItem(){
-    return Container(
-      padding:const EdgeInsets.only(bottom: 16),
-      decoration: const BoxDecoration(
-        border:  Border(
-          bottom: BorderSide(
-            color: Color.fromARGB(66, 221, 221, 221),
-            width: 1
+  userItem(itemInfo){
+    // /im-friend-info
+    return InkWell(
+      onTap:(){
+        Get.toNamed("/im-friend-info",arguments: {"itemInfo":itemInfo});
+      },
+      child: Container(
+        padding:const EdgeInsets.only(bottom: 16),
+        decoration: const BoxDecoration(
+          border:  Border(
+            bottom: BorderSide(
+              color: Color.fromARGB(66, 221, 221, 221),
+              width: 1
+            )
           )
-        )
-      ),
-      child: Row(
-        children: [
-          Container(
-            child: IMChat.IdentifyAvatars("", "admin"),
-          ),
-          Container(
-            padding: const EdgeInsets.only(left: 16),
-            child: Text(controller.textName.value),
-          )
-        ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              child: IMChat.IdentifyAvatars(itemInfo.faceUrl, itemInfo.userID),
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 16),
+              child: Text(itemInfo.userID),
+            )
+          ],
+        ),
       ),
     );
   }

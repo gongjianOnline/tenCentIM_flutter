@@ -60,14 +60,14 @@ class ImIndexView extends GetView<ImIndexController> {
             child: Container(
               child: Row(
                 children: [
-                  IdentifyAvatars("","火蓝"),
+                  IdentifyAvatars("",controller.userName.value),
                   Container(
                     child: Row(
                       children: [
                         Container(
                           margin: const EdgeInsets.only(left: 10.5),
                           child: Text(
-                            "${controller.titleName}",
+                            "${controller.userName}",
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight:FontWeight.w600

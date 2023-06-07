@@ -6,6 +6,8 @@ import '../modules/IM/im_talk/bindings/im_talk_binding.dart';
 import '../modules/IM/im_talk/views/im_talk_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/IM/im_friendInfo/bindings/im_friend_info_binding.dart';
+import '../modules/IM/im_friendInfo/views/im_friend_info_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.LOGIN,
       page: () => const LoginView(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.IM_FRIEND_INFO,
+      page: () => const ImFriendInfoView(),
+      binding: ImFriendInfoBinding(),
     ),
   ];
 }

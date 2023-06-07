@@ -228,6 +228,41 @@ class IMController extends GetxController  {
       Storage.setData("userInfo",getLoginUserRes.data);
     }
   }
+  // 拉去会话列表
+  tenCentSessionList()async{
+    V2TimValueCallback<V2TimConversationResult> getConversationListRes = await TencentImSDKPlugin.v2TIMManager.getConversationManager().getConversationList(nextSeq: '0',count: 100);
+    if (getConversationListRes.code == 0) {
+      //拉取成功
+      bool? isFinished = getConversationListRes.data?.isFinished;//是否拉取完
+      String? nextSeq = getConversationListRes.data?.nextSeq;//后续分页拉取的游标
+      List<V2TimConversation?>? conversationList =
+          getConversationListRes.data?.conversationList;//此次拉取到的消息列表
+      //如果没有拉取完，使用返回的nextSeq继续拉取直到isFinished为true
+      if (!isFinished!) {
+        V2TimValueCallback<V2TimConversationResult> nextConversationListRes =
+            await TencentImSDKPlugin.v2TIMManager
+                .getConversationManager()
+                .getConversationList(count: 100, nextSeq: nextSeq = "0");//使用返回的nextSeq继续拉取直到isFinished为true
+      }
+      print("测试打印会话列表");
+      print(conversationList);
+    }
+  }
+
+  // 查询其他用户资料(当前主要用于添加好友的好友查找)
+  queryUserInfo(userID)async{
+    V2TimValueCallback<List<V2TimUserFullInfo>> getUsersInfoRes = await TencentImSDKPlugin.v2TIMManager.getUsersInfo(userIDList: [userID]);//需要查询的用户id列表
+    if (getUsersInfoRes.code == 0) {
+      return getUsersInfoRes.data?[0];
+    }else{
+      return null;
+    }
+  }
+
+
+
+
+
 
 
 

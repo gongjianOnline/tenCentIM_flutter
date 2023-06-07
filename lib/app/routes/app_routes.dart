@@ -7,6 +7,7 @@ abstract class Routes {
   static const IM_TALK = _Paths.IM_TALK;
   static const IM_ADD_USER = _Paths.IM_ADD_USER;
   static const LOGIN = _Paths.LOGIN;
+  static const IM_FRIEND_INFO = _Paths.IM_FRIEND_INFO;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const IM_TALK = '/im-talk';
   static const IM_ADD_USER = '/im-add-user';
   static const LOGIN = '/login';
+  static const IM_FRIEND_INFO = '/im-friend-info';
 }
