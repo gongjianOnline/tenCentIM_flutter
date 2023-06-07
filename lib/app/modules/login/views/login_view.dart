@@ -30,17 +30,6 @@ class LoginView extends GetView<LoginController> {
               ),
             ),
             Container(
-              padding:const EdgeInsets.only(left: 16,right: 16),
-              margin:const EdgeInsets.only(top: 16),
-              child: const TextField(
-                obscureText:true,
-                decoration: InputDecoration(
-                    hintText: "密码", // 提示词
-                    border: OutlineInputBorder(), // 带边框
-                )
-              ),
-            ),
-            Container(
               padding: const EdgeInsets.only(left: 16,right: 16),
               margin: const EdgeInsets.only(top: 16),
               child: Row(
@@ -52,7 +41,8 @@ class LoginView extends GetView<LoginController> {
                         padding: const EdgeInsets.symmetric(vertical: 10)
                       ),
                       onPressed: (){
-                        Get.offNamed("/home");
+                        controller.handelLogin();
+                        
                       }, 
                       child: const Text("登录",style: TextStyle(fontSize: 20),)
                     )
