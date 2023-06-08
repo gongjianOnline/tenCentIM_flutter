@@ -220,6 +220,19 @@ class IMController extends GetxController  {
       UnifyUI.alter("登录失败");
     }
   }
+
+  // 腾讯云用户退出
+  tenCentLogout()async{
+    V2TimCallback logoutRes = await TencentImSDKPlugin.v2TIMManager.logout();
+    if(logoutRes.code == 0){
+      // 退出成功
+      Storage.removeData("userInfo");
+      Get.offNamed("/login");
+    }else{
+      UnifyUI.alter("退出失败");
+    }
+  }
+
   // 腾讯云获取用户信息
   Future tenCentUserInfo()async{
     V2TimValueCallback<String> getLoginUserRes = await TencentImSDKPlugin.v2TIMManager.getLoginUser();

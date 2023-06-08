@@ -67,7 +67,7 @@ class MyIndexView extends GetView<MyIndexController> {
                         backgroundColor: Colors.red[400]
                       ),
                       onPressed: (){
-                        Get.offNamed("/login");
+                        controller.handelLogout();
                       },
                       child: Text("退出账号"),
                     )

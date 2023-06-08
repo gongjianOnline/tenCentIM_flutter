@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
+import 'package:tencent_mi_flutter/app/common/im_relationship.dart';
 
 class ImFriendInfoController extends GetxController {
   //TODO: Implement ImFriendInfoController
+  IMRelationship imRelationship = Get.find();
 
   RxString titleName = "添加好友".obs;
   V2TimUserFullInfo? userFullInfo;
@@ -22,5 +24,11 @@ class ImFriendInfoController extends GetxController {
   void onClose() {
     super.onClose();
   }
+
+  handelAddFriend(){
+    print("111");
+    imRelationship.addFriend("test");
+  }
+
 
 }

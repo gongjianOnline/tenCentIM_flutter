@@ -48,24 +48,24 @@ class ImFriendInfoView extends GetView<ImFriendInfoController> {
             ),
 
             Container(
-              padding: const EdgeInsets.only(left: 16,right: 16),
-              margin: const EdgeInsets.only(top: 16),
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding:const EdgeInsets.symmetric(vertical: 14),
-                        backgroundColor: Colors.blue[600]
+                padding: const EdgeInsets.only(left: 16,right: 16),
+                margin: const EdgeInsets.only(top: 16),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding:const EdgeInsets.symmetric(vertical: 14),
+                          backgroundColor: Colors.blue[600]
+                        ),
+                        onPressed: (){controller.handelAddFriend();},
+                        child: Text(controller.titleName.value),
                       ),
-                      onPressed: (){},
-                      child: Text(controller.titleName.value),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
-            )
 
           ],
         )

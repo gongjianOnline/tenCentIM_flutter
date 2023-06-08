@@ -153,8 +153,8 @@ class IMRelationship extends GetxController  {
       onFriendApplicationListAdded: (List<V2TimFriendApplication> applicationList) async {
         //好友请求数量增加的回调
         //applicationList 新增的好友请求信息列表
-        print("新增好友请求信息列表打印");
-        print(applicationList);
+        print("添加好友请求打印");
+        print(applicationList[0].type);
       }
     );
     TencentImSDKPlugin.v2TIMManager
@@ -167,6 +167,25 @@ class IMRelationship extends GetxController  {
     super.onClose();
   }
 
+
+  // 添加好友
+  addFriend(String userID)async{
+        //添加好友
+    V2TimValueCallback<V2TimFriendOperationResult> addFriendRes = await TencentImSDKPlugin.v2TIMManager.getFriendshipManager().addFriend(
+      userID: userID, //需要添加的用户id
+      remark: "", //添加的好友的好友备注
+      friendGroup: "", //添加好友所在分组
+      addWording: "", //添加好友附带信息
+      addSource: "", //添加来源描述
+      addType: FriendTypeEnum.V2TIM_FRIEND_TYPE_BOTH, //设置加好友类型，默认双向
+    );
+    if (addFriendRes.code == 0) {
+      print("添加请求发送成功");
+      print(addFriendRes.data?.resultCode);
+      print(addFriendRes.data?.resultInfo);
+      print(addFriendRes.data?.userID);
+    }
+  }
 
 
 }
