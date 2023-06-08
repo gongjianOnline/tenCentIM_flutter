@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
+import 'package:tencent_mi_flutter/app/common/global_controller.dart';
 import 'package:tencent_mi_flutter/app/common/utils/storage.dart';
 
 import 'app/routes/app_pages.dart';
@@ -9,6 +10,7 @@ import "./app/common/im_controller.dart";
 import "./app/common/im_relationship.dart";
 
 void main() async{
+  await Get.put(GlobalController());
   await Get.put(IMController());
   await Get.put(IMRelationship());
   var isLogin = await Storage.getData("userInfo");

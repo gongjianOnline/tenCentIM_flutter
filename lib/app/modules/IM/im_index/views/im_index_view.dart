@@ -112,7 +112,10 @@ class ImIndexView extends GetView<ImIndexController> {
       ),
     );
   }
-  // 消息列表
+
+
+
+  // 消息列表模版
   messageListComponent(url,userName){
     return InkWell(
         onTap:(){

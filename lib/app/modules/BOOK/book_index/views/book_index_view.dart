@@ -8,10 +8,10 @@ class BookIndexView extends GetView<BookIndexController> {
   const BookIndexView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(()=>Scaffold(
       appBar: AppBar(
         elevation:0,
-        title:const Text("联系人"),
+        title:Text(controller.titleName.value),
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -23,14 +23,48 @@ class BookIndexView extends GetView<BookIndexController> {
         ),
       ),
       body:Container(
-        child: ListView(
-          padding: EdgeInsets.only(top: 20),
+        child: Column(
           children: [
-            contactsItemComponent()
+            InkWell(
+              onTap: (){Get.toNamed("/book-new-people");},
+              child: Container(
+                height: 52,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Colors.black12,
+                      width: 1
+                    )
+                  )
+                ),
+                padding: const EdgeInsets.only(left: 16,right: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text(
+                      "新朋友",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    Icon(Icons.navigate_next_rounded,size: 23)
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: ListView(
+                padding: EdgeInsets.only(top: 20),
+                children: [
+                  contactsItemComponent()
+                ],
+              )
+            )
           ],
         ),
       ),
-    );
+    ));
   }
 
   contactsItemComponent(){

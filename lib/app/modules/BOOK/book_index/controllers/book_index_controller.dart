@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 class BookIndexController extends GetxController {
   //TODO: Implement BookIndexController
 
-  final count = 0.obs;
+  final titleName = "通讯录".obs;
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +19,5 @@ class BookIndexController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+
 }

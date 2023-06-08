@@ -139,11 +139,13 @@ import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_status.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_video_elem.dart';
 import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
+import 'package:tencent_mi_flutter/app/common/global_controller.dart';
 import 'package:tencent_mi_flutter/app/common/unifyUI.dart';
 import 'package:tencent_mi_flutter/app/common/utils/storage.dart';
 
 // IM 关系链
 class IMRelationship extends GetxController  {
+  GlobalController globalController = Get.find();
   
   @override
   void onInit() async {
@@ -155,6 +157,7 @@ class IMRelationship extends GetxController  {
         //applicationList 新增的好友请求信息列表
         print("添加好友请求打印");
         print(applicationList[0].type);
+        globalController.addFriendList.value = applicationList;
       }
     );
     TencentImSDKPlugin.v2TIMManager
@@ -184,6 +187,20 @@ class IMRelationship extends GetxController  {
       print(addFriendRes.data?.resultCode);
       print(addFriendRes.data?.resultInfo);
       print(addFriendRes.data?.userID);
+    }
+  }
+
+  // 获取好友申请列表
+  friendApplication()async{
+    V2TimValueCallback<V2TimFriendApplicationResult> getFriendApplicationListRes = await TencentImSDKPlugin.v2TIMManager
+      .getFriendshipManager()
+      .getFriendApplicationList();
+    if(getFriendApplicationListRes.code == 0){
+      print("好友申请列表查询成功");
+      print(getFriendApplicationListRes.data?.unreadCount);
+      print(getFriendApplicationListRes.data?.friendApplicationList);
+    }else{
+      print("好友申请列表查询失败");
     }
   }
 
