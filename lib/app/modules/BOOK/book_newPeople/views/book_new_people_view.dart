@@ -28,7 +28,7 @@ class BookNewPeopleView extends GetView<BookNewPeopleController> {
       body: Container(
         child: ListView(
           children: controller.globalController.addFriendList.map((item){
-            return messageListComponent("","新朋友");
+            return messageListComponent(item);
           }).toList().cast<Widget>(),
           // children: [
           //   messageListComponent("","新盆友")
@@ -59,12 +59,8 @@ class BookNewPeopleView extends GetView<BookNewPeopleController> {
   }
 
   // 新好友列表
-  messageListComponent(url,userName){
-    return InkWell(
-        onTap:(){
-          Get.toNamed("/im-talk");
-        },
-        child: Container(
+  messageListComponent(userInfo){
+    return Container(
           margin: const EdgeInsets.only(top: 10,bottom: 10),
           padding: const EdgeInsets.only(left: 16,right: 16,bottom: 16),
           decoration: const BoxDecoration(
@@ -77,7 +73,7 @@ class BookNewPeopleView extends GetView<BookNewPeopleController> {
           ),
           child: Row(
             children: [
-              IMChat.IdentifyAvatars(url,userName),
+              IMChat.IdentifyAvatars(userInfo.faceUrl,userInfo.userID),
               Expanded(
                 flex: 1,
                 child: Column(
@@ -86,7 +82,7 @@ class BookNewPeopleView extends GetView<BookNewPeopleController> {
                     Container(
                       margin: const EdgeInsets.only(left: 20),
                       child: Text(
-                        userName,
+                        userInfo.userID,
                         style:const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w400
@@ -108,13 +104,12 @@ class BookNewPeopleView extends GetView<BookNewPeopleController> {
               ),
               Container(
                 child: ElevatedButton(
-                  onPressed: (){print("同意");},
+                  onPressed: (){controller.handelAgreeFriend(userInfo);},
                   child: const Text("同意"),
                 ),
               )
             ],
           ),
-        )
     );
   }
 

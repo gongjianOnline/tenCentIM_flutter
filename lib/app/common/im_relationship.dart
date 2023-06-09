@@ -157,7 +157,9 @@ class IMRelationship extends GetxController  {
         //applicationList 新增的好友请求信息列表
         print("添加好友请求打印");
         print(applicationList[0].type);
-        globalController.addFriendList.value = applicationList;
+        for (var item in applicationList) {
+          globalController.addFriendList.add(item);
+        }
       }
     );
     TencentImSDKPlugin.v2TIMManager
@@ -192,15 +194,31 @@ class IMRelationship extends GetxController  {
 
   // 获取好友申请列表
   friendApplication()async{
+    globalController.addFriendList.value = [];
     V2TimValueCallback<V2TimFriendApplicationResult> getFriendApplicationListRes = await TencentImSDKPlugin.v2TIMManager
       .getFriendshipManager()
       .getFriendApplicationList();
     if(getFriendApplicationListRes.code == 0){
-      print("好友申请列表查询成功");
-      print(getFriendApplicationListRes.data?.unreadCount);
-      print(getFriendApplicationListRes.data?.friendApplicationList);
+      getFriendApplicationListRes.data?.friendApplicationList?.forEach((item){
+        globalController.addFriendList.add(item!);
+      });
+    }
+  }
+
+  // 同意好友申请
+  agreeFriend(V2TimFriendApplication userInfo)async{
+    V2TimValueCallback<V2TimFriendOperationResult>
+        acceptFriendApplicationRes = await TencentImSDKPlugin.v2TIMManager
+            .getFriendshipManager()
+            .acceptFriendApplication(
+                responseType: FriendResponseTypeEnum.V2TIM_FRIEND_ACCEPT_AGREE, //建立好友关系时选择单向/双向好友关系
+                type: 	FriendApplicationTypeEnum.values[userInfo.type], //加好友类型 要与getApplicationList查询到的type相同，否则会报错。
+                userID: userInfo.userID); //同意好友的用户id
+    if (acceptFriendApplicationRes.code == 0) {
+      UnifyUI.alter("操作成功");
+      friendApplication();
     }else{
-      print("好友申请列表查询失败");
+      UnifyUI.alter("操作失败");
     }
   }
 

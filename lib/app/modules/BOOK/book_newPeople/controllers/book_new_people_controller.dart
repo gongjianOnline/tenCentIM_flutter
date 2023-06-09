@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_application.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_application_result.dart';
 import 'package:tencent_mi_flutter/app/common/im_relationship.dart';
 
 import '../../../../common/global_controller.dart';
@@ -10,7 +12,7 @@ class BookNewPeopleController extends GetxController {
 
   RxString titleName = "新朋友".obs;
   @override
-  void onInit() {
+  void onInit() async{
     super.onInit();
     print("获取新朋友列表");
     imRelationship.friendApplication();
@@ -25,5 +27,9 @@ class BookNewPeopleController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
+  
+  // 同意好友
+  handelAgreeFriend(userInfo){
+    imRelationship.agreeFriend(userInfo);
+  }
 }
