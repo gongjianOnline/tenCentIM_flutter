@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';
+import 'package:badges/badges.dart' as badges;
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
@@ -21,7 +22,12 @@ class HomeView extends GetView<HomeController> {
             label:"消息"
           ),
           BottomNavigationBarItem(
-            icon:Icon(Icons.class_),
+            icon:badges.Badge(
+              showBadge: false, // 控制红点显示隐藏
+              ignorePointer: true,
+              badgeContent: Text('3',style: TextStyle(color: Colors.white),),
+              child: Icon(Icons.class_),
+            ),
             label:"通讯录"
           ),
           BottomNavigationBarItem(
