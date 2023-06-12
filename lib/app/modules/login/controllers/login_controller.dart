@@ -34,7 +34,6 @@ class LoginController extends GetxController {
     print(userCode.value);
     // Get.offNamed("/home");
     if(userCode.value == ""){
-      print(111);
       UnifyUI.alter("用户名不能为空");
       return;
     }

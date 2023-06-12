@@ -26,8 +26,7 @@ class ImFriendInfoController extends GetxController {
   }
 
   handelAddFriend(){
-    print("111");
-    imRelationship.addFriend("test");
+    imRelationship.addFriend(userFullInfo!.userID as String);
   }
 
 

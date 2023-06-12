@@ -25,7 +25,6 @@ class ImTalkController extends GetxController {
 
   // 点击关闭键盘
   void hideKeyboard(BuildContext context) {
-    print("111");
     emoteStatus.value = 0;
     FocusScopeNode currentFocus = FocusScope.of(context);
     if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
