@@ -11,63 +11,79 @@ class ImFriendInfoView extends GetView<ImFriendInfoController> {
   Widget build(BuildContext context) {
     return Obx(()=>Scaffold(
         backgroundColor:const Color.fromRGBO(245, 245, 245, 1),
-        body: Column(
-          children: [
-            // banner 和 用户信息
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 300,
-              child: Stack(
-                children: [
-                  // banner背景
-                  bannerComponent(context),
-                  // 返回按钮
-                  backComponent(context),
-                  // 用户头像和附带信息
-                  userComponent()
-                ],
-              )
-            ),
-
-            // 个人信息模块
-            Container(
-              padding: const EdgeInsets.only(left: 16,right: 16,top: 0,bottom: 28),
-              margin: const EdgeInsets.only(left: 16,right: 16,top: 12),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20)
-              ),
-              child: Column(
-                children: [
-                  userInfo("性别",controller.userFullInfo?.gender==1?"男":"女"),
-                  userInfo("生日","${controller.userFullInfo?.birthday}"),
-                  userInfo("昵称","${controller.userFullInfo?.nickName}"),
-                  userInfo("个性签名","${controller.userFullInfo?.selfSignature}"),
-                ],
-              ),
-            ),
-
-            Container(
-                padding: const EdgeInsets.only(left: 16,right: 16),
-                margin: const EdgeInsets.only(top: 16),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          padding:const EdgeInsets.symmetric(vertical: 14),
-                          backgroundColor: Colors.blue[600]
-                        ),
-                        onPressed: (){controller.handelAddFriend();},
-                        child: Text(controller.titleName.value),
-                      ),
-                    )
-                  ],
+        body: Container(
+          child: Column(
+            children: [
+              // banner 和 用户信息
+              ClipRect(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 300,
+                  child: Stack(
+                    children: [
+                      // banner背景
+                      bannerComponent(context),
+                      // 返回按钮
+                      backComponent(context),
+                      // 用户头像和附带信息
+                      userComponent()
+                    ],
+                  )
                 ),
               ),
+              
 
-          ],
+              // 个人信息模块
+              Container(
+                  padding: const EdgeInsets.only(left: 16,right: 16,top: 0,bottom: 16),
+                  margin: const EdgeInsets.only(left: 16,right: 16,top: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20)
+                  ),
+                  child: Column(
+                    children: [
+                      userInfo("性别",controller.friendInfo?.friendInfo?.userProfile?.gender ==1 ? "男":"女"),
+                      userInfo("生日","${controller.friendInfo?.friendInfo?.userProfile?.birthday}"),
+                      userInfo("昵称","${controller.friendInfo?.friendInfo?.userProfile?.nickName}"),
+                    ],
+                  ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  padding: const EdgeInsets.only(left: 16,right: 16),
+                  margin: const EdgeInsets.only(top: 16),
+                  child: Row(
+                    children: [
+                      controller.friendInfo?.relation==0? Expanded(
+                        flex: 1,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding:const EdgeInsets.symmetric(vertical: 14),
+                            backgroundColor: Colors.blue[600]
+                          ),
+                          onPressed: (){controller.handelAddFriend();},
+                          child: Text(controller.titleName.value),
+                        ),
+                      ):Expanded(
+                        flex: 1,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding:const EdgeInsets.symmetric(vertical: 14),
+                            backgroundColor: Colors.blue[600]
+                          ),
+                          onPressed: (){print("建立会话");},
+                          child: const Text("发消息"),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
+
+            ],
+          ),
         )
     ));
   }
@@ -125,7 +141,7 @@ class ImFriendInfoView extends GetView<ImFriendInfoController> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(120)
                 ),
-                child: IMChat.IdentifyAvatars(controller.userFullInfo?.faceUrl as String,controller.userFullInfo?.userID as String),
+                child: IMChat.IdentifyAvatars(controller.friendInfo?.friendInfo?.userProfile?.faceUrl ??"",controller.friendInfo?.friendInfo?.userProfile?.userID ?? ""),
               ),
               // 用户名和性别
               Container(
@@ -136,7 +152,7 @@ class ImFriendInfoView extends GetView<ImFriendInfoController> {
                     Container(
                       margin: const EdgeInsets.only(right: 8),
                       child: Text(
-                        controller.userFullInfo?.userID as String,
+                        controller.friendInfo?.friendInfo?.userProfile?.userID ?? "",
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight:FontWeight.w500 
@@ -156,7 +172,7 @@ class ImFriendInfoView extends GetView<ImFriendInfoController> {
   // 个人信息
   userInfo(label,String value){
     return Container(
-      padding: const EdgeInsets.only(bottom:14,top: 28),
+      padding: const EdgeInsets.only(top: 28,bottom: 16),
       decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(

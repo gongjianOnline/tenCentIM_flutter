@@ -220,8 +220,6 @@ class IMController extends GetxController  {
       // 登录成功逻辑
       Get.offNamed("/home");
       tenCentUserInfo();
-      // 获取好友列表
-      imRelationship.getFriendList();
     }else{
       UnifyUI.alter("登录失败");
     }

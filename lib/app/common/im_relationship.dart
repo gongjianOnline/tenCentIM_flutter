@@ -155,8 +155,6 @@ class IMRelationship extends GetxController  {
       onFriendApplicationListAdded: (List<V2TimFriendApplication> applicationList) async {
         //好友请求数量增加的回调
         //applicationList 新增的好友请求信息列表
-        print("添加好友请求打印");
-        print(applicationList[0].type);
         for (var item in applicationList) {
           globalController.addFriendList.add(item);
         }
@@ -233,6 +231,18 @@ class IMRelationship extends GetxController  {
       });
     }else{
       UnifyUI.alter("获取好友列表失败");
+    }
+  }
+
+  // 获取指定好友资料(用于判断还有类型)
+  Future getFriendInfo(userID)async{
+    V2TimValueCallback<List<V2TimFriendInfoResult>> getFriendsInfoRes = await TencentImSDKPlugin.v2TIMManager
+    .getFriendshipManager()
+    .getFriendsInfo(userIDList: [userID]);
+    if(getFriendsInfoRes.code == 0){
+      return getFriendsInfoRes.data?[0];
+    }else{
+      UnifyUI.alter("好友信息获取失败");
     }
   }
 

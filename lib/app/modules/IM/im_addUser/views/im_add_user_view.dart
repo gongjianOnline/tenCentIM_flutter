@@ -115,7 +115,7 @@ class ImAddUserView extends GetView<ImAddUserController> {
     // /im-friend-info
     return InkWell(
       onTap:(){
-        Get.toNamed("/im-friend-info",arguments: {"itemInfo":itemInfo});
+        Get.toNamed("/im-friend-info",arguments: {"userID":itemInfo.userID});
       },
       child: Container(
         padding:const EdgeInsets.only(bottom: 16),
