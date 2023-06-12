@@ -171,7 +171,8 @@ class IMController extends GetxController  {
       },
       onKickedOffline: () {
         // 当前用户被踢下线，此时可以 UI 提示用户，并再次调用 V2TIMManager 的 login() 函数重新登录。
-        print("被踢下线");
+        UnifyUI.alter("当前用户被踢下线");
+        Get.offAllNamed("/login");
       },
       onSelfInfoUpdated: (V2TimUserFullInfo info) {
         // 登录用户的资料发生了更新
@@ -179,7 +180,8 @@ class IMController extends GetxController  {
       },
       onUserSigExpired: () {
         // 在线时票据过期：此时您需要生成新的 userSig 并再次调用 V2TIMManager 的 login() 函数重新登录。
-        print("登录过期");
+        UnifyUI.alter("登录过期请重新登录");
+        Get.offAllNamed("/login");
       },
       onUserStatusChanged: (List<V2TimUserStatus> userStatusList) {
         //用户状态变更通知
