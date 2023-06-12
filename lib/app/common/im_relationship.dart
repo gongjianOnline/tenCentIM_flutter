@@ -222,5 +222,19 @@ class IMRelationship extends GetxController  {
     }
   }
 
+  // 获取好友列表
+  getFriendList()async{
+    V2TimValueCallback<List<V2TimFriendInfo>> getFriendListRes = await TencentImSDKPlugin.v2TIMManager
+    .getFriendshipManager()
+    .getFriendList();
+    if(getFriendListRes.code == 0) {
+      getFriendListRes.data?.forEach((element) {
+        globalController.friendList?.add(element);
+      });
+    }else{
+      UnifyUI.alter("获取好友列表失败");
+    }
+  }
+
 
 }

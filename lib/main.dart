@@ -11,8 +11,8 @@ import "./app/common/im_relationship.dart";
 
 void main() async{
   await Get.put(GlobalController());
-  await Get.put(IMController());
   await Get.put(IMRelationship());
+  await Get.put(IMController());
   var isLogin = await Storage.getData("userInfo");
   runApp(
     GetMaterialApp(

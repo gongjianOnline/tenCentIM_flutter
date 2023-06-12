@@ -139,10 +139,12 @@ import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_status.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_video_elem.dart';
 import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
+import 'package:tencent_mi_flutter/app/common/im_relationship.dart';
 import 'package:tencent_mi_flutter/app/common/unifyUI.dart';
 import 'package:tencent_mi_flutter/app/common/utils/storage.dart';
 
 class IMController extends GetxController  {
+    IMRelationship imRelationship = Get.find();
   
    // 1. 从即时通信 IM 控制台获取应用 SDKAppID。
     int sdkAppID = 1400813777;
@@ -218,6 +220,8 @@ class IMController extends GetxController  {
       // 登录成功逻辑
       Get.offNamed("/home");
       tenCentUserInfo();
+      // 获取好友列表
+      imRelationship.getFriendList();
     }else{
       UnifyUI.alter("登录失败");
     }
