@@ -28,16 +28,16 @@ class MyIndexView extends GetView<MyIndexController> {
                 ],
               )
             ),
-            // 操作栏
-            Container(
-              padding:const EdgeInsets.only(left: 32,right: 32,top: 20,bottom: 18),
-              margin: const EdgeInsets.only(left: 16,right: 16,top: 37),
-              decoration:BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20)
-              ),
-              child:operateComponent() 
-            ),
+            // // 操作栏
+            // Container(
+            //   padding:const EdgeInsets.only(left: 32,right: 32,top: 20,bottom: 18),
+            //   margin: const EdgeInsets.only(left: 16,right: 16,top: 37),
+            //   decoration:BoxDecoration(
+            //     color: Colors.white,
+            //     borderRadius: BorderRadius.circular(20)
+            //   ),
+            //   child:operateComponent() 
+            // ),
 
             // 个人信息模块
             Container(
@@ -49,8 +49,8 @@ class MyIndexView extends GetView<MyIndexController> {
               ),
               child: Column(
                 children: [
-                  userInfo("性别","男"),
-                  userInfo("地址","河北省廊坊市"),
+                  userInfo("性别",controller.userInfo[0].gender==1?'男':'女'),
+                  userInfo("生日",'${controller.userInfo[0].birthday==0?'暂无':controller.userInfo[0].birthday}'),
                 ],
               ),
             ),
@@ -69,7 +69,7 @@ class MyIndexView extends GetView<MyIndexController> {
                       onPressed: (){
                         controller.handelLogout();
                       },
-                      child: Text("退出账号"),
+                      child: Text(controller.testName.value),
                     )
                   )
                 ],
@@ -118,6 +118,7 @@ class MyIndexView extends GetView<MyIndexController> {
 
   // 用户头像及组织信息
   userComponent(){
+    var asUser = controller.userInfo[0];
     return Positioned(
       left: 0,
       right: 0,
@@ -134,7 +135,7 @@ class MyIndexView extends GetView<MyIndexController> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(120)
                 ),
-                child: IMChat.IdentifyAvatars("","火蓝"),
+                child: IMChat.IdentifyAvatars(asUser.faceUrl??'',asUser.userID ?? ""),
               ),
               // 用户名和性别
               Container(
@@ -145,7 +146,7 @@ class MyIndexView extends GetView<MyIndexController> {
                     Container(
                       margin: const EdgeInsets.only(right: 8),
                       child: Text(
-                        "${controller.testName.value}",
+                        asUser.userID??'',
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight:FontWeight.w500 

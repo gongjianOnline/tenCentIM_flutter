@@ -246,5 +246,15 @@ class IMRelationship extends GetxController  {
     }
   }
 
+  // 获取个人资料
+  Future getUsersInfoResFun() async {
+    var userName =await Storage.getData("userInfo");
+    V2TimValueCallback<List<V2TimUserFullInfo>> getUsersInfoRes =
+        await TencentImSDKPlugin.v2TIMManager.getUsersInfo(userIDList: [userName]);
+    if(getUsersInfoRes.code == 0){
+      return getUsersInfoRes.data![0];
+    }
+  } 
+
 
 }
