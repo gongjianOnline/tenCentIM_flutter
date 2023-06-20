@@ -57,7 +57,6 @@ class BookIndexView extends GetView<BookIndexController> {
             Expanded(
               flex: 1,
               child: ListView(
-                padding: EdgeInsets.only(top: 20),
                 children: controller.globalController.friendList!.map((item){
                   return contactsItemComponent(item);
                 }).toList().cast<Widget>(),
@@ -73,27 +72,30 @@ class BookIndexView extends GetView<BookIndexController> {
   }
 
   contactsItemComponent(V2TimFriendInfo  friendInfo){
-    return Container(
-      padding: const EdgeInsets.only(left: 16,right: 16,bottom: 16),
-      decoration:const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(width: 1, color: Color.fromARGB(255, 235, 234, 234)), // 设置下边框
+    return InkWell(
+      onTap:(){print("建立会话");},
+      child: Container(
+        padding: const EdgeInsets.only(left: 16,right: 16,bottom: 16,top: 16),
+        decoration:const BoxDecoration(
+          border: Border(
+            bottom: BorderSide(width: 1, color: Color.fromARGB(255, 235, 234, 234)), // 设置下边框
+          ),
         ),
-      ),
-      child:Row(
-        children: [
-          IMChat.IdentifyAvatars(friendInfo.userProfile?.faceUrl,friendInfo.userID),
-          Container(
-            margin: const EdgeInsets.only(left: 10),
-            child: Text(
-              friendInfo.userID,
-              style:const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w400
-              )
-            ),
-          )
-        ],
+        child:Row(
+          children: [
+            IMChat.IdentifyAvatars(friendInfo.userProfile?.faceUrl,friendInfo.userID),
+            Container(
+              margin: const EdgeInsets.only(left: 10),
+              child: Text(
+                friendInfo.userID,
+                style:const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400
+                )
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

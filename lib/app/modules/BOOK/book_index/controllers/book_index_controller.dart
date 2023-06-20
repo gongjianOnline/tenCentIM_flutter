@@ -10,8 +10,9 @@ class BookIndexController extends GetxController {
   final titleName = "通讯录".obs;
 
   @override
-  void onInit() {
+  void onInit()async {
     super.onInit();
+    await globalController.friendListFun();
     imRelationship.getFriendList();
   }
 

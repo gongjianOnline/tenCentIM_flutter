@@ -209,7 +209,7 @@ class IMRelationship extends GetxController  {
         acceptFriendApplicationRes = await TencentImSDKPlugin.v2TIMManager
             .getFriendshipManager()
             .acceptFriendApplication(
-                responseType: FriendResponseTypeEnum.V2TIM_FRIEND_ACCEPT_AGREE, //建立好友关系时选择单向/双向好友关系
+                responseType: FriendResponseTypeEnum.V2TIM_FRIEND_ACCEPT_AGREE_AND_ADD, //建立好友关系时选择单向/双向好友关系
                 type: 	FriendApplicationTypeEnum.values[userInfo.type], //加好友类型 要与getApplicationList查询到的type相同，否则会报错。
                 userID: userInfo.userID); //同意好友的用户id
     if (acceptFriendApplicationRes.code == 0) {

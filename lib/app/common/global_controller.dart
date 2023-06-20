@@ -20,6 +20,10 @@ class GlobalController extends GetxController  {
     super.onClose();
   }
 
+  // 重置好友列表
+  friendListFun(){
+    friendList =  RxList<V2TimFriendInfo>([]);
+  }
   
 
 
