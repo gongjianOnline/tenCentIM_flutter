@@ -28,8 +28,12 @@ class BookNewPeopleController extends GetxController {
     super.onClose();
   }
   
-  // 同意好友
+  // 同意好友申请
   handelAgreeFriend(userInfo){
     imRelationship.agreeFriend(userInfo);
+  }
+  // 拒绝好友申请
+  handelRefuseFriend(userInfo){
+    imRelationship.refuseFriend(userInfo);
   }
 }

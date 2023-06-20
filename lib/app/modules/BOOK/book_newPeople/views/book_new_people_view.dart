@@ -107,7 +107,18 @@ class BookNewPeopleView extends GetView<BookNewPeopleController> {
                   onPressed: (){controller.handelAgreeFriend(userInfo);},
                   child: const Text("同意"),
                 ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 10),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red[400]
+                  ),
+                  onPressed: (){controller.handelRefuseFriend(userInfo);},
+                  child: const Text("拒绝"),
+                ),
               )
+              
             ],
           ),
     );

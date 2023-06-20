@@ -219,6 +219,22 @@ class IMRelationship extends GetxController  {
       UnifyUI.alter("操作失败");
     }
   }
+  // 拒绝添加好友申请
+  refuseFriend(V2TimFriendApplication userInfo) async {
+     V2TimValueCallback<V2TimFriendOperationResult> refuseFriendApplicationRes = await TencentImSDKPlugin.v2TIMManager
+      .getFriendshipManager()
+      .refuseFriendApplication(
+          type: FriendApplicationTypeEnum
+              .values[userInfo.type], //拒绝好友类型
+          userID: userInfo.userID); //拒绝好友的用户id
+      if (refuseFriendApplicationRes.code == 0) {
+        friendApplication();
+        // 拒绝成功
+        refuseFriendApplicationRes.data?.resultCode; //操作结果错误码
+        refuseFriendApplicationRes.data?.resultInfo; //操作结果描述
+        refuseFriendApplicationRes.data?.userID; //拒绝好友的id
+      }
+  }
 
   // 获取好友列表
   getFriendList()async{
@@ -255,6 +271,8 @@ class IMRelationship extends GetxController  {
       return getUsersInfoRes.data![0];
     }
   } 
+
+  
 
 
 }
