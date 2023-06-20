@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
 
 import '../controllers/my_index_controller.dart';
 import "../../../../Component/IMChat.dart";
@@ -9,7 +10,20 @@ class MyIndexView extends GetView<MyIndexController> {
   const MyIndexView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Obx(()=>Scaffold(
+    return Obx((){
+      var userInfoData = {};
+      if(controller.userInfo.isEmpty){
+        userInfoData["userID"] = "";
+        userInfoData["faceUrl"] = "";
+        userInfoData["userID"] = "";
+        userInfoData["birthday"] = "";
+      }else{
+        userInfoData["userID"] = controller.userInfo[0].userID;
+        userInfoData["faceUrl"] = controller.userInfo[0].faceUrl;
+        userInfoData["gender"] = controller.userInfo[0].gender;
+        userInfoData["birthday"] = controller.userInfo[0].birthday;
+      };
+      return Scaffold(
         backgroundColor:const Color.fromRGBO(245, 245, 245, 1),
         body: Column(
           children: [
@@ -22,9 +36,9 @@ class MyIndexView extends GetView<MyIndexController> {
                   // banner背景
                   bannerComponent(context),
                   // 返回按钮
-                  backComponent(context),
+                  // backComponent(context),
                   // 用户头像和附带信息
-                  userComponent()
+                  userComponent(userInfoData)
                 ],
               )
             ),
@@ -49,8 +63,8 @@ class MyIndexView extends GetView<MyIndexController> {
               ),
               child: Column(
                 children: [
-                  userInfo("性别",controller.userInfo[0].gender==1?'男':'女'),
-                  userInfo("生日",'${controller.userInfo[0].birthday==0?'暂无':controller.userInfo[0].birthday}'),
+                  userInfo("性别",userInfoData["gender"]==1?'男':'女'),
+                  userInfo("生日",'${userInfoData["birthday"]==0?'暂无':userInfoData["birthday"]}'),
                 ],
               ),
             ),
@@ -78,7 +92,8 @@ class MyIndexView extends GetView<MyIndexController> {
 
           ],
         )
-    ));
+    );
+    });
   }
 
 
@@ -117,8 +132,8 @@ class MyIndexView extends GetView<MyIndexController> {
   }
 
   // 用户头像及组织信息
-  userComponent(){
-    var asUser = controller.userInfo[0];
+  userComponent(userInfoData){
+    // var asUser = controller.userInfo[0];
     return Positioned(
       left: 0,
       right: 0,
@@ -135,7 +150,7 @@ class MyIndexView extends GetView<MyIndexController> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(120)
                 ),
-                child: IMChat.IdentifyAvatars(asUser.faceUrl??'',asUser.userID ?? ""),
+                child: IMChat.IdentifyAvatars(userInfoData["faceUrl"],userInfoData["userID"]),
               ),
               // 用户名和性别
               Container(
@@ -146,7 +161,7 @@ class MyIndexView extends GetView<MyIndexController> {
                     Container(
                       margin: const EdgeInsets.only(right: 8),
                       child: Text(
-                        asUser.userID??'',
+                        userInfoData["userID"],
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight:FontWeight.w500 

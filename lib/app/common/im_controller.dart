@@ -276,6 +276,21 @@ class IMController extends GetxController  {
     }
   }
 
+  // 获取用户登录状态
+  getLoginStatusResFun()async{
+    V2TimValueCallback<int> getLoginStatusRes =
+          await TencentImSDKPlugin.v2TIMManager.getLoginStatus();
+      if (getLoginStatusRes.code == 0) {
+        int? status = getLoginStatusRes.data; // getLoginStatusRes.data为用户登录状态值
+        if (status == 1) {
+          print("监听到用户已登录");
+        } else if (status == 2) {
+          print("正在登录");
+        } else if (status == 3) {
+          Get.offAllNamed("/login");
+        }
+      }
+  }
 
 
 
