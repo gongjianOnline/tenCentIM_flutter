@@ -4,6 +4,7 @@ import 'package:flutter_im/app/common/AliIcon.dart';
 import 'package:get/get.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
+import '../../../common/myTheme.dart';
 import '../controllers/layout_controller.dart';
 
 class LayoutView extends GetView<LayoutController> {
@@ -12,7 +13,7 @@ class LayoutView extends GetView<LayoutController> {
   Widget build(BuildContext context) {
     return  Obx(()=>Scaffold(
       bottomNavigationBar: ConvexAppBar(
-        backgroundColor:const Color.fromRGBO(0, 204, 153, 1),
+        backgroundColor:MyTheme.themeColor,
         initialActiveIndex:controller.navIndex.value,
         items: const [
           TabItem(icon: AliIcon.message, title: '消息'),
@@ -23,6 +24,9 @@ class LayoutView extends GetView<LayoutController> {
         onTap: (int i){controller.checkNavIndex(i);},
       ),
       body: Container(
+        decoration: const BoxDecoration(
+          color: MyTheme.bgColor
+        ),
         width: MediaQuery. of (context).size.width,
         margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
         child:controller.routerList[controller.navIndex.value]

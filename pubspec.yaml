@@ -23,3 +23,6 @@ flutter:
     - family: aliIcon
       fonts: 
         - asset: lib/assets/icons/iconfont.ttf
+  
+  assets:
+    - lib/assets/img/
