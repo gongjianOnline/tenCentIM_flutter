@@ -1,16 +1,14 @@
 # flutter_im
+项目基于腾讯即时通信API,具备实时通信、通话、朋友圈分享等功能
+# 目录结构
+- layout 通用页面架构
+- login 登录页面 
+- home 消息首页
+- friend 朋友页面
+- circle 朋友圈
+- my 我的
+- friend_info 好友信息
+- chart 聊天页面
+- search_friend 搜索好友
+- new_friend 新好友通知页面
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
