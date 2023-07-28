@@ -67,14 +67,14 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  // 单消息模块
+  /* 单消息模块 */
   messageItem(){
     return Container(
       padding: const EdgeInsets.only(left: 10,right: 10),
       margin: const EdgeInsets.only(bottom: 20),
       child: Row(
         children: [
-          // 头像
+          /* 头像 */
           Container(
             margin: const EdgeInsets.only(right: 10),
             width: 60,
