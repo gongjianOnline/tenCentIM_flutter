@@ -10,6 +10,8 @@ import '../modules/layout/bindings/layout_binding.dart';
 import '../modules/layout/views/layout_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/web_view/bindings/web_view_binding.dart';
+import '../modules/web_view/views/web_view_view.dart';
 
 part 'app_routes.dart';
 
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.CHART,
       page: () => const ChartView(),
       binding: ChartBinding(),
+    ),
+    GetPage(
+      name: _Paths.WEB_VIEW,
+      page: () => const WebViewView(),
+      binding: WebViewBinding(),
     ),
   ];
 }

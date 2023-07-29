@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import '../../../common/myTheme.dart';
 import '../controllers/my_controller.dart';
@@ -195,7 +196,7 @@ class MyView extends GetView<MyController> {
       child:InkWell(
         onTap:(){
           if(titleName == "关于我们"){
-            
+            Get.toNamed("/webView",arguments:{"url":data});
           }
         },
         child: Container(

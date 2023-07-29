@@ -8,6 +8,7 @@ abstract class Routes {
   static const ADD_FRIEND = _Paths.ADD_FRIEND;
   static const FRIEND_INFO = _Paths.FRIEND_INFO;
   static const CHART = _Paths.CHART;
+  static const WEB_VIEW = _Paths.WEB_VIEW;
 }
 
 abstract class _Paths {
@@ -17,4 +18,5 @@ abstract class _Paths {
   static const ADD_FRIEND = '/addFriend';
   static const FRIEND_INFO = '/friendInfo';
   static const CHART = '/chart';
+  static const WEB_VIEW = '/webView';
 }
