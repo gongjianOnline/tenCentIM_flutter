@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/add_friend/bindings/add_friend_binding.dart';
 import '../modules/add_friend/views/add_friend_view.dart';
+import '../modules/friend_info/bindings/friend_info_binding.dart';
+import '../modules/friend_info/views/friend_info_view.dart';
 import '../modules/layout/bindings/layout_binding.dart';
 import '../modules/layout/views/layout_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -29,6 +31,11 @@ class AppPages {
       name: _Paths.ADD_FRIEND,
       page: () => const AddFriendView(),
       binding: AddFriendBinding(),
+    ),
+    GetPage(
+      name: _Paths.FRIEND_INFO,
+      page: () => const FriendInfoView(),
+      binding: FriendInfoBinding(),
     ),
   ];
 }

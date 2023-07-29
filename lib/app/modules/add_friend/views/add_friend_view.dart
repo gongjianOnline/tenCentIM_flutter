@@ -86,51 +86,56 @@ class AddFriendView extends GetView<AddFriendController> {
 
   /* 搜索结果 */
   searchResult(){
-    return Container(
-      padding: const EdgeInsets.only(left: 10,right: 10),
-      margin: const EdgeInsets.only(bottom: 20,top: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            width: 52,
-            height: 52,
-            margin: const EdgeInsets.only(right: 10),
-            child: Image.asset("lib/assets/img/user.png"),
-          ),
-          Expanded(
-            flex: 1,
-            child:Container(
+    return InkWell(
+      onTap: (){Get.toNamed("/friendInfo");},
+      child: Container(
+        padding: const EdgeInsets.only(left: 10,right: 10),
+        margin: const EdgeInsets.only(bottom: 20,top: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              width: 52,
               height: 52,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child:const Text(
-                      "南开大学网络教育学院",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: MyTheme.stressFontColor
+              margin: const EdgeInsets.only(right: 10),
+              child: Image.asset("lib/assets/img/user.png"),
+            ),
+            Expanded(
+              flex: 1,
+              child:Container(
+                height: 52,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child:const Text(
+                        "南开大学网络教育学院",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: MyTheme.stressFontColor
+                        ),
+                      )
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: const Text(
+                        "天津 西青区",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: MyTheme.unimportantFontColor
+                        ),
                       ),
                     )
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: const Text(
-                      "天津 西青区",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: MyTheme.unimportantFontColor
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                  ],
+                ),
+              )
             )
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
+
+
 } 
