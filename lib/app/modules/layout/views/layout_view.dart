@@ -29,7 +29,20 @@ class LayoutView extends GetView<LayoutController> {
         ),
         width: MediaQuery. of (context).size.width,
         margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-        child:controller.routerList[controller.navIndex.value]
+        child:AnimatedSwitcher(
+          duration: const Duration(milliseconds: 250),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            final offsetAnimation = Tween<Offset>(
+              begin: const Offset(1.0, 0.0),
+              end: const Offset(0.0, 0.0),
+            ).animate(animation);
+            return SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            );
+          },
+          child: controller.routerList[controller.navIndex.value]
+        )
       )
     ));
   }

@@ -19,6 +19,7 @@ void main() {
       theme: ThemeData( 
         colorScheme: const ColorScheme.light().copyWith(primary: MyTheme.themeColor),
       ),
+      defaultTransition: Transition.rightToLeftWithFade, // 路由切换动画
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     ),
