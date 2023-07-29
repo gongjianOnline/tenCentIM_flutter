@@ -28,7 +28,7 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  // 顶部模块
+  /* 顶部模块 */
   headerComponent(){
     return Container(
       padding: const EdgeInsets.only(left: 10,right: 10,top: 8),
@@ -55,7 +55,7 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  // 信息模块
+  /* 信息模块 */
   messageComponent(){
     return ListView(
       padding: const EdgeInsets.only(top:10,bottom: 20),
