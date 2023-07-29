@@ -43,15 +43,17 @@ class FriendView extends GetView<FriendController> {
             ),
             child: const Text("好友",style: TextStyle(color: Colors.white),),
           ),
-          InkWell(
-            onTap: (){
-              Get.toNamed("/addFriend");
-            },
-            child:Container(
-              child: const Icon(
-                Icons.add_circle_outline,
-                color: MyTheme.unimportantFontColor,
-                size: 26,
+          Material(
+            child: InkWell(
+              onTap: (){
+                Get.toNamed("/addFriend");
+              },
+              child:Container(
+                child: const Icon(
+                  Icons.add_circle_outline,
+                  color: MyTheme.unimportantFontColor,
+                  size: 26,
+                ),
               ),
             ),
           )

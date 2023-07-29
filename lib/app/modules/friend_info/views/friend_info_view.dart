@@ -150,21 +150,23 @@ class FriendInfoView extends GetView<FriendInfoController> {
 
   /* 添加好友 */
   addFriendComponent(context){
-    return InkWell(
-      radius:10.0,
-      onTap: (){},
-      child: Container(
-        width: MediaQuery. of (context).size.width,
-        height: 40,
-        alignment: Alignment.center,
-        decoration:  BoxDecoration(
-          color:Colors.white,
-          borderRadius: BorderRadius.circular(10)
-        ),
-        child: const Text(
-          "添加朋友",
-          style: TextStyle(
-            color:MyTheme.themeColor
+    return Ink(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10)
+      ),
+      child: InkWell(
+        radius:10.0,
+        onTap: (){},
+        child: Container(
+          width: MediaQuery. of (context).size.width,
+          height: 40,
+          alignment: Alignment.center,
+          child: const Text(
+            "添加朋友",
+            style: TextStyle(
+              color:MyTheme.themeColor
+            ),
           ),
         ),
       ),

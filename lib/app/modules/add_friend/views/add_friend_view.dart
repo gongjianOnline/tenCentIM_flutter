@@ -29,7 +29,7 @@ class AddFriendView extends GetView<AddFriendController> {
   /* 标题模块 */
   headerComponent(){
     return Container(
-      padding: const EdgeInsets.only(left: 10,right: 10),
+      padding: const EdgeInsets.only(left: 10,right: 10,top: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -37,11 +37,9 @@ class AddFriendView extends GetView<AddFriendController> {
             onTap: (){
               Get.back();
             },
-            child: Container(
-              child: Icon(
-                Icons.arrow_back_ios,
-                color: MyTheme.unimportantFontColor,
-              ),
+            child: const Icon(
+              Icons.arrow_back_ios,
+              color: MyTheme.unimportantFontColor,
             ),
           ),
           const Text(
