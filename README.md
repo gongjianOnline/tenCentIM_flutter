@@ -9,6 +9,6 @@
 - my 我的
 - friend_info 好友信息
 - chart 聊天页面
-- search_friend 搜索好友
+- add_friend 添加好友
 - new_friend 新好友通知页面
 
