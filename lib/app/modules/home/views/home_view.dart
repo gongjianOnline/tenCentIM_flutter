@@ -109,7 +109,7 @@ class HomeView extends GetView<HomeController> {
                           children: [
                             Container(
                               child: const Text(
-                                "放牛娃",
+                                "南开大学网络教育学院",
                                 style: TextStyle(
                                   color: MyTheme.stressFontColor,
                                   fontSize: 18
@@ -133,7 +133,7 @@ class HomeView extends GetView<HomeController> {
                       Container(
                         padding: EdgeInsets.only(right: 50),
                         child: const Text(
-                          "真傻逼真傻逼真傻逼真傻逼真傻逼真傻逼真傻逼真傻逼真傻逼真傻逼",
+                          "已添加对方为好友，来打个招呼吧~",
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
