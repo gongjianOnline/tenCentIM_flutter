@@ -51,7 +51,7 @@ class FriendView extends GetView<FriendController> {
               child:Container(
                 child: const Icon(
                   Icons.add_circle_outline,
-                  color: MyTheme.unimportantFontColor,
+                  color: MyTheme.themeColor,
                   size: 26,
                 ),
               ),

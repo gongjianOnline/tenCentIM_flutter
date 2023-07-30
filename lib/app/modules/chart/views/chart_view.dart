@@ -4,6 +4,7 @@ import 'package:flutter_im/app/common/myTheme.dart';
 import 'package:get/get.dart';
 
 import '../controllers/chart_controller.dart';
+import "../../../components/ChartComponent.dart";
 
 class ChartView extends GetView<ChartController> {
   const ChartView({Key? key}) : super(key: key);
@@ -64,7 +65,10 @@ class ChartView extends GetView<ChartController> {
         color: Color.fromARGB(255, 243, 243, 243)
       ),
       child: ListView(
-        children: [],
+        children: [
+          ChartComponent.myChart(),
+          ChartComponent.sideChart()
+        ],
       ),
     );
   }
