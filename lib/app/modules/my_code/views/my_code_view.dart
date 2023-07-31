@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_im/app/common/myTheme.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 import 'package:get/get.dart';
 
@@ -32,8 +33,11 @@ class MyCodeView extends GetView<MyCodeController> {
       padding: const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
       child: Row(
         children: [
-          Container(
-            child: Icon(Icons.arrow_back_ios,color: MyTheme.unimportantFontColor,),
+          InkWell(
+            onTap: (){Get.back();},
+            child: Container(
+              child: Icon(Icons.arrow_back_ios,color: MyTheme.unimportantFontColor,),
+            ),
           )
         ],
       ),
@@ -95,7 +99,16 @@ class MyCodeView extends GetView<MyCodeController> {
             width: MediaQuery. of (context).size.width,
             height: 400,
             decoration: const BoxDecoration(
-              color: Colors.black12
+              // color: Colors.black12
+            ),
+            child: QrImageView(
+              data: '南开大学网络教育学院',
+              version: QrVersions.auto,
+              padding:EdgeInsets.zero,
+              size: 400.0,
+              gapless: false,
+              eyeStyle:const QrEyeStyle(eyeShape: QrEyeShape.square, color: MyTheme.themeColor),
+              dataModuleStyle:const QrDataModuleStyle(dataModuleShape:QrDataModuleShape.square, color: MyTheme.themeColor),
             ),
           ),
 
