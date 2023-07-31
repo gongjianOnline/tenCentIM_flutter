@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_im/app/common/AliIcon.dart';
 
 import 'package:get/get.dart';
 
@@ -135,8 +136,9 @@ class CircleDetailsView extends GetView<CircleDetailsController> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Container(
+                  margin: const EdgeInsets.only(right: 4),
                   child: const Icon(
-                    Icons.fmd_good,
+                    AliIcon.position,
                     color: MyTheme.unimportantFontColor,
                     size: 20,
                   ),

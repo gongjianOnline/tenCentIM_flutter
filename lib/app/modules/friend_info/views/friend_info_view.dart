@@ -122,24 +122,27 @@ class FriendInfoView extends GetView<FriendInfoController> {
           ),
           Expanded(
             flex: 1,
-            child: Container(
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 10),
-                    child: const Icon(
-                      Icons.camera_alt,
-                      color: MyTheme.unimportantFontColor,
-                      size: 32,
+            child: InkWell(
+              onTap: (){Get.toNamed("/circleSeparate");},
+              child: Container(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 10),
+                      child: const Icon(
+                        Icons.camera_alt,
+                        color: MyTheme.unimportantFontColor,
+                        size: 32,
+                      ),
                     ),
-                  ),
-                  Container(
-                    child: const Text(
-                      "圈子",
-                      style: TextStyle(color: MyTheme.unimportantFontColor),
-                    ),
-                  )
-                ],
+                    Container(
+                      child: const Text(
+                        "圈子",
+                        style: TextStyle(color: MyTheme.unimportantFontColor),
+                      ),
+                    )
+                  ],
+                ),
               ),
             )
           )
@@ -156,7 +159,7 @@ class FriendInfoView extends GetView<FriendInfoController> {
         borderRadius: BorderRadius.circular(10)
       ),
       child: InkWell(
-        radius:10.0,
+        borderRadius: BorderRadius.circular(10),
         onTap: (){},
         child: Container(
           width: MediaQuery. of (context).size.width,

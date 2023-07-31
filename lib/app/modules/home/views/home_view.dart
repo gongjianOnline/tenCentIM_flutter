@@ -3,6 +3,7 @@ import 'package:flutter_im/app/common/myTheme.dart';
 
 import 'package:get/get.dart';
 
+import '../../../common/AliIcon.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -46,7 +47,7 @@ class HomeView extends GetView<HomeController> {
           ),
           Container(
             child: const Icon(
-              Icons.qr_code_scanner,
+              AliIcon.scan,
               color:MyTheme.themeColor
             ),
           )

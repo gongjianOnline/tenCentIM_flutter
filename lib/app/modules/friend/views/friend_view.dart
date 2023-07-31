@@ -3,6 +3,7 @@ import 'package:flutter_im/app/common/myTheme.dart';
 
 import 'package:get/get.dart';
 
+import '../../../common/AliIcon.dart';
 import '../controllers/friend_controller.dart';
 
 class FriendView extends GetView<FriendController> {
@@ -50,7 +51,7 @@ class FriendView extends GetView<FriendController> {
               },
               child:Container(
                 child: const Icon(
-                  Icons.add_circle_outline,
+                  AliIcon.addFriends,
                   color: MyTheme.themeColor,
                   size: 26,
                 ),

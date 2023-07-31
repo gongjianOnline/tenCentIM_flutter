@@ -57,8 +57,11 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
           padding: const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
           child: Row(
             children: [
-              Container(
-                child: Icon(Icons.arrow_back_ios,color:MyTheme.unimportantFontColor),
+              InkWell(
+                onTap: (){Get.back();},
+                child: Container(
+                  child: Icon(Icons.arrow_back_ios,color:MyTheme.unimportantFontColor),
+                ),
               ),
               Container(
                 child:const Text("南开大学网络教育学院",style: TextStyle(color: MyTheme.stressFontColor,fontSize: 18),),

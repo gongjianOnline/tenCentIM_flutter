@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../common/AliIcon.dart';
 import '../../../common/myTheme.dart';
 import '../../../components/circleData.dart';
 import '../controllers/circle_controller.dart';
@@ -36,7 +37,7 @@ class CircleView extends GetView<CircleController> {
   /* 顶部模块 */
   headerComponent(){
     return Container(
-      padding: const EdgeInsets.only(left: 10,right: 10,top: 10),
+      padding: const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -55,9 +56,9 @@ class CircleView extends GetView<CircleController> {
               },
               child:Container(
                 child: const Icon(
-                  Icons.edit_note,
+                  AliIcon.edit,
                   color: MyTheme.themeColor,
-                  size: 26,
+                  size: 22,
                 ),
               ),
             ),
@@ -160,9 +161,9 @@ class CircleView extends GetView<CircleController> {
                     children: [
                       Container(
                         child: const Icon(
-                          Icons.fmd_good,
+                          AliIcon.position,
                           color: MyTheme.themeColor,
-                          size: 20,
+                          size: 16,
                         ),
                       ),
                       Container(
@@ -189,7 +190,7 @@ class CircleView extends GetView<CircleController> {
                         child: Container(
                           padding: const EdgeInsets.only(right: 14),
                           child: const Icon(
-                            Icons.tag_faces,
+                            AliIcon.like,
                             size: 20,
                             color: MyTheme.unimportantFontColor,
                           ),
@@ -200,7 +201,7 @@ class CircleView extends GetView<CircleController> {
                         onTap: (){Get.toNamed("/circleDetails");},
                         child: Container(
                           child: const Icon(
-                            Icons.message,
+                            AliIcon.comment,
                             size: 20,
                             color: MyTheme.unimportantFontColor,
                           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_im/app/common/AliIcon.dart';
 
 import 'package:get/get.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -158,7 +159,7 @@ class MyView extends GetView<MyController> {
                     Container(
                       margin: const EdgeInsets.only(bottom: 10),
                       child: const Icon(
-                        Icons.camera_alt,
+                        AliIcon.circle,
                         color: MyTheme.unimportantFontColor,
                         size: 32,
                       ),
@@ -185,8 +186,8 @@ class MyView extends GetView<MyController> {
       margin: const EdgeInsets.only(left: 10,right: 10),
       child: Column(
         children: [
-          singleComponent(const Icon(Icons.headphones,color: MyTheme.stressFontColor,size: 28,),"关于我们","http://www.gjweb.top"),
-          singleComponent(const Icon(Icons.info_outline,color: MyTheme.stressFontColor,size: 28,),"版本号","V 1.0.0"),
+          singleComponent(const Icon(AliIcon.about,color: MyTheme.stressFontColor,size: 24,),"关于我们","http://www.gjweb.top"),
+          singleComponent(const Icon(AliIcon.version,color: MyTheme.stressFontColor,size: 24,),"版本号","V 1.0.0"),
         ],
       ),
     );
