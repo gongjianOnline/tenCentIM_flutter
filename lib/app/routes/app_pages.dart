@@ -8,6 +8,8 @@ import '../modules/circle_details/bindings/circle_details_binding.dart';
 import '../modules/circle_details/views/circle_details_view.dart';
 import '../modules/circle_send/bindings/circle_send_binding.dart';
 import '../modules/circle_send/views/circle_send_view.dart';
+import '../modules/circle_separate/bindings/circle_separate_binding.dart';
+import '../modules/circle_separate/views/circle_separate_view.dart';
 import '../modules/friend_info/bindings/friend_info_binding.dart';
 import '../modules/friend_info/views/friend_info_view.dart';
 import '../modules/layout/bindings/layout_binding.dart';
@@ -64,6 +66,11 @@ class AppPages {
       name: _Paths.CIRCLE_SEND,
       page: () => const CircleSendView(),
       binding: CircleSendBinding(),
+    ),
+    GetPage(
+      name: _Paths.CIRCLE_SEPARATE,
+      page: () => const CircleSeparateView(),
+      binding: CircleSeparateBinding(),
     ),
   ];
 }

@@ -14,4 +14,5 @@
 - web_view webView 页面跳转第三方地址
 - circle_details 朋友圈单行详情
 - circle_send 发布朋友圈
+- circle_separate 个人朋友圈
 

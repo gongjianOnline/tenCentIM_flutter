@@ -10,6 +10,7 @@ abstract class Routes {
   static const WEB_VIEW = _Paths.WEB_VIEW;
   static const CIRCLE_DETAILS = _Paths.CIRCLE_DETAILS;
   static const CIRCLE_SEND = _Paths.CIRCLE_SEND;
+  static const CIRCLE_SEPARATE = _Paths.CIRCLE_SEPARATE;
 }
 
 abstract class _Paths {
@@ -22,4 +23,5 @@ abstract class _Paths {
   static const WEB_VIEW = '/webView';
   static const CIRCLE_DETAILS = '/circleDetails';
   static const CIRCLE_SEND = '/circleSend';
+  static const CIRCLE_SEPARATE = '/circleSeparate';
 }
