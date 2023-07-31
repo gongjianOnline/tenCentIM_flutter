@@ -1,12 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class CircleSeparateController extends GetxController {
-  //TODO: Implement CircleSeparateController
+  /* getx引用展位 */
+  RxString titleName = "南开大学网络教育学院".obs;
+  /* 滚动条控制器 */
+  ScrollController listViewController = ScrollController();
+  /* 是否显示抬头 */
+  RxBool isHeader = false.obs;
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    listViewController.addListener(_scrollListener);
   }
 
   @override
@@ -19,5 +25,14 @@ class CircleSeparateController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  void _scrollListener(){
+    double scrollHeight = listViewController.offset;
+    if( scrollHeight > 160 ){
+      isHeader.value = true;
+    }else{
+      isHeader.value = false;
+    }
+  }
+
+
 }

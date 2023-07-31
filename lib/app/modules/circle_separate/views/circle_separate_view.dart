@@ -10,15 +10,26 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
   const CircleSeparateView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(()=>Scaffold(
       body: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
         child: Column(
           children: [
-            simpleComponent(),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 250),
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+              child: controller.isHeader.value ? simpleComponent() : Container(),
+            ),
+            // controller.isHeader.value?simpleComponent():Container(),
             Expanded(
               flex: 1,
               child: ListView(
+                controller: controller.listViewController,
                 padding: const EdgeInsets.only(top: 0,bottom: 40),
                 children: [
                   detailsComponent(),
@@ -30,7 +41,7 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
           ],
         ),
       ),
-    );
+    ));
   }
 
   /* 简要标题 */
@@ -75,9 +86,9 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
               children: [
                 Container(
                   alignment: Alignment.centerLeft,
-                  child:const Text(
-                    "南开大学网络教育学院",
-                    style: TextStyle(
+                  child:Text(
+                    controller.titleName.value,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20
                     ),
