@@ -51,7 +51,7 @@ class CircleView extends GetView<CircleController> {
           Material(
             child: InkWell(
               onTap: (){
-                Get.toNamed("/addFriend");
+                Get.toNamed("/circleSend");
               },
               child:Container(
                 child: const Icon(
