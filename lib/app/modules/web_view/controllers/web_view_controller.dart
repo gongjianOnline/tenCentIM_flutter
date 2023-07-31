@@ -1,14 +1,14 @@
 import 'package:get/get.dart';
 
 class WebViewController extends GetxController {
-  //TODO: Implement WebViewController
-
+  
   RxString url = "".obs;
-
+  /* 进度条加载 */
+  RxDouble schedule = 0.0.obs;
   @override
   void onInit() {
     url.value = Get.arguments["url"];
-    print(url);
+
     super.onInit();
   }
 
