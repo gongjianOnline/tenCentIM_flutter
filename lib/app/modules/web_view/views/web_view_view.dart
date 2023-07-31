@@ -19,7 +19,7 @@ class WebViewView extends GetView<WebViewController> {
               flex: 1,
               child: InAppWebView(
                 initialUrlRequest:URLRequest(
-                  url:Uri.parse("https://www.gjweb.com")
+                  url:Uri.parse("https://gjweb.top/")
                 ),
               ),
             )
