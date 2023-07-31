@@ -10,7 +10,7 @@ class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(()=>Scaffold(
       body: Container(
         // decoration: const BoxDecoration(
         //   color:MyTheme.bgColor
@@ -26,7 +26,7 @@ class HomeView extends GetView<HomeController> {
           ],
         ),
       )
-    );
+    ));
   }
 
   /* 顶部模块 */
@@ -37,18 +37,21 @@ class HomeView extends GetView<HomeController> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            child: const Text(
-              "消息",
-              style: TextStyle(
+            child: Text(
+              controller.titleName.value,
+              style: const TextStyle(
                 fontSize: 28,
                 color: MyTheme.stressFontColor
               ),
             ),
           ),
-          Container(
-            child: const Icon(
-              AliIcon.scan,
-              color:MyTheme.themeColor
+          InkWell(
+            onTap: (){controller.searchCodeFn();},
+            child: Container(
+              child: const Icon(
+                AliIcon.scan,
+                color:MyTheme.themeColor
+              ),
             ),
           )
         ],

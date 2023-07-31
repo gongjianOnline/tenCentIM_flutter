@@ -10,6 +10,8 @@ dependencies:
   convex_bottom_bar: ^3.2.0
   flutter_inappwebview: ^5.7.2+3
   qr_flutter: ^4.1.0
+  flutter_easy_permission: ^1.1.2
+  flutter_scankit: ^1.2.4
   get: 4.6.5
   flutter: 
     sdk: flutter
