@@ -16,6 +16,8 @@ import '../modules/layout/bindings/layout_binding.dart';
 import '../modules/layout/views/layout_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/my_code/bindings/my_code_binding.dart';
+import '../modules/my_code/views/my_code_view.dart';
 import '../modules/web_view/bindings/web_view_binding.dart';
 import '../modules/web_view/views/web_view_view.dart';
 
@@ -71,6 +73,11 @@ class AppPages {
       name: _Paths.CIRCLE_SEPARATE,
       page: () => const CircleSeparateView(),
       binding: CircleSeparateBinding(),
+    ),
+    GetPage(
+      name: _Paths.MY_CODE,
+      page: () => const MyCodeView(),
+      binding: MyCodeBinding(),
     ),
   ];
 }

@@ -15,4 +15,5 @@
 - circle_details 朋友圈单行详情
 - circle_send 发布朋友圈
 - circle_separate 个人朋友圈
+- my_code 我的二维码
 

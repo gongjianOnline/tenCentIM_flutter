@@ -11,6 +11,7 @@ abstract class Routes {
   static const CIRCLE_DETAILS = _Paths.CIRCLE_DETAILS;
   static const CIRCLE_SEND = _Paths.CIRCLE_SEND;
   static const CIRCLE_SEPARATE = _Paths.CIRCLE_SEPARATE;
+  static const MY_CODE = _Paths.MY_CODE;
 }
 
 abstract class _Paths {
@@ -24,4 +25,5 @@ abstract class _Paths {
   static const CIRCLE_DETAILS = '/circleDetails';
   static const CIRCLE_SEND = '/circleSend';
   static const CIRCLE_SEPARATE = '/circleSeparate';
+  static const MY_CODE = '/myCode';
 }

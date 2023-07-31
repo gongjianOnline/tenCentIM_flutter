@@ -62,53 +62,64 @@ class MyView extends GetView<MyController> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10)
       ),
-      child: Column(
+      child: Stack(
         children: [
-          Container(
-            width:60,
-            height: 60,
-            child: Image.asset("lib/assets/img/user.png"),
+          Positioned(
+            right: 20,
+            child: InkWell(
+              onTap: (){Get.toNamed("/myCode");},
+              child: const Icon(Icons.qr_code_outlined,color: MyTheme.themeColor,),
+            )
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 14),
-            child:const Text(
-              '南开大学网络教育学院',
-              style: TextStyle(
-                fontSize: 16,
-                color: MyTheme.stressFontColor
+          Column(
+            children: [
+              Container(
+                width:60,
+                height: 60,
+                child: Image.asset("lib/assets/img/user.png"),
               ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 4),
-            child: const Text(
-              "ID: 123456789",
-              style: TextStyle(
-                fontSize: 14,
-                color: MyTheme.unimportantFontColor
+              Container(
+                margin: const EdgeInsets.only(top: 14),
+                child:const Text(
+                  '南开大学网络教育学院',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: MyTheme.stressFontColor
+                  ),
+                ),
               ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 16,left: 20,right: 20,bottom: 14),
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  width: 0.5,
-                  color: Color.fromARGB(103, 161, 161, 161)
-                )
+              Container(
+                margin: const EdgeInsets.only(top: 4),
+                child: const Text(
+                  "ID: 123456789",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: MyTheme.unimportantFontColor
+                  ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 16,left: 20,right: 20,bottom: 14),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      width: 0.5,
+                      color: Color.fromARGB(103, 161, 161, 161)
+                    )
+                  )
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 20),
+                alignment: Alignment.centerLeft,
+                child: const Text(
+                  "快来找我聊天吧~",
+                  style: TextStyle(
+                    color: MyTheme.unimportantFontColor
+                  ),
+                ),
               )
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(left: 20),
-            alignment: Alignment.centerLeft,
-            child: const Text(
-              "快来找我聊天吧~",
-              style: TextStyle(
-                color: MyTheme.unimportantFontColor
-              ),
-            ),
+            ],
           )
         ],
       ),
