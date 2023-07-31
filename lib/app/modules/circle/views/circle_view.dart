@@ -131,7 +131,7 @@ class CircleView extends GetView<CircleController> {
                 ),
                 /* 详情 */
                 InkWell(
-                  onTap: (){},
+                  onTap: (){Get.toNamed("/circleDetails");},
                   child: Container(
                     child: const Icon(
                       Icons.more_horiz_sharp,
@@ -197,7 +197,7 @@ class CircleView extends GetView<CircleController> {
                       ),
                       /* 评论 */
                       InkWell(
-                        onTap: (){},
+                        onTap: (){Get.toNamed("/circleDetails");},
                         child: Container(
                           child: const Icon(
                             Icons.message,

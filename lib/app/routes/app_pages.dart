@@ -4,6 +4,8 @@ import '../modules/add_friend/bindings/add_friend_binding.dart';
 import '../modules/add_friend/views/add_friend_view.dart';
 import '../modules/chart/bindings/chart_binding.dart';
 import '../modules/chart/views/chart_view.dart';
+import '../modules/circle_details/bindings/circle_details_binding.dart';
+import '../modules/circle_details/views/circle_details_view.dart';
 import '../modules/friend_info/bindings/friend_info_binding.dart';
 import '../modules/friend_info/views/friend_info_view.dart';
 import '../modules/layout/bindings/layout_binding.dart';
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.WEB_VIEW,
       page: () => const WebViewView(),
       binding: WebViewBinding(),
+    ),
+    GetPage(
+      name: _Paths.CIRCLE_DETAILS,
+      page: () => const CircleDetailsView(),
+      binding: CircleDetailsBinding(),
     ),
   ];
 }

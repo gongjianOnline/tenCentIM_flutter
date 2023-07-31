@@ -11,5 +11,6 @@
 - chart 聊天页面
 - add_friend 添加好友
 - new_friend 新好友通知页面
-- web_view webView页面跳转第三方地址
+- web_view webView 页面跳转第三方地址
+- circle_details 朋友圈单行详情
 
