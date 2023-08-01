@@ -95,7 +95,7 @@ class MyCodeView extends GetView<MyCodeController> {
 
           /* 二维码 */
           Container(
-            margin: const EdgeInsets.only(top: 16),
+            margin: const EdgeInsets.only(top: 28),
             width: MediaQuery. of (context).size.width,
             height: 400,
             decoration: const BoxDecoration(
