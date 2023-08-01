@@ -105,6 +105,7 @@ class HomeView extends GetView<HomeController> {
                   height: 60,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       /*用户名和消息时间 */
                       Container(
