@@ -18,6 +18,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/my_code/bindings/my_code_binding.dart';
 import '../modules/my_code/views/my_code_view.dart';
+import '../modules/setting/bindings/setting_binding.dart';
+import '../modules/setting/views/setting_view.dart';
 import '../modules/web_view/bindings/web_view_binding.dart';
 import '../modules/web_view/views/web_view_view.dart';
 
@@ -78,6 +80,11 @@ class AppPages {
       name: _Paths.MY_CODE,
       page: () => const MyCodeView(),
       binding: MyCodeBinding(),
+    ),
+    GetPage(
+      name: _Paths.SETTING,
+      page: () => const SettingView(),
+      binding: SettingBinding(),
     ),
   ];
 }

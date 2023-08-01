@@ -41,10 +41,13 @@ class MyView extends GetView<MyController> {
               ),
             ),
           ),
-          Container(
-            child: const Icon(
-              Icons.settings_sharp,
-              color:MyTheme.themeColor
+          InkWell(
+            onTap:(){Get.toNamed("/setting");},
+            child: Container(
+              child: const Icon(
+                Icons.settings_sharp,
+                color:MyTheme.themeColor
+              ),
             ),
           )
         ],

@@ -16,4 +16,5 @@
 - circle_send 发布朋友圈
 - circle_separate 个人朋友圈
 - my_code 我的二维码
+- setting 设置
 
