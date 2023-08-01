@@ -183,7 +183,9 @@ class LoginView extends GetView<LoginController> {
 
             /* 登录 */
             InkWell(
-              onTap: (){Get.offAndToNamed("/layout");},
+              onTap: (){
+                controller.handelLogin();
+              },
               child: Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(

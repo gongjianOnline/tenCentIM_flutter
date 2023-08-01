@@ -1,6 +1,10 @@
 import 'package:get/get.dart';
 
+import '../../../api/login.dart';
+
 class LoginController extends GetxController {
+
+
   RxString authorValue = "@基于Flutter即时通信案例".obs;
 
   /* 监听再按一次退出APP */
@@ -26,6 +30,14 @@ class LoginController extends GetxController {
   setLastPopTime(){
     lastPopTime.value = DateTime.now();
     update();
+  }
+
+  /* 登录 */
+  handelLogin()async{
+    var response =await LoginApi.login({
+          "name":"admin"
+    });
+    print(response);
   }
 
   
