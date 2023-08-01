@@ -12,6 +12,7 @@ dependencies:
   qr_flutter: ^4.1.0
   flutter_easy_permission: ^1.1.2
   flutter_scankit: ^1.2.4
+  flutter_svg: ^2.0.7
   get: 4.6.5
   flutter: 
     sdk: flutter
@@ -30,3 +31,4 @@ flutter:
   
   assets:
     - lib/assets/img/
+    - lib/assets/svg/

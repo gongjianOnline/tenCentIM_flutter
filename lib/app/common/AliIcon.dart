@@ -73,5 +73,11 @@ class AliIcon {
     fontFamily:'aliIcon',
     matchTextDirection:true
   );
+  /* 密码 */
+  static const IconData password = IconData(
+    0xe68c,
+    fontFamily:'aliIcon',
+    matchTextDirection:true
+  );
 
 }
