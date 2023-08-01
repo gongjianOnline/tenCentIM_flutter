@@ -5,6 +5,9 @@ import "../../circle/views/circle_view.dart";
 import "../../my/views/my_view.dart";
 class LayoutController extends GetxController {
 
+  /**调用obx的引用 */
+  RxString navIndexA = "消息".obs;
+
   /**导航栏菜单 */
   RxInt navIndex = 0.obs;
   /*路由*/
@@ -14,6 +17,10 @@ class LayoutController extends GetxController {
     CircleView(),
     MyView()
   ].obs;
+
+  /* 两次返回退出应用程序 */
+  var lastPopTime = DateTime.now().obs;
+
 
   @override
   void onInit() {
@@ -34,5 +41,12 @@ class LayoutController extends GetxController {
   checkNavIndex(newValue){
     navIndex.value = newValue;
   }
+
+  /* 退出APP */
+  setLastPopTime(){
+    lastPopTime.value = DateTime.now();
+    update();
+  }
+
 
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_im/app/common/myTheme.dart';
+
 
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../common/AliIcon.dart';
 import '../controllers/login_controller.dart';
@@ -11,26 +14,49 @@ class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-        width: MediaQuery. of (context).size.width,
-        height: MediaQuery. of (context).size.height,
-        child:Stack(
-          children: [
-            /* banner背景 */
-            bannerComponent(context),
-            /**修饰logo */
-            logoDecorateComponent(),
-            /* logo */
-            logoComponent(),
-            /* 表单  */
-            loginComponent(context),
-            /* 作者 */
-            authorComponent()
-          ],
+    return Obx(
+      ()=>WillPopScope(
+        onWillPop: ()async{
+          /* 判断两秒内点击两次返回按钮则退出APP */
+          if(controller.lastPopTime.value == null || DateTime.now().difference(controller.lastPopTime.value) > Duration(seconds: 2)){
+            Fluttertoast.showToast(
+              msg: "在按一次退出应用",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Color.fromARGB(57, 0, 0, 0),
+              textColor: Colors.white,
+              fontSize: 16.0
+            );
+            controller.setLastPopTime();
+          }else{
+            /* 退出app */
+            await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+          }
+          return false;
+        },
+        child: Scaffold(
+          body: Container(
+            margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+            width: MediaQuery. of (context).size.width,
+            height: MediaQuery. of (context).size.height,
+            child:Stack(
+              children: [
+                /* banner背景 */
+                bannerComponent(context),
+                /**修饰logo */
+                logoDecorateComponent(),
+                /* logo */
+                logoComponent(),
+                /* 表单  */
+                loginComponent(context),
+                /* 作者 */
+                authorComponent()
+              ],
+            )
+          ),
         )
-      ),
+      )
     );
   }
 
@@ -184,14 +210,14 @@ class LoginView extends GetView<LoginController> {
 
   /*作者声明 */
   authorComponent(){
-    return const Positioned(
+    return Positioned(
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Padding(
-          padding: EdgeInsets.only(bottom: 30),
+          padding:const EdgeInsets.only(bottom: 30),
           child: Text(
-            "@基于Flutter即时通信案例",
-            style: TextStyle(
+            controller.authorValue.value,
+            style: const TextStyle(
               color: MyTheme.unimportantFontColor
             ),
           ),

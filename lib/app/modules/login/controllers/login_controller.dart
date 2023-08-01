@@ -1,9 +1,12 @@
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
-  //TODO: Implement LoginController
+  RxString authorValue = "@基于Flutter即时通信案例".obs;
 
-  final count = 0.obs;
+  /* 监听再按一次退出APP */
+  var lastPopTime = DateTime.now().obs;
+
+
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +22,11 @@ class LoginController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  /* 确认退出APP */ 
+  setLastPopTime(){
+    lastPopTime.value = DateTime.now();
+    update();
+  }
+
+  
 }
