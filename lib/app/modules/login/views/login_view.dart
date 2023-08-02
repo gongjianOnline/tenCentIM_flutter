@@ -126,9 +126,9 @@ class LoginView extends GetView<LoginController> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10)
                     ),
-                    child: const TextField(
+                    child: TextField(
                       maxLines: 1,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: "账号", // 提示词
                         border: InputBorder.none, // 带边框
                         contentPadding: EdgeInsets.symmetric(vertical:9,horizontal:0),
@@ -138,8 +138,11 @@ class LoginView extends GetView<LoginController> {
                             AliIcon.my,
                             color: Color.fromRGBO(228, 228, 228, 1),
                           ),
-                        )
-                      )
+                        ),
+                      ),
+                      onChanged: (val)=>{
+                        controller.handleUserName(val)
+                      },
                     ),
                   ),
 

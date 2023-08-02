@@ -1,9 +1,14 @@
 import 'package:get/get.dart';
 
-class SettingController extends GetxController {
-  //TODO: Implement SettingController
+import '../../../controllers/tencent_user_controller.dart';
 
-  final count = 0.obs;
+class SettingController extends GetxController {
+  /* 调用腾讯用户登录模块 */
+  TencentUserController tencentUserController = Get.find();
+
+  /* 建立控制器和视图层关联 */
+  RxString titleName = "设置".obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +24,8 @@ class SettingController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  /* 退出 */
+  handleLogout(){
+    tencentUserController.tenCentLogout();
+  }
 }

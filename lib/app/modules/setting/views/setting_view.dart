@@ -40,9 +40,9 @@ class SettingView extends GetView<SettingController> {
           ),
           Container(
             margin: const EdgeInsets.only(left: 20),
-            child: const Text(
-              "设置",
-              style: TextStyle(
+            child: Text(
+              controller.titleName.value,
+              style:const TextStyle(
                 fontSize: 28,
                 color: MyTheme.stressFontColor
               ),
@@ -56,7 +56,7 @@ class SettingView extends GetView<SettingController> {
   /**退出按钮 */
   logoutComponent(){
     return InkWell(
-      onTap: (){Get.offAndToNamed("/login");},
+      onTap: (){controller.handleLogout();},
       child: Container(
         decoration: BoxDecoration(
           color: Colors.red[300],
@@ -79,5 +79,5 @@ class SettingView extends GetView<SettingController> {
       ),
     );
   }
-
+  
 }

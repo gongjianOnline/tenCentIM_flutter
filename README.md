@@ -1,6 +1,7 @@
 # flutter_im
 项目基于腾讯即时通信API,具备实时通信、通话、朋友圈分享等功能
 # 目录结构
+modules文件夹存放页面文件
 - layout 通用页面架构
 - login 登录页面 
 - home 消息首页
@@ -18,3 +19,14 @@
 - my_code 我的二维码
 - setting 设置
 
+common 文件夹存放公共方法
+  - AliIcon 阿里云图标
+  - http dio二次封装
+  - myTheme 主题色统一存放
+
+controllers 文件夹存放全局控制器
+  - init_tencent_im_controller 初始化腾讯IM控制器
+  - tencent_user_controller 腾讯IM用户登录相关控制器
+
+bindings 文件夹用于加载全局控制器
+  - global_bindings 加载全局controllers

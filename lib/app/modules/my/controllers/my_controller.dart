@@ -1,9 +1,8 @@
 import 'package:get/get.dart';
 
-class MyController extends GetxController {
-  //TODO: Implement MyController
+import '../../../controllers/tencent_user_controller.dart';
 
-  final count = 0.obs;
+class MyController extends GetxController {
   @override
   void onInit() {
     super.onInit();
@@ -18,6 +17,4 @@ class MyController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
