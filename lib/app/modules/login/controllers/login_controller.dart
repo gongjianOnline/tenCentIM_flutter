@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 
 import '../../../api/login.dart';
+import '../../../model/sigModel.dart';
 
 class LoginController extends GetxController {
 
@@ -35,10 +38,11 @@ class LoginController extends GetxController {
   /* 登录 */
   handelLogin()async{
     var response =await LoginApi.login({
-          "name":"admin"
+      "name":"admin"
     });
-    print(response);
+    Sig sigData = Sig.fromJson(response); // json 字符串转 map
+    print(sigData.sig);
+    // Get.offAndToNamed("/layout");
   }
-
   
 }
