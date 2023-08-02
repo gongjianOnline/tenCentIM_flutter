@@ -11,11 +11,13 @@ class SettingView extends GetView<SettingController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.white,
+        color: const Color.fromRGBO(246,246,246,1),
         margin: EdgeInsets.only(top:MediaQuery.of(context).padding.top),
         child: Column(
           children: [
             headerComponent(),
+            /* 我的账户 */
+            rowComponent(),
             logoutComponent()
           ],
         ),
@@ -26,7 +28,8 @@ class SettingView extends GetView<SettingController> {
   /* 头部标题 */
   headerComponent(){
     return Container(
-      padding: const EdgeInsets.only(left: 10,right: 10,top: 8),
+      color:Colors.white,
+      padding: const EdgeInsets.only(left: 10,right: 10,top: 8,bottom: 8),
       child: Row(
         children: [
           InkWell(
@@ -49,6 +52,41 @@ class SettingView extends GetView<SettingController> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  /**单列模块 */
+  rowComponent(){
+    return InkWell(
+      onTap:(){
+        Get.toNamed("/setAccount");
+      },
+      child: Container(
+        color: Colors.white,
+        margin: const EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
+        child: Row(
+          mainAxisAlignment:MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              child: const Text(
+                "账户与安全",
+                style: TextStyle(
+                  color: MyTheme.stressFontColor,
+                  fontSize: 16
+                ),
+              ),
+            ),
+            Container(
+              child:const Icon(
+                Icons.navigate_next_rounded,
+                color: MyTheme.unimportantFontColor,
+                size: 28,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

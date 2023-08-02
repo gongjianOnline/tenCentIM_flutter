@@ -18,6 +18,7 @@ modules文件夹存放页面文件
 - circle_separate 个人朋友圈
 - my_code 我的二维码
 - setting 设置
+- set_account 账户与安全设置
 
 common 文件夹存放公共方法
   - AliIcon 阿里云图标
