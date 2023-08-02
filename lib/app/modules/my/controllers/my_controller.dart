@@ -35,8 +35,10 @@ class MyController extends GetxController {
   /* 获取用户信息 */
   handleGetUserInfo()async{
     V2TimUserFullInfo? result = await tencentUserController.tenCentGetSelfInfo();
+    
     if(result != null){
       selfInfo.value = result;
+      print(selfInfo.value.userID);
     }
     update();
   }

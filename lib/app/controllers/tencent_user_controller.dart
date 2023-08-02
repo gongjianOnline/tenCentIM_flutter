@@ -4,6 +4,8 @@ import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
 
+import '../common/remind.dart';
+
 /* 用户登录相关操作 */
 class TencentUserController extends GetxController {
 
@@ -80,10 +82,16 @@ class TencentUserController extends GetxController {
     if(getUsersInfoRes.code == 0){
       return getUsersInfoRes.data?[0];
     }
-
   }
 
-
+  /* 改变登录用户信息 */
+  Future tenCentChangeSelfInfo(V2TimUserFullInfo selfInfo)async{
+    V2TimCallback setSelfInfoRes =
+      await TencentImSDKPlugin.v2TIMManager.setSelfInfo(userFullInfo: selfInfo);//用户资料设置信息
+      if (setSelfInfoRes.code == 0) {
+        return 101;
+      }
+  }
 
 
 }

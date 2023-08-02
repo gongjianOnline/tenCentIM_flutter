@@ -24,6 +24,7 @@ common 文件夹存放公共方法
   - AliIcon 阿里云图标
   - http dio二次封装
   - myTheme 主题色统一存放
+  - remind 弹窗封装
 
 controllers 文件夹存放全局控制器
   - init_tencent_im_controller 初始化腾讯IM控制器

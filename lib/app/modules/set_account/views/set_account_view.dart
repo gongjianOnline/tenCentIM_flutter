@@ -17,12 +17,12 @@ class SetAccountView extends GetView<SetAccountController> {
           children: [
             headerComponent(),
             
-            rowComponent("昵称","请设置昵称",true),
-            rowComponent("ID","admin",false),
-            rowComponent("性别","男",true),
-            rowComponent("生日","",true),
-            rowComponent("好友验证方式","允许所有人加我好友",true),
-            rowComponent("个性签名","",true),
+            rowComponent(context,"昵称",controller.nickname.value,true),
+            rowComponent(context,"ID",controller.userID.value,false),
+            rowComponent(context,"性别",controller.genderName.value,true),
+            rowComponent(context,"生日",controller.birthday.value,true),
+            rowComponent(context,"好友验证方式",controller.allowTypeName.value,true),
+            rowComponent(context,"个性签名",controller.selfSignature.value,true),
 
           ],
         ),
@@ -63,10 +63,23 @@ class SetAccountView extends GetView<SetAccountController> {
   }
   
   /* 单行模版 */
-  rowComponent(title,infoValue,isNext){
+  rowComponent(context,title,infoValue,isNext){
     return InkWell(
       onTap: (){
-        
+        switch (title) {
+          case "昵称":
+            controller.handleNickname();
+            break;
+          case "性别":
+            controller.handleGender(context);
+          case "生日":
+            controller.handleBirthday(context);
+          case "好友验证方式":
+            controller.handleVerify(context);
+          case "个性签名":
+            controller.handleSignature();
+          default:
+        }
       },
       child: Container(
         decoration: const BoxDecoration(

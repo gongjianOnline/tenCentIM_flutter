@@ -45,7 +45,7 @@ class InitTencentImController extends GetxController {
     onSelfInfoUpdated: (V2TimUserFullInfo info) {
       // 登录用户的资料发生了更新
       // info登录用户的资料
-      print("info登录用户的资料");
+      print("登录用户的资料发生改变");
     },
     onUserSigExpired: () {
       // 在线时票据过期：此时您需要生成新的 userSig 并再次调用 V2TIMManager 的 login() 函数重新登录。
