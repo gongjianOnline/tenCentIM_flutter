@@ -70,7 +70,7 @@ class TencentUserController extends GetxController {
   tenCentLogout()async{
     V2TimCallback logoutRes = await TencentImSDKPlugin.v2TIMManager.logout();
     if(logoutRes.code == 0){
-      Get.offAndToNamed("/login");
+      Get.offAllNamed("/login");
     }
   }
 
