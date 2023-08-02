@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_callback.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
 
@@ -69,6 +70,17 @@ class TencentUserController extends GetxController {
     if(logoutRes.code == 0){
       Get.offAndToNamed("/login");
     }
+  }
+
+  /**查看登录用户的个人信息 */
+  tenCentGetSelfInfo()async{
+    var userID =  await tenCentLoginUserID();
+    V2TimValueCallback<List<V2TimUserFullInfo>> getUsersInfoRes = 
+      await TencentImSDKPlugin.v2TIMManager.getUsersInfo(userIDList: [userID]);
+    if(getUsersInfoRes.code == 0){
+      return getUsersInfoRes.data?[0];
+    }
+
   }
 
 

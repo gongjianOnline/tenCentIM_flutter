@@ -11,7 +11,7 @@ class MyView extends GetView<MyController> {
   const MyView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(()=>Scaffold(
       body: Container(
         child: Column(
           children: [
@@ -22,7 +22,7 @@ class MyView extends GetView<MyController> {
           ],
         ),
       )
-    );
+    ));
   }
 
   /* 头部模块 */
@@ -33,9 +33,9 @@ class MyView extends GetView<MyController> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            child: const Text(
-              "我的",
-              style: TextStyle(
+            child: Text(
+              controller.titleName.value,
+              style:const TextStyle(
                 fontSize: 28,
                 color: MyTheme.stressFontColor
               ),
@@ -79,13 +79,14 @@ class MyView extends GetView<MyController> {
               Container(
                 width:60,
                 height: 60,
-                child: Image.asset("lib/assets/img/user.png"),
+                child:(controller.selfInfo.value.faceUrl == "" || controller.selfInfo.value.faceUrl == null) ? 
+                  Image.asset("lib/assets/img/user.png") : Image.network("${controller.selfInfo.value.faceUrl}"),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 14),
-                child:const Text(
-                  '南开大学网络教育学院',
-                  style: TextStyle(
+                child:Text(
+                  "${controller.selfInfo.value.nickName ?? controller.selfInfo.value.userID}",
+                  style:const TextStyle(
                     fontSize: 16,
                     color: MyTheme.stressFontColor
                   ),
@@ -93,9 +94,9 @@ class MyView extends GetView<MyController> {
               ),
               Container(
                 margin: const EdgeInsets.only(top: 4),
-                child: const Text(
-                  "ID: 123456789",
-                  style: TextStyle(
+                child: Text(
+                  "ID: ${controller.selfInfo.value.userID}",
+                  style:const TextStyle(
                     fontSize: 14,
                     color: MyTheme.unimportantFontColor
                   ),
