@@ -3,7 +3,10 @@ import "../../home/views/home_view.dart";
 import "../../friend/views/friend_view.dart";
 import "../../circle/views/circle_view.dart";
 import "../../my/views/my_view.dart";
+import "../../../controllers/tencent_relationship_controller.dart";
 class LayoutController extends GetxController {
+  /* 调用好友关系链模块 */
+  TencentRelationshipController tencentRelationshipController = Get.find();
 
   /**调用obx的引用 */
   RxString navIndexA = "消息".obs;
@@ -25,6 +28,8 @@ class LayoutController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    /* 拉去好友请求列表 */
+    tencentRelationshipController.tencentGetFriendApply();
   }
 
   @override

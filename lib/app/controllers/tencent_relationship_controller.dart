@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_im/app/common/remind.dart';
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/enum/V2TimFriendshipListener.dart';
@@ -8,6 +10,7 @@ import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_info_result.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_operation_result.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_application_result.dart';
 /* 监听关系链 */
 class TencentRelationshipController extends GetxController {
 
@@ -54,11 +57,8 @@ class TencentRelationshipController extends GetxController {
             (List<V2TimFriendApplication> applicationList) async {
               print("关系链监听到好友请求信息增加");
               //好友请求数量增加的回调
-              friendApplyList.addAll(applicationList);
               //applicationList 新增的好友请求信息列表
-              // applicationList.forEach((item) {
-              //   friendApplyList.add(item);
-              // });
+              friendApplyList.insertAll(0,applicationList);
         },
         onFriendApplicationListDeleted: (List<String> userIDList) async {
           print("关系链监听到好友请求信息减少");
@@ -132,8 +132,20 @@ class TencentRelationshipController extends GetxController {
       }
     }
 
-    xxx(applicationList){
-      friendApplyList.addAll(applicationList);
+    /* 获取好友请求列表(在重新登录或进入APP时调用该接口) */
+    tencentGetFriendApply()async{
+      V2TimValueCallback<V2TimFriendApplicationResult>
+        getFriendApplicationListRes = await TencentImSDKPlugin.v2TIMManager
+            .getFriendshipManager()
+            .getFriendApplicationList();
+      if(getFriendApplicationListRes.code == 0){
+        print("未读数量-${getFriendApplicationListRes.data?.unreadCount}");
+        // friendApplyList.addAll( as Iterable<V2TimFriendApplication>);
+        getFriendApplicationListRes.data?.friendApplicationList?.forEach((element) {
+          friendApplyList.add(element as V2TimFriendApplication);
+        });
+      }
+
     }
 
 }

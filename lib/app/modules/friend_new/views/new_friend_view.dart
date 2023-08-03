@@ -7,6 +7,7 @@ import '../../../common/myTheme.dart';
 import '../../../controllers/tencent_relationship_controller.dart';
 import '../controllers/new_friend_controller.dart';
 
+// ignore: must_be_immutable
 class NewFriendView extends GetView<NewFriendController> {
   /* 调用好友关系链模块 */
   TencentRelationshipController tencentRelationshipController = Get.find();
