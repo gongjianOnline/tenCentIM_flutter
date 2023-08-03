@@ -1,9 +1,10 @@
 import 'package:get/get.dart';
 
 class NewFriendController extends GetxController {
-  //TODO: Implement NewFriendController
 
-  final count = 0.obs;
+  /* 建立视图层和控制器关联 */
+  RxString titleName = "请求列表".obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +20,4 @@ class NewFriendController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
 }
