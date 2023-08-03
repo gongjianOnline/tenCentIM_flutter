@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_application.dart';
 
 import '../../../common/myTheme.dart';
+import '../../../controllers/tencent_relationship_controller.dart';
 import '../controllers/new_friend_controller.dart';
 
 class NewFriendView extends GetView<NewFriendController> {
-  const NewFriendView({Key? key}) : super(key: key);
+  /* 调用好友关系链模块 */
+  TencentRelationshipController tencentRelationshipController = Get.find();
+  NewFriendView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Obx(()=>Scaffold(
@@ -19,11 +23,9 @@ class NewFriendView extends GetView<NewFriendController> {
               flex: 1,
               child: ListView(
                 padding:const EdgeInsets.only(top: 10),
-                children: [
-                  searchResult(),
-                  searchResult(),
-                  searchResult(),
-                ],
+                children:tencentRelationshipController.friendApplyList.map((element) {
+                  return searchResult(element);
+                }).toList().cast<Widget>(),
               )
             )
           ],
@@ -61,7 +63,7 @@ class NewFriendView extends GetView<NewFriendController> {
   }
 
   /* 好友请求列表 */
-  searchResult(){
+  searchResult(V2TimFriendApplication friendApplyItem){
     return Container(
         padding: const EdgeInsets.only(left: 10,right: 10,bottom: 10),
         margin: const EdgeInsets.only(bottom: 20),
@@ -93,18 +95,18 @@ class NewFriendView extends GetView<NewFriendController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          child: const Text(
-                            "南开大学网络教育学院",
-                            style: TextStyle(
+                          child: Text(
+                            "${(friendApplyItem.userID ==""||friendApplyItem.nickname==null)?friendApplyItem.userID:friendApplyItem.nickname}",
+                            style:const TextStyle(
                               fontSize: 16,
                               color: MyTheme.stressFontColor
                             ),
                           ),
                         ),
                         Container(
-                          child: const Text(
-                            "ID: admin",
-                            style: TextStyle(
+                          child: Text(
+                            "ID: ${friendApplyItem.userID}",
+                            style:const TextStyle(
                               fontSize: 14,
                               color: MyTheme.unimportantFontColor
                             ),

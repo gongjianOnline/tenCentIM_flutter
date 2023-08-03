@@ -18,8 +18,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/my_code/bindings/my_code_binding.dart';
 import '../modules/my_code/views/my_code_view.dart';
-import '../modules/new_friend/bindings/new_friend_binding.dart';
-import '../modules/new_friend/views/new_friend_view.dart';
+import '../modules/friend_new/bindings/new_friend_binding.dart';
+import '../modules/friend_new/views/new_friend_view.dart';
 import '../modules/set_account/bindings/set_account_binding.dart';
 import '../modules/set_account/views/set_account_view.dart';
 import '../modules/setting/bindings/setting_binding.dart';
@@ -97,7 +97,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.NEW_FRIEND,
-      page: () => const NewFriendView(),
+      page: () => NewFriendView(),
       binding: NewFriendBinding(),
     ),
   ];

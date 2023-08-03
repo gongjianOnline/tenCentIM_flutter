@@ -11,11 +11,19 @@ import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
 /* 监听关系链 */
 class TencentRelationshipController extends GetxController {
 
+
+  /* 声明懒变量用于存放好友关系链的配置 */
+  late V2TimFriendshipListener listener;
+
+  /* 好友申请列表 */
+  RxList<V2TimFriendApplication> friendApplyList = <V2TimFriendApplication>[].obs;
+  
   @override
   void onInit() {
     super.onInit();
     initRelationshipObserver();
   }
+  
 
   @override
   void onReady() {
@@ -28,52 +36,60 @@ class TencentRelationshipController extends GetxController {
     destroyRelationshipObserver();
   }
 
-    /* 配置关系链监听器 */
-    V2TimFriendshipListener listener = V2TimFriendshipListener(
-      onBlackListAdd: (List<V2TimFriendInfo> infoList) async {
-        print("关系链监听到黑名单列表新增用户");
-        //黑名单列表新增用户的回调
-        //infoList 新增的用户信息列表
-      },
-      onBlackListDeleted: (List<String> userList) async {
-        print("关系链监听到黑名单列表删除用户");
-        //黑名单列表删除的回调
-        //userList 被删除的用户id列表
-      },
-      onFriendApplicationListAdded:
-          (List<V2TimFriendApplication> applicationList) async {
-            print("关系链监听到好友请求信息增加");
-        //好友请求数量增加的回调
-        //applicationList 新增的好友请求信息列表
-      },
-      onFriendApplicationListDeleted: (List<String> userIDList) async {
-        print("关系链监听到好友请求信息减少");
-        //好友请求数量减少的回调
-        //减少的好友请求的请求用户id列表
-      },
-      onFriendApplicationListRead: () async {
-        print("关系链监听到好友请求已读");
-        //好友请求已读的回调
-      },
-      onFriendInfoChanged: (List<V2TimFriendInfo> infoList) async {
-        print("关系链监听到好友信息改变");
-        //好友信息改变的回调
-        //infoList 好友信息改变的好友列表
-      },
-      onFriendListAdded: (List<V2TimFriendInfo> users) async {
-        print("关系链监听到好友列表增加");
-        //好友列表增加人员的回调
-        //users 新增的好友信息列表
-      },
-      onFriendListDeleted: (List<String> userList) async {
-        print("关系链监听到好友列表减少");
-        //好友列表减少人员的回调
-        //userList 减少的好友id列表
-      },
-    );
+    /* 配置好友关系链 */
+    configRelation(){
+      /* 配置关系链监听器 */
+      listener = V2TimFriendshipListener(
+        onBlackListAdd: (List<V2TimFriendInfo> infoList) async {
+          print("关系链监听到黑名单列表新增用户");
+          //黑名单列表新增用户的回调
+          //infoList 新增的用户信息列表
+        },
+        onBlackListDeleted: (List<String> userList) async {
+          print("关系链监听到黑名单列表删除用户");
+          //黑名单列表删除的回调
+          //userList 被删除的用户id列表
+        },
+        onFriendApplicationListAdded:
+            (List<V2TimFriendApplication> applicationList) async {
+              print("关系链监听到好友请求信息增加");
+              //好友请求数量增加的回调
+              friendApplyList.addAll(applicationList);
+              //applicationList 新增的好友请求信息列表
+              // applicationList.forEach((item) {
+              //   friendApplyList.add(item);
+              // });
+        },
+        onFriendApplicationListDeleted: (List<String> userIDList) async {
+          print("关系链监听到好友请求信息减少");
+          //好友请求数量减少的回调
+          //减少的好友请求的请求用户id列表
+        },
+        onFriendApplicationListRead: () async {
+          print("关系链监听到好友请求已读");
+          //好友请求已读的回调
+        },
+        onFriendInfoChanged: (List<V2TimFriendInfo> infoList) async {
+          print("关系链监听到好友信息改变");
+          //好友信息改变的回调
+          //infoList 好友信息改变的好友列表
+        },
+        onFriendListAdded: (List<V2TimFriendInfo> users) async {
+          print("关系链监听到好友列表增加");
+          //好友列表增加人员的回调
+          //users 新增的好友信息列表
+        },
+        onFriendListDeleted: (List<String> userList) async {
+          print("关系链监听到好友列表减少");
+          //好友列表减少人员的回调
+          //userList 减少的好友id列表
+        },
+      );
+    }
 
     /* 初始化监听器 */
     initRelationshipObserver(){
+      configRelation();
       TencentImSDKPlugin.v2TIMManager
         .getFriendshipManager()
         .addFriendListener(listener: listener);//添加关系链监听器
@@ -113,12 +129,11 @@ class TencentRelationshipController extends GetxController {
       print(addFriendRes.code);
       if (addFriendRes.code == 0) {
         Remind.toast("等待对方同意");
-        // // 添加请求发送成功
-        // print(addFriendRes.data?.resultCode); //添加结果错误码
-        // print(addFriendRes.data?.resultInfo); //添加结果描述
-        // print(addFriendRes.data?.userID); //被添加的用户id
       }
     }
 
+    xxx(applicationList){
+      friendApplyList.addAll(applicationList);
+    }
 
 }
