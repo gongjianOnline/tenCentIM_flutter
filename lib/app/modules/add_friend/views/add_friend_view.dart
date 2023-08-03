@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart' as badges;
 
 import 'package:get/get.dart';
 
@@ -156,13 +157,26 @@ class AddFriendView extends GetView<AddFriendController> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              child:const Text(
-                "新朋友",
-                style: TextStyle(
-                  color: MyTheme.stressFontColor,
-                  fontSize: 20
+              child:badges.Badge(
+                badgeContent: Text(
+                  "${controller.tencentRelationshipController.friendApplyList.length}",
+                  style: const TextStyle(
+                    color: Colors.white
+                  ),
                 ),
-              ),
+                showBadge: true,
+                position: badges.BadgePosition.topEnd(top:-4,end: -20),
+                badgeStyle:const badges.BadgeStyle(
+                  badgeColor: Color.fromRGBO(229, 115, 115, 1)
+                ),
+                child: const Text(
+                  "新朋友",
+                  style: TextStyle(
+                    color: MyTheme.stressFontColor,
+                    fontSize: 20
+                  ),
+                ),
+              )
             ),
             Container(
               child: const Icon(

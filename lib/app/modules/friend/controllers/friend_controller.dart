@@ -1,9 +1,14 @@
 import 'package:get/get.dart';
 
-class FriendController extends GetxController {
-  //TODO: Implement FriendController
+import '../../../controllers/tencent_relationship_controller.dart';
 
-  final count = 0.obs;
+class FriendController extends GetxController {
+
+  /* 建立视图层和控制器关联 */
+  RxString titleName = "好友".obs;
+  TencentRelationshipController tencentRelationshipController = Get.find();
+
+
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +24,5 @@ class FriendController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  
 }

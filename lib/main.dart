@@ -24,6 +24,7 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   runApp(
     GetMaterialApp(
+      debugShowCheckedModeBanner:false,
       title: "Application",
       theme: ThemeData( 
         colorScheme: const ColorScheme.light().copyWith(primary: MyTheme.themeColor),

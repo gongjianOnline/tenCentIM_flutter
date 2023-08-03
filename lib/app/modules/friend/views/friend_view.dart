@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_im/app/common/myTheme.dart';
+import 'package:badges/badges.dart' as badges;
 
 import 'package:get/get.dart';
 
@@ -10,7 +11,7 @@ class FriendView extends GetView<FriendController> {
   const FriendView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(()=>Scaffold(
       body:Container(
         decoration: const BoxDecoration(
           // color: MyTheme.bgColor
@@ -26,7 +27,7 @@ class FriendView extends GetView<FriendController> {
           ],
         )
       )
-    );
+    ));
   }
 
   /* 顶部模块 */
@@ -42,18 +43,31 @@ class FriendView extends GetView<FriendController> {
               color:MyTheme.themeColor,
               borderRadius: BorderRadius.circular(16)
             ),
-            child: const Text("好友",style: TextStyle(color: Colors.white),),
+            child: Text(controller.titleName.value,style: const TextStyle(color: Colors.white),),
           ),
           Material(
-            child: InkWell(
-              onTap: (){
-                Get.toNamed("/addFriend");
-              },
-              child:Container(
-                child: const Icon(
-                  AliIcon.addFriends,
-                  color: MyTheme.themeColor,
-                  size: 26,
+            child:badges.Badge(
+              badgeContent: Text(
+                "${controller.tencentRelationshipController.friendApplyList.length}",
+                style: const TextStyle(
+                  color: Colors.white
+                ),
+              ),
+              showBadge: true,
+              position: badges.BadgePosition.topEnd(end: -4),
+              badgeStyle:const badges.BadgeStyle(
+                badgeColor: Color.fromRGBO(229, 115, 115, 1)
+              ),
+              child: InkWell(
+                onTap: (){
+                  Get.toNamed("/addFriend");
+                },
+                child:Container(
+                  child: const Icon(
+                    AliIcon.addFriends,
+                    color: MyTheme.themeColor,
+                    size: 26,
+                  ),
                 ),
               ),
             ),
