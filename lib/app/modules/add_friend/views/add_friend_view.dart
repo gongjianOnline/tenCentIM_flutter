@@ -9,7 +9,7 @@ class AddFriendView extends GetView<AddFriendController> {
   const AddFriendView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(()=>Scaffold(
       body: Container(
         decoration: const BoxDecoration(
           color: Colors.white
@@ -23,7 +23,7 @@ class AddFriendView extends GetView<AddFriendController> {
           ],
         ),
       )
-    );
+    ));
   }
 
   /* 标题模块 */
@@ -42,9 +42,9 @@ class AddFriendView extends GetView<AddFriendController> {
               color: MyTheme.unimportantFontColor,
             ),
           ),
-          const Text(
-            "添加朋友",
-            style: TextStyle(
+          Text(
+            controller.titleName.value,
+            style:const TextStyle(
               fontSize: 28,
               color: MyTheme.stressFontColor
             ),
@@ -63,9 +63,9 @@ class AddFriendView extends GetView<AddFriendController> {
         color: Color.fromRGBO(242, 242, 242, 1),
         borderRadius: BorderRadius.circular(20)
       ),
-      child: const TextField(
+      child: TextField(
         maxLines: 1,
-        decoration: InputDecoration(
+        decoration:const InputDecoration(
           hintText: "搜索用户ID",
           hintStyle:TextStyle(color:Color.fromRGBO(206, 206, 206, 1)),
           contentPadding: EdgeInsets.symmetric(vertical:9,horizontal:-10), // 调整上下内边距
@@ -78,61 +78,65 @@ class AddFriendView extends GetView<AddFriendController> {
             ),
           )
         ),
+        onChanged:(val){
+          controller.handelSearch(val);
+        },
       ),
     );
   }
 
   /* 搜索结果 */
   searchResult(){
-    return InkWell(
-      onTap: (){Get.toNamed("/friendInfo");},
-      child: Container(
-        padding: const EdgeInsets.only(left: 10,right: 10),
-        margin: const EdgeInsets.only(bottom: 20,top: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              width: 52,
-              height: 52,
-              margin: const EdgeInsets.only(right: 10),
-              child: Image.asset("lib/assets/img/user.png"),
-            ),
-            Expanded(
-              flex: 1,
-              child:Container(
+    return controller.friendObj.value.userID == ""? Container():
+      InkWell(
+        onTap: (){Get.toNamed("/friendInfo",arguments:{"friendId":controller.friendObj.value.userID});},
+        child: Container(
+          padding: const EdgeInsets.only(left: 10,right: 10),
+          margin: const EdgeInsets.only(bottom: 20,top: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                width: 52,
                 height: 52,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child:const Text(
-                        "南开大学网络教育学院",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: MyTheme.stressFontColor
+                margin: const EdgeInsets.only(right: 10),
+                child: Image.asset("lib/assets/img/user.png"),
+              ),
+              Expanded(
+                flex: 1,
+                child:Container(
+                  height: 52,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child:Text(
+                          controller.friendObj.value.nickName == ""?controller.friendObj.value.userID:controller.friendObj.value.nickName,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: MyTheme.stressFontColor
+                          ),
+                        )
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: const Text(
+                          "天津 西青区",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: MyTheme.unimportantFontColor
+                          ),
                         ),
                       )
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: const Text(
-                        "天津 西青区",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: MyTheme.unimportantFontColor
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                    ],
+                  ),
+                )
               )
-            )
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
   }
 
 

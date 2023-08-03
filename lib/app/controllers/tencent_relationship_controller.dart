@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/enum/V2TimFriendshipListener.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_application.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_info.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_info_result.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
 /* 监听关系链 */
 class TencentRelationshipController extends GetxController {
@@ -23,7 +25,7 @@ class TencentRelationshipController extends GetxController {
     destroyRelationshipObserver();
   }
 
-  /* 配置关系链监听器 */
+    /* 配置关系链监听器 */
     V2TimFriendshipListener listener = V2TimFriendshipListener(
       onBlackListAdd: (List<V2TimFriendInfo> infoList) async {
         print("关系链监听到黑名单列表新增用户");
@@ -73,12 +75,25 @@ class TencentRelationshipController extends GetxController {
         .getFriendshipManager()
         .addFriendListener(listener: listener);//添加关系链监听器
     }
+    
     /**移除监听器 */
     destroyRelationshipObserver(){
       TencentImSDKPlugin.v2TIMManager
         .getFriendshipManager()
         .removeFriendListener(listener: listener);//需要移除的关系链监听器
     }
+
+    /* 获取好友资料 */
+    Future tencentGetFriendInfo(friedId)async{
+      V2TimValueCallback<List<V2TimFriendInfoResult>> getFriendsInfoRes =
+        await TencentImSDKPlugin.v2TIMManager
+            .getFriendshipManager()
+            .getFriendsInfo(userIDList: [friedId]);
+      if(getFriendsInfoRes.code == 0){
+        return getFriendsInfoRes.data;
+      }
+    }
+
 
 
 }

@@ -18,6 +18,7 @@ dependencies:
   flutter_pickers: ^2.1.9
   dio: ^5.3.1
   intl: ^0.18.1
+  easy_debounce: ^2.0.3
   get: 4.6.5
   flutter: 
     sdk: flutter
