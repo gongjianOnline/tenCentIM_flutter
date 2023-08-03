@@ -29,6 +29,7 @@ common 文件夹存放公共方法
 controllers 文件夹存放全局控制器
   - init_tencent_im_controller 初始化腾讯IM控制器
   - tencent_user_controller 腾讯IM用户登录相关控制器
+  - tencent_relationship_controller 监听关系链
 
 bindings 文件夹用于加载全局控制器
   - global_bindings 加载全局controllers
