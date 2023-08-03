@@ -3,7 +3,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_info_result.dart';
 
 import '../../../controllers/tencent_relationship_controller.dart';
-import '../../../model/friendInfo.dart';
+import '../../../model/friendInfoModel.dart';
 
 class AddFriendController extends GetxController {
   /* 调用腾讯关系链模块 */
