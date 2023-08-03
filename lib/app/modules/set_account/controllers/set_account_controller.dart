@@ -61,8 +61,8 @@ class SetAccountController extends GetxController {
     birthday.value = formattedDate;
     /* 验证方式 */
     if(selfInfo.allowType == 0){allowTypeName.value="允许所有人加我好友";}
-    if(selfInfo.allowType == 1){allowTypeName.value="不允许所有人加我好友";}
-    if(selfInfo.allowType == 2){allowTypeName.value="加我好友需我确认";}
+    if(selfInfo.allowType == 1){allowTypeName.value="加我好友需我确认";}
+    if(selfInfo.allowType == 2){allowTypeName.value="不允许所有人加我好友";}
     /* 个性签名 */
     selfSignature.value = (selfInfo.selfSignature==null ||selfInfo.selfSignature=="")?"": selfInfo.selfSignature as String;
   }
@@ -162,7 +162,7 @@ class SetAccountController extends GetxController {
   handleVerify(context){
     Pickers.showSinglePicker(
       context,
-      data: ['允许所有人加我好友', '不允许所有人加我好友','加我好友需我确认'],
+      data: ['允许所有人加我好友',"加我好友需我确认", '不允许所有人加我好友',],
       selectData: "允许所有人加我好友",
       pickerStyle: PickerStyle(
         textSize:18
