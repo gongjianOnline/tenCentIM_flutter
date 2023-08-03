@@ -2,6 +2,8 @@
 import 'package:flutter_im/app/common/remind.dart';
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/enum/V2TimFriendshipListener.dart';
+import 'package:tencent_cloud_chat_sdk/enum/friend_application_type_enum.dart';
+import 'package:tencent_cloud_chat_sdk/enum/friend_response_type_enum.dart';
 import 'package:tencent_cloud_chat_sdk/enum/friend_type_enum.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_application.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_info.dart';
@@ -145,6 +147,22 @@ class TencentRelationshipController extends GetxController {
         });
       }
 
+    }
+
+    /* 同意好友申请 */
+    tencentConsentFriendApply(V2TimFriendApplication friendInfo)async{
+      V2TimValueCallback<V2TimFriendOperationResult>
+        acceptFriendApplicationRes = await TencentImSDKPlugin.v2TIMManager
+            .getFriendshipManager()
+            .acceptFriendApplication(
+                responseType: FriendResponseTypeEnum.V2TIM_FRIEND_ACCEPT_AGREE_AND_ADD, //建立好友关系时选择单向/双向好友关系
+                type: FriendApplicationTypeEnum.values[friendInfo.type], //加好友类型 要与getApplicationList查询到的type相同，否则会报错。
+                userID: friendInfo.userID);
+      if(acceptFriendApplicationRes.code == 0){
+        Remind.toast("好友添加成功");
+        friendApplyList.value.removeWhere((item) => item.userID == friendInfo.userID);
+        friendApplyList.refresh();
+      }
     }
 
 }

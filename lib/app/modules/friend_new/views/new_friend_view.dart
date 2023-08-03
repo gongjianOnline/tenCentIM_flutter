@@ -150,7 +150,9 @@ class NewFriendView extends GetView<NewFriendController> {
                   const Padding(padding: EdgeInsets.only(left: 10)),
                   InkWell(
                     borderRadius:BorderRadius.circular(10),
-                    onTap: (){print("同意");},
+                    onTap: (){
+                      tencentRelationshipController.tencentConsentFriendApply(friendApplyItem);
+                    },
                     child: Container(
                       padding: const EdgeInsets.only(left: 10,right: 10,bottom: 4,top: 4),
                       decoration: BoxDecoration(
