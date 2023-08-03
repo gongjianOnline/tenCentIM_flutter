@@ -9,7 +9,7 @@ class FriendInfoView extends GetView<FriendInfoController> {
   const FriendInfoView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(()=>Scaffold(
       body: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
         padding: const EdgeInsets.all(20),
@@ -21,7 +21,7 @@ class FriendInfoView extends GetView<FriendInfoController> {
           ],
         ),
       )
-    );
+    ));
   }
 
   /* 用户信息 */
@@ -42,9 +42,9 @@ class FriendInfoView extends GetView<FriendInfoController> {
           ),
           Container(
             margin: const EdgeInsets.only(top: 14),
-            child:const Text(
-              '南开大学网络教育学院',
-              style: TextStyle(
+            child: Text(
+              controller.friendObj.value.nickName == ""?controller.friendObj.value.userID:controller.friendObj.value.nickName,
+              style: const TextStyle(
                 fontSize: 16,
                 color: MyTheme.stressFontColor
               ),
@@ -52,9 +52,9 @@ class FriendInfoView extends GetView<FriendInfoController> {
           ),
           Container(
             margin: const EdgeInsets.only(top: 4),
-            child: const Text(
-              "ID: 123456789",
-              style: TextStyle(
+            child: Text(
+              "ID: ${controller.friendObj.value.userID}",
+              style:const TextStyle(
                 fontSize: 14,
                 color: MyTheme.unimportantFontColor
               ),
@@ -74,9 +74,9 @@ class FriendInfoView extends GetView<FriendInfoController> {
           Container(
             margin: const EdgeInsets.only(left: 20),
             alignment: Alignment.centerLeft,
-            child: const Text(
-              "快来找我聊天吧~",
-              style: TextStyle(
+            child: Text(
+              controller.friendObj.value.selfSignature == ""?"快来找我聊天吧~":controller.friendObj.value.selfSignature,
+              style: const TextStyle(
                 color: MyTheme.unimportantFontColor
               ),
             ),
@@ -153,27 +153,43 @@ class FriendInfoView extends GetView<FriendInfoController> {
 
   /* 添加好友 */
   addFriendComponent(context){
-    return Ink(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10)
-      ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(10),
-        onTap: (){},
-        child: Container(
-          width: MediaQuery. of (context).size.width,
-          height: 40,
-          alignment: Alignment.center,
-          child: const Text(
-            "添加朋友",
-            style: TextStyle(
-              color:MyTheme.themeColor
+    return controller.friendObj.value.allowType == 2? 
+      Container(
+        decoration: BoxDecoration(
+          color: Colors.red[200],
+          borderRadius: BorderRadius.circular(10)
+        ),
+        width: MediaQuery. of (context).size.width,
+        height: 40,
+        alignment: Alignment.center,
+        child:const Text(
+          "该用户禁止添加好友",
+          style: TextStyle(
+            color:Colors.white
+          ),
+        ),
+      )
+      : Ink(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10)
+        ),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(10),
+          onTap: (){},
+          child: Container(
+            width: MediaQuery. of (context).size.width,
+            height: 40,
+            alignment: Alignment.center,
+            child:Text(
+              controller.titleName.value,
+              style:const TextStyle(
+                color:MyTheme.themeColor
+              ),
             ),
           ),
         ),
-      ),
-    );
-  }
+      );
+    }
 
 }
