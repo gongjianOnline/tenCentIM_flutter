@@ -164,7 +164,7 @@ class AddFriendView extends GetView<AddFriendController> {
                     color: Colors.white
                   ),
                 ),
-                showBadge: true,
+                showBadge: controller.tencentRelationshipController.friendApplyList.isEmpty?false:true,
                 position: badges.BadgePosition.topEnd(top:-4,end: -20),
                 badgeStyle:const badges.BadgeStyle(
                   badgeColor: Color.fromRGBO(229, 115, 115, 1)
