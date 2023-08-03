@@ -33,3 +33,7 @@ controllers 文件夹存放全局控制器
 
 bindings 文件夹用于加载全局控制器
   - global_bindings 加载全局controllers
+
+model 数据模型
+  - sigModel node服务端获取时间密钥模型
+  - friendInfoModel 腾讯云获取好友信息自定义数据模型
