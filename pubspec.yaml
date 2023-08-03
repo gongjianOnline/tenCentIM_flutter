@@ -1,5 +1,5 @@
 name: flutter_im
-version: 1.0.0+1
+version: 1.0.1
 publish_to: none
 description: A new Flutter project.
 environment: 
@@ -19,6 +19,7 @@ dependencies:
   dio: ^5.3.1
   intl: ^0.18.1
   easy_debounce: ^2.0.3
+  package_info_plus: ^4.1.0
   get: 4.6.5
   flutter: 
     sdk: flutter

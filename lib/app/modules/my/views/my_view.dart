@@ -115,9 +115,9 @@ class MyView extends GetView<MyController> {
               Container(
                 margin: const EdgeInsets.only(left: 20),
                 alignment: Alignment.centerLeft,
-                child: const Text(
-                  "快来找我聊天吧~",
-                  style: TextStyle(
+                child: Text(
+                  ( controller.selfInfo.value.selfSignature=="" || controller.selfInfo.value.selfSignature == null)?"快来找我聊天吧~":controller.selfInfo.value.selfSignature as String,
+                  style: const TextStyle(
                     color: MyTheme.unimportantFontColor
                   ),
                 ),
@@ -201,7 +201,7 @@ class MyView extends GetView<MyController> {
       child: Column(
         children: [
           singleComponent(const Icon(AliIcon.about,color: MyTheme.stressFontColor,size: 24,),"关于我们","http://www.gjweb.top"),
-          singleComponent(const Icon(AliIcon.version,color: MyTheme.stressFontColor,size: 24,),"版本号","V 1.0.0"),
+          singleComponent(const Icon(AliIcon.version,color: MyTheme.stressFontColor,size: 24,),"版本号",controller.version.value),
         ],
       ),
     );
