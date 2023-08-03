@@ -176,7 +176,7 @@ class FriendInfoView extends GetView<FriendInfoController> {
         ),
         child: InkWell(
           borderRadius: BorderRadius.circular(10),
-          onTap: (){},
+          onTap: (){controller.handleAddFriend();},
           child: Container(
             width: MediaQuery. of (context).size.width,
             height: 40,

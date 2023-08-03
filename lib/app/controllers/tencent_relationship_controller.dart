@@ -1,8 +1,11 @@
+import 'package:flutter_im/app/common/remind.dart';
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/enum/V2TimFriendshipListener.dart';
+import 'package:tencent_cloud_chat_sdk/enum/friend_type_enum.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_application.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_info.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_info_result.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_operation_result.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
 /* 监听关系链 */
@@ -94,6 +97,28 @@ class TencentRelationshipController extends GetxController {
       }
     }
 
+    /**添加好友 */
+    tencentAddFriend(friendId)async{
+      V2TimValueCallback<V2TimFriendOperationResult> addFriendRes =
+        await TencentImSDKPlugin.v2TIMManager
+        .getFriendshipManager()
+        .addFriend(
+          userID: friendId,//需要添加的用户id
+          remark: "", //添加的好友的好友备注
+          friendGroup: "", //添加好友所在分组
+          addWording: "", //添加好友附带信息
+          addSource: "", //添加来
+          addType:FriendTypeEnum.V2TIM_FRIEND_TYPE_BOTH,//设置加好友类型，默认双向
+        );
+      print(addFriendRes.code);
+      if (addFriendRes.code == 0) {
+        Remind.toast("等待对方同意");
+        // // 添加请求发送成功
+        // print(addFriendRes.data?.resultCode); //添加结果错误码
+        // print(addFriendRes.data?.resultInfo); //添加结果描述
+        // print(addFriendRes.data?.userID); //被添加的用户id
+      }
+    }
 
 
 }

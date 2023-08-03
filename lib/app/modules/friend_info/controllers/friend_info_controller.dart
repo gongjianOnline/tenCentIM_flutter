@@ -15,10 +15,16 @@ class FriendInfoController extends GetxController {
   /* 好友信息 */
   Rx<FriendInfo> friendObj = FriendInfo().obs;
 
+  /*路由参数 
+   * friendId 好友ID
+  */
+  RxString friendId = "".obs;
+
   @override
   void onInit() {
     super.onInit();
     print(Get.arguments["friendId"]);
+    friendId.value = Get.arguments["friendId"];
     handleGetFriendInfo(Get.arguments["friendId"]);
   }
 
@@ -58,5 +64,12 @@ class FriendInfoController extends GetxController {
         return (data == null || data == "")?"":data;
     }
   }
+
+
+  /* 添加好友信息 */
+  handleAddFriend(){
+    tencentRelationshipController.tencentAddFriend(friendId.value);
+  }
+
 
 }
