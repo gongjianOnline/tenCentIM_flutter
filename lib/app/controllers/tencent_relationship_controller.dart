@@ -165,4 +165,22 @@ class TencentRelationshipController extends GetxController {
       }
     }
 
+    /* 拒绝好友申请 */
+    tencentConsentFriendRefuse(V2TimFriendApplication friendInfo)async{
+      print(friendInfo.userID);
+      print(friendInfo.type);
+      V2TimValueCallback<V2TimFriendOperationResult>
+            refuseFriendApplicationRes = await TencentImSDKPlugin.v2TIMManager
+                .getFriendshipManager()
+                .refuseFriendApplication(
+                    type: FriendApplicationTypeEnum.V2TIM_FRIEND_APPLICATION_COME_IN, /**官方文档有误，需要将参数写死 */
+                    userID: friendInfo.userID);
+      if(refuseFriendApplicationRes.code == 0){
+        Remind.toast("拒绝添加好友");
+        friendApplyList.value.removeWhere((item) => item.userID == friendInfo.userID);
+        friendApplyList.refresh();
+      }
+    }
+
+
 }

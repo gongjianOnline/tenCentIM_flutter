@@ -129,7 +129,10 @@ class NewFriendView extends GetView<NewFriendController> {
                 children: [
                   InkWell(
                     borderRadius:BorderRadius.circular(10),
-                    onTap: (){print("拒绝");},
+                    onTap: (){
+                      print("0000");
+                      tencentRelationshipController.tencentConsentFriendRefuse(friendApplyItem);
+                    },
                     child: Container(
                       padding: const EdgeInsets.only(left: 10,right: 10,bottom: 4,top: 4),
                       // margin: EdgeInsets.only(right: 10),
