@@ -19,6 +19,7 @@ modules文件夹存放页面文件
 - my_code 我的二维码
 - setting 设置
 - set_account 账户与安全设置
+- new_friend 新朋友审核
 
 common 文件夹存放公共方法
   - AliIcon 阿里云图标
