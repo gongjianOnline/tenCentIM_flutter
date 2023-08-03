@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_im/app/common/AliIcon.dart';
 
 import 'package:get/get.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import '../../../common/myTheme.dart';
 import '../controllers/my_controller.dart';

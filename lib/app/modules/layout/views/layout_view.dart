@@ -50,7 +50,7 @@ class LayoutView extends GetView<LayoutController> {
       ), 
       onWillPop: ()async{
         /* 判断两秒内点击两次返回按钮则退出APP */
-        if(controller.lastPopTime.value == null || DateTime.now().difference(controller.lastPopTime.value) > const Duration(seconds: 2)){
+        if(DateTime.now().difference(controller.lastPopTime.value) > const Duration(seconds: 2)){
           Fluttertoast.showToast(
             msg: "在按一次退出应用",
             toastLength: Toast.LENGTH_SHORT,
