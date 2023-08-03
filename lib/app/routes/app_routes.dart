@@ -14,6 +14,7 @@ abstract class Routes {
   static const MY_CODE = _Paths.MY_CODE;
   static const SETTING = _Paths.SETTING;
   static const SET_ACCOUNT = _Paths.SET_ACCOUNT;
+  static const NEW_FRIEND = _Paths.NEW_FRIEND;
 }
 
 abstract class _Paths {
@@ -30,4 +31,5 @@ abstract class _Paths {
   static const MY_CODE = '/myCode';
   static const SETTING = '/setting';
   static const SET_ACCOUNT = '/setAccount';
+  static const NEW_FRIEND = '/newFriend';
 }

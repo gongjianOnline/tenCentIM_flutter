@@ -39,6 +39,7 @@ class MyController extends GetxController {
   /* 获取应用版本 */
   getAppInfo()async{
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    print(packageInfo);
     version.value = packageInfo.version;
   }
 

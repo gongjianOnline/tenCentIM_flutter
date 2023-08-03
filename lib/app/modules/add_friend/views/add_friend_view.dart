@@ -19,6 +19,7 @@ class AddFriendView extends GetView<AddFriendController> {
           children: [
             headerComponent(),
             searchComponent(),
+            rowComponent(),
             searchResult(),
           ],
         ),
@@ -139,5 +140,41 @@ class AddFriendView extends GetView<AddFriendController> {
       );
   }
 
+  /* 新朋友 */
+  rowComponent(){
+    return InkWell(
+      onTap:(){Get.toNamed("/newFriend");},
+      child: Container(
+        padding: const EdgeInsets.only(left: 10,right: 10,bottom: 10),
+        margin: const EdgeInsets.only(top: 10,left: 10,right: 10),
+        decoration:const BoxDecoration(
+          border: Border(
+            bottom: BorderSide(color: Color.fromRGBO(218, 218, 218, 1),width: 0.5)
+          )
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              child:const Text(
+                "新朋友",
+                style: TextStyle(
+                  color: MyTheme.stressFontColor,
+                  fontSize: 20
+                ),
+              ),
+            ),
+            Container(
+              child: const Icon(
+                Icons.navigate_next_rounded,
+                color: MyTheme.stressFontColor,
+                size: 28,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
 
 } 
