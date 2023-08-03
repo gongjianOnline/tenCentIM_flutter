@@ -18,9 +18,11 @@ class NewFriendView extends GetView<NewFriendController> {
             Expanded(
               flex: 1,
               child: ListView(
-                padding:const EdgeInsets.only(top: 0),
+                padding:const EdgeInsets.only(top: 10),
                 children: [
-                  searchResult()
+                  searchResult(),
+                  searchResult(),
+                  searchResult(),
                 ],
               )
             )
@@ -61,8 +63,16 @@ class NewFriendView extends GetView<NewFriendController> {
   /* 好友请求列表 */
   searchResult(){
     return Container(
-        padding: const EdgeInsets.only(left: 10,right: 10),
-        margin: const EdgeInsets.only(bottom: 20,top: 20),
+        padding: const EdgeInsets.only(left: 10,right: 10,bottom: 10),
+        margin: const EdgeInsets.only(bottom: 20),
+        decoration: const BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: Colors.black12,
+              width: 0.5
+            )
+          )
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
