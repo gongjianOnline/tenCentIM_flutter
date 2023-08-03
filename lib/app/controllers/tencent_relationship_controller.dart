@@ -160,15 +160,13 @@ class TencentRelationshipController extends GetxController {
                 userID: friendInfo.userID);
       if(acceptFriendApplicationRes.code == 0){
         Remind.toast("好友添加成功");
-        friendApplyList.value.removeWhere((item) => item.userID == friendInfo.userID);
+        friendApplyList.removeWhere((item) => item.userID == friendInfo.userID);
         friendApplyList.refresh();
       }
     }
 
     /* 拒绝好友申请 */
     tencentConsentFriendRefuse(V2TimFriendApplication friendInfo)async{
-      print(friendInfo.userID);
-      print(friendInfo.type);
       V2TimValueCallback<V2TimFriendOperationResult>
             refuseFriendApplicationRes = await TencentImSDKPlugin.v2TIMManager
                 .getFriendshipManager()
@@ -177,7 +175,7 @@ class TencentRelationshipController extends GetxController {
                     userID: friendInfo.userID);
       if(refuseFriendApplicationRes.code == 0){
         Remind.toast("拒绝添加好友");
-        friendApplyList.value.removeWhere((item) => item.userID == friendInfo.userID);
+        friendApplyList.removeWhere((item) => item.userID == friendInfo.userID);
         friendApplyList.refresh();
       }
     }
