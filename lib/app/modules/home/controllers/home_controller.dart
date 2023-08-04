@@ -5,11 +5,15 @@ import 'package:flutter_easy_permission/constants.dart';
 import 'package:flutter_easy_permission/easy_permissions.dart';
 import 'package:flutter_scankit/flutter_scankit.dart';
 
+import '../../../controllers/tencent_session_controller.dart';
 import "../../../controllers/tencent_user_controller.dart";
 
 class HomeController extends GetxController {
   /*调用腾讯云用户登录模块 */
   TencentUserController tencentUserController = Get.find();
+  /* 腾讯云会话关系模块 */
+  TencentSessionController tencentSessionController = Get.find();
+
   
   /**建立控制器和视图层关联 */
   RxString titleName = "消息".obs;
@@ -37,6 +41,8 @@ class HomeController extends GetxController {
     scanKit.addResultListen((val) {
       print(val);
     });
+    /* 拉去会话列表 */
+    tencentSessionController.tencentSessionList();
   }
 
   @override

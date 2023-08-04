@@ -46,7 +46,7 @@ class TencentMessageController extends GetxController {
       onRecvNewMessage: (V2TimMessage message) async {
         // 处理文本消息
         if (message.elemType == MessageElemType.V2TIM_ELEM_TYPE_TEXT) {
-          print("处理文本消息");
+          print("处理文本消息 ${message.textElem?.text}");
           // message.textElem?.text;
         }
       },

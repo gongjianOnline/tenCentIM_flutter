@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 import 'package:tencent_cloud_chat_sdk/enum/V2TimConversationListener.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_conversation.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_conversation_result.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
 
 
@@ -99,6 +101,14 @@ class TencentSessionController extends GetxController {
         .getConversationManager()
         .addConversationListener(listener: listener);
   }
+
+  /* 会话列表 */
+  tencentSessionList()async{
+    V2TimValueCallback<V2TimConversationResult> convList = 
+      await TencentImSDKPlugin.v2TIMManager.getConversationManager().getConversationList(nextSeq: '0',count: 100);
+    print("会话列表 ${convList.data?.conversationList}");
+  }
+
 
 
 }
