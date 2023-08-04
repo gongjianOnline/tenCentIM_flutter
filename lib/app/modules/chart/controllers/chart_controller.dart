@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_info_result.dart';
 
+import '../../../controllers/tencent_message_controller.dart';
 import '../../../controllers/tencent_relationship_controller.dart';
-import '../../../controllers/tencent_session_controller.dart';
 import '../../../model/friendInfoModel.dart';
 
 class ChartController extends GetxController {
   /* 调用好友关系链模块 */
   TencentRelationshipController tencentRelationshipController = Get.find();
-  /* 调用会话关系模块 */
-  TencentSessionController tencentSessionController = Get.find();
+  /* 调用消息关系模块 */
+  TencentMessageController tencentMessageController = Get.find();
 
   /* 建立视图层和控制器关联 */
   RxString titleName = " ".obs;
@@ -75,7 +75,7 @@ class ChartController extends GetxController {
 
   /* 发送消息 */
   handelSend(){
-    tencentSessionController.tencentTextMessage(chartInputController.text,friendID.value);
+    tencentMessageController.tencentTextMessage(chartInputController.text,friendID.value);
   }
 
 }
