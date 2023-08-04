@@ -11,20 +11,26 @@ class ChartView extends GetView<ChartController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-        child: Column(
-          children: [
-            headerComponent(),
-            Expanded(
-              flex: 1,
-              child: chartComponent()
-            ),
-            inputComponent()
-          ],
+      body: Obx(()=>GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: (){
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Container(
+          margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+          child: Column(
+            children: [
+              headerComponent(),
+              Expanded(
+                flex: 1,
+                child: chartComponent()
+              ),
+              inputComponent()
+            ],
+          ),
         ),
       )
-    );
+    ));
   }
 
   /* 标题模块 */
@@ -44,6 +50,7 @@ class ChartView extends GetView<ChartController> {
               ),
             ),
           ),
+          Text(controller.titleName.value),
           Container(
             child: const Text(
               "南开大学网络教育学院",
@@ -72,6 +79,7 @@ class ChartView extends GetView<ChartController> {
       ),
     );
   }
+  
   /* 输入框 */
   inputComponent(){
     return Container(
@@ -79,16 +87,16 @@ class ChartView extends GetView<ChartController> {
       child: Row(
         children: [
           /* 语音切换 */
-          InkWell(
-            borderRadius: BorderRadius.circular(20),
-            onTap: (){},
-            child: Container(
-              child:const Icon(
-                Icons.keyboard_voice,
-                color: MyTheme.stressFontColor,
-              ),
-            ),
-          ),
+          // InkWell(
+          //   borderRadius: BorderRadius.circular(20),
+          //   onTap: (){},
+          //   child: Container(
+          //     child:const Icon(
+          //       Icons.keyboard_voice,
+          //       color: MyTheme.stressFontColor,
+          //     ),
+          //   ),
+          // ),
           /**输入框 */
           Expanded(
             flex: 1,
@@ -98,25 +106,35 @@ class ChartView extends GetView<ChartController> {
                 color: Color.fromARGB(31, 145, 145, 145),
                 borderRadius: BorderRadius.circular(20)
               ),
-              child: const TextField(
-                decoration: InputDecoration(
+              child:  TextField(
+                controller: controller.chartInputController,
+                decoration:const InputDecoration(
                   contentPadding: EdgeInsets.symmetric(vertical:0,horizontal:20), /*调整上下内边距,可改变输入框的高度*/
                   border: InputBorder.none,
-                ) /*不显示下划线*/ 
+                ),
               ),
             ),
           ),
-          /* 表情按钮 */
-          InkWell(
-            borderRadius: BorderRadius.circular(20),
-            onTap: (){print("表情");},
-            child: Container(
-              child: const Icon(
-                Icons.emoji_emotions,
-                color: MyTheme.stressFontColor,
+          /* 发送按钮 */
+          controller.chartInputIndex.value==0?Container():
+            InkWell(
+              borderRadius: BorderRadius.circular(20),
+              onTap: (){print("发送");},
+              child: Container(
+                margin: const EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: 10,right: 10,top: 4,bottom: 4),
+                decoration: BoxDecoration(
+                  color: MyTheme.themeColor,
+                  borderRadius: BorderRadius.circular(10)
+                ),
+                child:const Text(
+                  "发送",
+                  style: TextStyle(
+                    color: Colors.white
+                  ),
+                ),
               ),
             ),
-          ),
         ],
       ),
     );

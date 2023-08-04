@@ -1,12 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class ChartController extends GetxController {
-  //TODO: Implement ChartController
+  
+  /* 建立视图层和控制器关联 */
+  RxString titleName = " ".obs;
 
-  final count = 0.obs;
+  /* 输入框动态变量 */
+  TextEditingController chartInputController = TextEditingController();
+  RxInt chartInputIndex = 0.obs;
+
   @override
   void onInit() {
     super.onInit();
+    chartInputController.addListener((){
+      chartInputIndex.value = chartInputController.text.length;
+    });
   }
 
   @override
@@ -19,5 +28,5 @@ class ChartController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+
 }
