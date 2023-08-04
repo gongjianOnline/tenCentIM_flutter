@@ -43,7 +43,6 @@ class FriendInfoController extends GetxController {
     List<V2TimFriendInfoResult> result = await tencentRelationshipController.tencentGetFriendInfo(friendID);
     if(result.isNotEmpty){
       V2TimFriendInfoResult resultItem = result[0];
-      print(resultItem.friendInfo?.userProfile?.allowType);
       friendObj.value = FriendInfo(
         relation:filterFriendInfo(resultItem.relation,"int"),
         userID : filterFriendInfo(resultItem.friendInfo!.userID,"string"),

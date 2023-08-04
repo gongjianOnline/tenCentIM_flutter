@@ -152,9 +152,9 @@ class FriendInfoView extends GetView<FriendInfoController> {
   }
 
   /* 添加好友 */
+  /*判断对方是否可以添加好友, 判断对方是否是好友 */
   addFriendComponent(context){
-    return controller.friendObj.value.allowType == 2? 
-      Container(
+    return controller.friendObj.value.allowType == 2?Container(
         decoration: BoxDecoration(
           color: Colors.red[200],
           borderRadius: BorderRadius.circular(10)
@@ -169,7 +169,29 @@ class FriendInfoView extends GetView<FriendInfoController> {
           ),
         ),
       )
-      : Ink(
+      : controller.friendObj.value.relation == 3? 
+        Ink(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10)
+          ),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(10),
+            onTap: (){Get.offAndToNamed("/chart");},
+            child: Container(
+              width: MediaQuery. of (context).size.width,
+              height: 40,
+              alignment: Alignment.center,
+              child:const Text(
+                "发起会话",
+                style:TextStyle(
+                  color:MyTheme.themeColor
+                ),
+              ),
+            ),
+          ),
+        ):
+        Ink(
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10)

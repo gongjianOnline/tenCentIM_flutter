@@ -7,6 +7,7 @@ class FriendInfo {
   late int gender; /**性别 */
   late String nickName; /**昵称 */
   late String selfSignature; /**签名 */
+  
 
 
   FriendInfo({
