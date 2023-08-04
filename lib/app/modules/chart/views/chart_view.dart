@@ -52,9 +52,9 @@ class ChartView extends GetView<ChartController> {
           ),
           Text(controller.titleName.value),
           Container(
-            child: const Text(
-              "南开大学网络教育学院",
-              style: TextStyle(
+            child:Text(
+              (controller.friendInfo.value.nickName=="")?controller.friendInfo.value.userID:controller.friendInfo.value.nickName,
+              style: const TextStyle(
                 color: MyTheme.stressFontColor,
                 fontSize: 18
               ),
@@ -119,7 +119,7 @@ class ChartView extends GetView<ChartController> {
           controller.chartInputIndex.value==0?Container():
             InkWell(
               borderRadius: BorderRadius.circular(20),
-              onTap: (){print("发送");},
+              onTap: (){controller.handelSend();},
               child: Container(
                 margin: const EdgeInsets.only(left: 10),
                 padding: const EdgeInsets.only(left: 10,right: 10,top: 4,bottom: 4),
