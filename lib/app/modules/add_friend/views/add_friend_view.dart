@@ -91,7 +91,13 @@ class AddFriendView extends GetView<AddFriendController> {
   searchResult(){
     return controller.friendObj.value.userID == ""? Container():
       InkWell(
-        onTap: (){Get.toNamed("/friendInfo",arguments:{"friendId":controller.friendObj.value.userID});},
+        onTap: (){
+          if(controller.selfID.value == controller.friendObj.value.userID){
+            Get.offAndToNamed("/layout");
+          }else{
+            Get.toNamed("/friendInfo",arguments:{"friendId":controller.friendObj.value.userID});
+          }
+        },
         child: Container(
           padding: const EdgeInsets.only(left: 10,right: 10),
           margin: const EdgeInsets.only(bottom: 20,top: 20),

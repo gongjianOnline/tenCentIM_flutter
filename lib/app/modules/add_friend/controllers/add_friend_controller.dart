@@ -1,13 +1,16 @@
 import 'package:get/get.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_info_result.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
 
 import '../../../controllers/tencent_relationship_controller.dart';
+import '../../../controllers/tencent_user_controller.dart';
 import '../../../model/friendInfoModel.dart';
 
 class AddFriendController extends GetxController {
   /* 调用腾讯关系链模块 */
   TencentRelationshipController tencentRelationshipController = Get.find();
+  TencentUserController tencentUserController = Get.find();
 
   /* 建立视图层和控制器关联 */
   RxString titleName = "添加朋友".obs;
@@ -17,9 +20,16 @@ class AddFriendController extends GetxController {
   /**好友资料 */
   Rx<FriendInfo> friendObj = FriendInfo().obs;
 
+  /*登录用户id
+   * 防止用户自己搜自己,当好友id和登录Id相同时直接跳转my页面 
+   */
+  RxString selfID = "".obs;
+
   @override
   void onInit() {
     super.onInit();
+    /**获取登录用户信息 */
+    handelGetSelfInfo();
   }
 
   @override
@@ -34,6 +44,7 @@ class AddFriendController extends GetxController {
 
   /* 监听搜索框 */
   handelSearch(val){
+    /* 防抖函数 */
     searchValue.value = val;
     EasyDebounce.debounce(
       'search_friend', 
@@ -53,8 +64,7 @@ class AddFriendController extends GetxController {
               selfSignature  : filterFriendInfo(resultItem.friendInfo?.userProfile?.selfSignature ,"string"),
             );
           }
-        }
-        
+        };
       }
     );
   }
@@ -69,6 +79,10 @@ class AddFriendController extends GetxController {
     }
   }
 
-
+  /**获取登录的用户信息 */
+  handelGetSelfInfo()async{
+    V2TimUserFullInfo result = await tencentUserController.tenCentGetSelfInfo();
+    selfID.value = result.userID as String;
+  }
 
 }
