@@ -12,6 +12,8 @@ class FriendController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    /* 获取好友列表 */
+    tencentRelationshipController.tencentGetFriendList();
   }
 
   @override

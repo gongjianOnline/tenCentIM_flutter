@@ -21,6 +21,9 @@ class TencentRelationshipController extends GetxController {
 
   /* 好友申请列表 */
   RxList<V2TimFriendApplication> friendApplyList = <V2TimFriendApplication>[].obs;
+
+  /*好友列表 */
+  RxList<V2TimFriendInfo?> friendList = <V2TimFriendInfo>[].obs;
   
   @override
   void onInit() {
@@ -79,6 +82,7 @@ class TencentRelationshipController extends GetxController {
           print("关系链监听到好友列表增加");
           //好友列表增加人员的回调
           //users 新增的好友信息列表
+          friendList.addAll(users);
         },
         onFriendListDeleted: (List<String> userList) async {
           print("关系链监听到好友列表减少");
@@ -180,5 +184,16 @@ class TencentRelationshipController extends GetxController {
       }
     }
 
+    /*获取好友列表 */
+    tencentGetFriendList()async{
+      V2TimValueCallback<List<V2TimFriendInfo>> getFriendListRes =
+        await TencentImSDKPlugin.v2TIMManager
+            .getFriendshipManager()
+            .getFriendList();
+      if(getFriendListRes.code == 0){
+        friendList.value = getFriendListRes.data!;
+      }
+    }
 
+    
 }

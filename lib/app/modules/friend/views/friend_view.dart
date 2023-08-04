@@ -3,6 +3,7 @@ import 'package:flutter_im/app/common/myTheme.dart';
 import 'package:badges/badges.dart' as badges;
 
 import 'package:get/get.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_info.dart';
 
 import '../../../common/AliIcon.dart';
 import '../controllers/friend_controller.dart';
@@ -108,17 +109,14 @@ class FriendView extends GetView<FriendController> {
   /*好友列表 */
   friendListComponent(){
     return ListView(
-      children: [
-        friendItem(),
-        friendItem(),
-        friendItem(),
-        friendItem(),
-      ],
+      children: controller.tencentRelationshipController.friendList.map((item){
+        return  friendItem(item!);
+      }).toList().cast<Widget>(),
     );
   }
 
   /* 好友信息 */
-  friendItem(){
+  friendItem(V2TimFriendInfo friendInfo){
     return InkWell(
       onTap: (){Get.toNamed("/chart");},
       child: Container(
@@ -143,9 +141,9 @@ class FriendView extends GetView<FriendController> {
                   children: [
                     Container(
                       alignment: Alignment.centerLeft,
-                      child:const Text(
-                        "南开大学网络教育学院",
-                        style: TextStyle(
+                      child:Text(
+                        (friendInfo.userProfile?.nickName == null || friendInfo.userProfile?.nickName =="")?friendInfo.userID:friendInfo.userProfile?.nickName as String,
+                        style:const TextStyle(
                           fontSize: 16,
                           color: MyTheme.stressFontColor
                         ),
