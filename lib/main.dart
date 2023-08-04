@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import 'app/controllers/init_tencent_im_controller.dart';
 import 'app/controllers/tencent_relationship_controller.dart';
+import 'app/controllers/tencent_session_controller.dart';
 import 'app/controllers/tencent_user_controller.dart';
 import 'app/routes/app_pages.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +16,7 @@ void main() async {
   Get.put(InitTencentImController());
   Get.put(TencentUserController());
   Get.put(TencentRelationshipController());
+  Get.put(TencentSessionController());
   
   /*更改状态栏颜色 */
   SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
