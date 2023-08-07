@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_im/app/common/myTheme.dart';
 
 import 'package:get/get.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_conversation.dart';
 
 import '../../../common/AliIcon.dart';
+import '../../../common/timeFormat.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -63,16 +65,19 @@ class HomeView extends GetView<HomeController> {
   messageComponent(){
     return ListView(
       padding: const EdgeInsets.only(top:10,bottom: 20),
-      children: [
-        messageItem(),
-        messageItem(),
-        messageItem(),
-      ],
+      children: controller.tencentSessionController.sessionList.map((item){
+        return messageItem(item);
+      }).toList().cast<Widget>(),
+      // children: [
+      //   messageItem(),
+      //   messageItem(),
+      //   messageItem(),
+      // ],
     );
   }
 
   /* 单消息模块 */
-  messageItem(){
+  messageItem(V2TimConversation? sessionItem){
     return Ink(
       child: InkWell(
         onTap: (){
@@ -113,18 +118,18 @@ class HomeView extends GetView<HomeController> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              child: const Text(
-                                "南开大学网络教育学院",
-                                style: TextStyle(
+                              child:Text(
+                                "${sessionItem!.showName}",
+                                style:const TextStyle(
                                   color: MyTheme.stressFontColor,
                                   fontSize: 18
                                 ),
                               ),
                             ),
                             Container(
-                              child: const Text(
-                                "15:21",
-                                style: TextStyle(
+                              child:Text(
+                                TimeFormat.toText(sessionItem.lastMessage?.timestamp,formatText:"HH:mm"),
+                                style: const TextStyle(
                                   color: MyTheme.unimportantFontColor,
                                   fontSize: 14
                                 ),
@@ -137,11 +142,11 @@ class HomeView extends GetView<HomeController> {
                       /*消息摘要 */
                       Container(
                         padding: EdgeInsets.only(right: 50),
-                        child: const Text(
-                          "已添加对方为好友，来打个招呼吧~",
+                        child: Text(
+                          "${sessionItem.lastMessage!.textElem?.text}",
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: MyTheme.unimportantFontColor,
                             fontSize: 14
                           ),

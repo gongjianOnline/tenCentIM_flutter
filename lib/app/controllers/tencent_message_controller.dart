@@ -72,6 +72,7 @@ class TencentMessageController extends GetxController {
         .createTextMessage(
           text: text, // 文本信息
         );
+        print("创建的会话ID ${createTextMessageRes.data?.id}");
     tencentSendMessage(createTextMessageRes.data?.id as String,userID);
   }
 
@@ -84,8 +85,8 @@ class TencentMessageController extends GetxController {
         groupID:"", //群组id
         priority: MessagePriorityEnum.V2TIM_PRIORITY_DEFAULT, // 消息优先级
         onlineUserOnly:false, // 是否只有在线用户才能收到，如果设置为 true ，接收方历史消息拉取不到，常被用于实现“对方正在输入”或群组里的非重要提示等弱提示功能，该字段不支持 AVChatRoom。
-        isExcludedFromUnreadCount: true, // 发送消息是否计入会话未读数
-        isExcludedFromLastMessage: true, // 发送消息是否计入会话 lastMessage
+        isExcludedFromUnreadCount: false, // 发送消息是否计入会话未读数
+        isExcludedFromLastMessage: false, // 发送消息是否计入会话 lastMessage
         needReadReceipt:false, // 消息是否需要已读回执（只有 Group 消息有效，6.1 及以上版本支持，需要您购买旗舰版套餐）
         offlinePushInfo: OfflinePushInfo(), // 离线推送时携带的标题和内容
         cloudCustomData: "", // 消息云端数据，消息附带的额外的数据，存云端，消息的接收者可以访问到

@@ -1,4 +1,6 @@
 
+import 'dart:ffi';
+
 import 'package:get/get.dart';
 
 import 'package:tencent_cloud_chat_sdk/enum/V2TimConversationListener.dart';
@@ -12,6 +14,9 @@ class TencentSessionController extends GetxController {
   
   /* 会话监听器 */
   late V2TimConversationListener listener;
+
+  /*会话列表 */
+  RxList<V2TimConversation?> sessionList = <V2TimConversation>[].obs;
 
   @override
   void onInit() {
@@ -104,10 +109,26 @@ class TencentSessionController extends GetxController {
 
   /* 会话列表 */
   tencentSessionList()async{
-    V2TimValueCallback<V2TimConversationResult> convList = 
+    V2TimValueCallback<V2TimConversationResult> concList = 
       await TencentImSDKPlugin.v2TIMManager.getConversationManager().getConversationList(nextSeq: '0',count: 100);
-    print("会话列表 ${convList.data?.conversationList}");
+      
+      print(concList.data?.conversationList);
+
+      concList.data?.conversationList?.forEach((item){
+        print("会话列表");
+        print(item);
+        print(item?.lastMessage?.textElem?.text);
+        sessionList.add(item);
+      });
+
+      // print("会话列表 ${concList.data?.conversationList}");
+
+      // if((concList.data?.conversationList)!.isNotEmpty){
+      //   sessionList.addAll(concList.data!.conversationList as List<V2TimConversation?>);
+      // }
   }
+
+
 
 
 

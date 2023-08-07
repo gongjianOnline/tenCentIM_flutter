@@ -1,9 +1,12 @@
+import 'dart:core';
+
 import 'package:get/get.dart';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_easy_permission/constants.dart';
 import 'package:flutter_easy_permission/easy_permissions.dart';
 import 'package:flutter_scankit/flutter_scankit.dart';
+
 
 import '../../../controllers/tencent_session_controller.dart';
 import "../../../controllers/tencent_user_controller.dart";
@@ -67,5 +70,8 @@ class HomeController extends GetxController {
       }
     }
   }
+
+
+
 
 }
