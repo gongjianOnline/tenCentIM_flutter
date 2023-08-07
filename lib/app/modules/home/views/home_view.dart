@@ -81,7 +81,7 @@ class HomeView extends GetView<HomeController> {
     return Ink(
       child: InkWell(
         onTap: (){
-          Get.toNamed("/chart");
+          Get.toNamed("/chart",arguments: {"friendID":sessionItem.userID});
         },
         child: Container(
           padding: const EdgeInsets.only(left: 10,right: 10),
