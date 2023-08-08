@@ -17,8 +17,9 @@ void main() async {
   Get.put(InitTencentImController());
   Get.put(TencentUserController());
   Get.put(TencentRelationshipController());
-  Get.put(TencentSessionController());
   Get.put(TencentMessageController());
+  Get.put(TencentSessionController());
+  
   
   /*更改状态栏颜色 */
   SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(

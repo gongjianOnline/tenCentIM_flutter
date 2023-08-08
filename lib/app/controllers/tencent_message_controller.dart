@@ -74,7 +74,6 @@ class TencentMessageController extends GetxController {
         .createTextMessage(
           text: text, // 文本信息
         );
-        print("创建的会话ID ${createTextMessageRes.data?.id}");
     tencentSendMessage(createTextMessageRes.data?.id as String,userID);
   }
 

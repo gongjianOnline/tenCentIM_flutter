@@ -1,16 +1,20 @@
 
 import 'dart:ffi';
 
+import 'package:flutter_im/app/controllers/tencent_message_controller.dart';
 import 'package:get/get.dart';
 
 import 'package:tencent_cloud_chat_sdk/enum/V2TimConversationListener.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_conversation.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_conversation_result.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_message.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
 
 
 class TencentSessionController extends GetxController {
+  /**调用消息控制器 */
+  TencentMessageController tencentMessageController = Get.find();
   
   /* 会话监听器 */
   late V2TimConversationListener listener;
@@ -48,6 +52,11 @@ class TencentSessionController extends GetxController {
         }else{
           sessionList.addAll(conversationList);
         }
+        /* 在消息列表中插入最新消息 */
+        if(tencentMessageController.historyMessage[0].userID == conversationList[0].userID){
+          tencentMessageController.historyMessage.add(conversationList[0].lastMessage as V2TimMessage);
+        }
+        
       },
       onConversationGroupCreated:
           (String groupName, List<V2TimConversation> conversationList) {
