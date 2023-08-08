@@ -55,6 +55,8 @@ class TencentSessionController extends GetxController {
         /* 在消息列表中插入最新消息 */
         if(tencentMessageController.historyMessage[0].userID == conversationList[0].userID){
           tencentMessageController.historyMessage.add(conversationList[0].lastMessage as V2TimMessage);
+          /*消息列表置㡳 */
+          tencentMessageController.scrollToBottom();
         }
         
       },

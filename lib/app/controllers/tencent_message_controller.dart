@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/enum/V2TimAdvancedMsgListener.dart';
 import 'package:tencent_cloud_chat_sdk/enum/message_elem_type.dart';
@@ -17,7 +18,9 @@ class TencentMessageController extends GetxController {
   late V2TimAdvancedMsgListener listener;
   /* 历史消息列表 */
   RxList<V2TimMessage> historyMessage = <V2TimMessage>[].obs;
-  
+  /* 消息列表ListView控制器 */
+  ScrollController scrollController = ScrollController();
+
   @override
   void onInit() {
     super.onInit();
@@ -33,6 +36,18 @@ class TencentMessageController extends GetxController {
   void onClose() {
     super.onClose();
   }
+
+  /*ListView控制器 */
+  void scrollToBottom() {
+  Future.delayed(const Duration(milliseconds: 300), () {
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
+  });
+}
+
 
   /* 消息监听器 */
   configMessage(){
@@ -119,8 +134,8 @@ class TencentMessageController extends GetxController {
       //拉取成功
       (getC2CHistoryMessageListRes.data)?.forEach((item) {
         historyMessage.insert(0,item);
+        scrollToBottom();
       });
-
     }
   }
 

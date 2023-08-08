@@ -75,6 +75,8 @@ class ChartView extends GetView<ChartController> {
         color: Color.fromARGB(255, 243, 243, 243)
       ),
       child: ListView(
+        key: const Key("111"),
+        controller: controller.tencentMessageController.scrollController,
         children: controller.tencentMessageController.historyMessage.map((item){
           if(item.isSelf as bool){
             return ChartComponent.sideChart(item.textElem as V2TimTextElem);
