@@ -1,6 +1,4 @@
 
-import 'dart:ffi';
-
 import 'package:flutter_im/app/controllers/tencent_message_controller.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +11,7 @@ import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
 
 
 class TencentSessionController extends GetxController {
-  /**调用消息控制器 */
+  /*调用消息控制器 */
   TencentMessageController tencentMessageController = Get.find();
   
   /* 会话监听器 */
