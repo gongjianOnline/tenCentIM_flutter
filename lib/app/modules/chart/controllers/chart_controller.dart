@@ -30,7 +30,10 @@ class ChartController extends GetxController {
     super.onInit();
     /* 路由参数获取friendID */
     friendID.value = Get.arguments["friendID"];
+    /* 获取好友资料 */
     handleGetFriendInfo(friendID.value);
+    /* l拉去消息历史记录 */
+    tencentMessageController.tencentHistoryMessage(friendID.value);
     /* 表单监听器 */
     chartInputController.addListener((){
       chartInputIndex.value = chartInputController.text.length;
@@ -77,5 +80,7 @@ class ChartController extends GetxController {
   handelSend(){
     tencentMessageController.tencentTextMessage(chartInputController.text,friendID.value);
   }
+
+
 
 }

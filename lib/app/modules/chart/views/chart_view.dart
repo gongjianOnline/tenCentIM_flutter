@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_im/app/common/myTheme.dart';
 
 import 'package:get/get.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_text_elem.dart';
 
 import '../controllers/chart_controller.dart';
 import "../../../components/ChartComponent.dart";
@@ -72,10 +75,17 @@ class ChartView extends GetView<ChartController> {
         color: Color.fromARGB(255, 243, 243, 243)
       ),
       child: ListView(
-        children: [
-          ChartComponent.myChart(),
-          ChartComponent.sideChart()
-        ],
+        children: controller.tencentMessageController.historyMessage.map((item){
+          if(item.isSelf as bool){
+            return ChartComponent.sideChart(item.textElem as V2TimTextElem);
+          }else{
+            return ChartComponent.myChart(item.textElem as V2TimTextElem);
+          }
+        }).toList().cast<Widget>(),
+        // children: [
+        //   ChartComponent.myChart(),
+        //   ChartComponent.sideChart()
+        // ],
       ),
     );
   }

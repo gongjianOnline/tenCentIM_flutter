@@ -3,9 +3,9 @@ import 'package:flutter_im/app/common/myTheme.dart';
 
 class ChartComponent {
   /* 我的信息 */
-  static myChart(){
+  static myChart(messageInfo){
     return Container(
-      margin: const EdgeInsets.only(left: 10,right: 10,bottom: 20),
+      margin: const EdgeInsets.only(left: 10,right: 60,bottom: 20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -27,7 +27,8 @@ class ChartComponent {
                   bottomRight: Radius.circular(10)
                 )
               ),
-              child: Text("南开大学网络教育学院,允公允能,日新月异;欢迎来到南开大学"),
+              // child: Text("南开大学网络教育学院,允公允能,日新月异;欢迎来到南开大学"),
+              child: Text("${messageInfo.text}"),
             )
           )
         ],
@@ -35,9 +36,9 @@ class ChartComponent {
     );
   }
   /* 对方的信息 */
-  static sideChart(){
+  static sideChart(messageInfo){
     return Container(
-      margin: const EdgeInsets.only(left: 10,right: 10,bottom: 20),
+      margin: const EdgeInsets.only(left: 60,right: 10,bottom: 20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -53,9 +54,9 @@ class ChartComponent {
                   bottomRight: Radius.circular(10)
                 )
               ),
-              child: const Text(
-                "南开大学网络教育学院,允公允能,日新月异;欢迎来到南开大学",
-                style: TextStyle(color: Colors.white),
+              child: Text(
+                "${messageInfo.text}",
+                style:const TextStyle(color: Colors.white),
               ),
             )
           ),

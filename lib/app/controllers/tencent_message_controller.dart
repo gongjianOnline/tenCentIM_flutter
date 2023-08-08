@@ -15,6 +15,8 @@ import '../common/remind.dart';
 class TencentMessageController extends GetxController {
   /* 消息配置变量 */
   late V2TimAdvancedMsgListener listener;
+  /* 历史消息列表 */
+  RxList<V2TimMessage> historyMessage = <V2TimMessage>[].obs;
   
   @override
   void onInit() {
@@ -98,6 +100,29 @@ class TencentMessageController extends GetxController {
       }
   }
 
+  /*获取c2c消息记录
+   * friendID 是否是好友ID
+   * lastMsgID 最后一条消息的ID 如果为 null 清空之前的消息列表
+   */
+  tencentHistoryMessage(String friendID,{lastMsgID})async{
+    V2TimValueCallback<List<V2TimMessage>> getC2CHistoryMessageListRes =
+      await TencentImSDKPlugin.v2TIMManager
+        .getMessageManager()
+        .getC2CHistoryMessageList(
+          userID: friendID, // 单聊用户id
+          count: 10, // 拉取数据数量
+          lastMsgID: lastMsgID, // 拉取起始消息id
+        );
+    if (getC2CHistoryMessageListRes.code == 0) {
+      if(lastMsgID == null){
+        historyMessage.value = <V2TimMessage>[];
+      }
+      //拉取成功
+      (getC2CHistoryMessageListRes.data)?.forEach((item) {
+        historyMessage.insert(0,item);
+      });
 
+    }
+  }
 
 }
