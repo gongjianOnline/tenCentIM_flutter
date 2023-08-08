@@ -1,5 +1,6 @@
 import 'dart:core';
 
+import 'package:flutter_im/app/controllers/tencent_message_controller.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter/services.dart';
@@ -16,13 +17,15 @@ class HomeController extends GetxController {
   TencentUserController tencentUserController = Get.find();
   /* 腾讯云会话关系模块 */
   TencentSessionController tencentSessionController = Get.find();
+  /*腾讯云消息模块 */
+  TencentMessageController tencentMessageController = Get.find();
 
   
-  /**建立控制器和视图层关联 */
+  /*建立控制器和视图层关联 */
   RxString titleName = "消息".obs;
   /* 实例化扫码变量 */
   late FlutterScankit scanKit;
-  /**扫一扫相关配置 */
+  /*扫一扫相关配置 */
   /* 相机和外部存储权限(获取安卓权限) */
   final permissions = const [
     Permissions.READ_EXTERNAL_STORAGE,
@@ -71,7 +74,11 @@ class HomeController extends GetxController {
     }
   }
 
-
+  /*跳转到聊天页面 */
+  handelChart(friendID)async{
+    bool status =   await tencentMessageController.tencentREADMessage(friendID);
+    status?Get.toNamed("/chart",arguments: {"friendID":friendID}):null;
+  }
 
 
 }

@@ -55,6 +55,8 @@ class TencentSessionController extends GetxController {
           tencentMessageController.historyMessage.add(conversationList[0].lastMessage as V2TimMessage);
           /*消息列表置㡳 */
           tencentMessageController.scrollToBottom();
+          /* 消息已读回调 */
+          // tencentMessageController.tencentREADMessage(conversationList[0].userID as String);
         }
         
       },
@@ -128,6 +130,7 @@ class TencentSessionController extends GetxController {
     sessionList.value = <V2TimConversation>[];
     V2TimValueCallback<V2TimConversationResult> concList = 
       await TencentImSDKPlugin.v2TIMManager.getConversationManager().getConversationList(nextSeq: '0',count: 100);
+      sessionList.value = <V2TimConversation>[].obs;
       concList.data?.conversationList?.forEach((item){
         sessionList.add(item);
       });

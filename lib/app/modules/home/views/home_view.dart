@@ -3,6 +3,7 @@ import 'package:flutter_im/app/common/myTheme.dart';
 
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_conversation.dart';
+import 'package:badges/badges.dart' as badges;
 
 import '../../../common/AliIcon.dart';
 import '../../../common/timeFormat.dart';
@@ -81,7 +82,8 @@ class HomeView extends GetView<HomeController> {
     return Ink(
       child: InkWell(
         onTap: (){
-          Get.toNamed("/chart",arguments: {"friendID":sessionItem.userID});
+          controller.handelChart(sessionItem.userID);
+          
         },
         child: Container(
           padding: const EdgeInsets.only(left: 10,right: 10),
@@ -126,14 +128,29 @@ class HomeView extends GetView<HomeController> {
                                 ),
                               ),
                             ),
-                            Container(
-                              child:Text(
-                                TimeFormat.toText(sessionItem.lastMessage?.timestamp,formatText:"HH:mm"),
+                            
+                            // ${sessionItem.unreadCount}
+                            badges.Badge(
+                              badgeContent: Text(
+                                "${sessionItem.unreadCount}",
                                 style: const TextStyle(
-                                  color: MyTheme.unimportantFontColor,
-                                  fontSize: 14
+                                  color: Colors.white
                                 ),
                               ),
+                              showBadge: sessionItem.unreadCount == 0?false:true,
+                              position: badges.BadgePosition.topEnd(top:20,end: -4),
+                              badgeStyle:const badges.BadgeStyle(
+                                badgeColor: Color.fromRGBO(229, 115, 115, 1)
+                              ),
+                              child: Container(
+                                child:Text(
+                                  TimeFormat.toText(sessionItem.lastMessage?.timestamp,formatText:"HH:mm"),
+                                  style: const TextStyle(
+                                    color: MyTheme.unimportantFontColor,
+                                    fontSize: 14
+                                  ),
+                                ),
+                              )
                             )
                           ],
                         ),

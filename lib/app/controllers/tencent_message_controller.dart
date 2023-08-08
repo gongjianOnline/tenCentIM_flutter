@@ -4,6 +4,7 @@ import 'package:tencent_cloud_chat_sdk/enum/V2TimAdvancedMsgListener.dart';
 import 'package:tencent_cloud_chat_sdk/enum/message_elem_type.dart';
 import 'package:tencent_cloud_chat_sdk/enum/message_priority_enum.dart';
 import 'package:tencent_cloud_chat_sdk/enum/offlinePushInfo.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_callback.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_message.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_message_receipt.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_msg_create_info_result.dart';
@@ -139,4 +140,18 @@ class TencentMessageController extends GetxController {
     }
   }
 
+
+  /**标记消息已读(c2c) */
+  Future tencentREADMessage(String friendId)async{
+    // 设置单聊消息已读
+    V2TimCallback markC2CMessageAsReadRes = await TencentImSDKPlugin
+        .v2TIMManager
+        .getMessageManager()
+        .markC2CMessageAsRead(userID: friendId); // 需要设置消息已读的用户id
+    if (markC2CMessageAsReadRes.code == 0) {
+      return true;
+    }
+
+    // return true;
+  }
 }
