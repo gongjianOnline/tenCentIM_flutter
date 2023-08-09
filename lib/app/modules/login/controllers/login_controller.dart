@@ -34,6 +34,9 @@ class LoginController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    if(Get.arguments != null){
+
+    }
   }
 
   @override

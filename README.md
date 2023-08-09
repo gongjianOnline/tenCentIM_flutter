@@ -41,4 +41,5 @@ bindings 文件夹用于加载全局控制器
 
 model 数据模型
   - sigModel node服务端获取时间密钥模型
+  - registerModel 服务端注册接口数据模型
   - friendInfoModel 腾讯云获取好友信息自定义数据模型

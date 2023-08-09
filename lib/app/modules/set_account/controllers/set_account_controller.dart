@@ -111,6 +111,7 @@ class SetAccountController extends GetxController {
                     if(resultCode == 101){
                       Remind.toast("修改成功");
                       handleGetSelfInfo();
+                      Get.back();
                     }
                   },
                   child: Container(
@@ -244,6 +245,7 @@ class SetAccountController extends GetxController {
                     if(resultCode == 101){
                       Remind.toast("修改成功");
                       handleGetSelfInfo();
+                      Get.back();
                     }
                   },
                   child: Container(

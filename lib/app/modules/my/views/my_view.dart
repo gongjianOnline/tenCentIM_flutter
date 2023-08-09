@@ -94,7 +94,9 @@ class MyView extends GetView<MyController> {
               Container(
                 margin: const EdgeInsets.only(top: 4),
                 child: Text(
-                  "ID: ${(controller.selfInfo.value.userID)!.substring(0,8)}",
+                  "ID: ${
+                    controller.selfInfo.value.userID == "" || controller.selfInfo.value.userID == null?
+                    "":(controller.selfInfo.value.userID)!.substring(0,8)}",
                   style:const TextStyle(
                     fontSize: 14,
                     color: MyTheme.unimportantFontColor

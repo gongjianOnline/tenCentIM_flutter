@@ -1,5 +1,8 @@
+import 'package:flutter_im/app/api/login.dart';
 import 'package:flutter_im/app/common/remind.dart';
 import 'package:get/get.dart';
+
+import '../../../model/registerModel.dart';
 
 class RegisterController extends GetxController {
 
@@ -40,7 +43,7 @@ class RegisterController extends GetxController {
     passWords.value = val;
   }
   /* 注册 */
-  handelRegister(){
+  handelRegister()async{
     if(passWord.value != passWords.value){
       Remind.toast("两次密码不一致");
       return;
@@ -49,6 +52,19 @@ class RegisterController extends GetxController {
       Remind.toast("信息不能为空");
       return;
     }
+    /* 调用注册接口 */
+    var response = await LoginApi.register({
+      "name":userName.value,
+      "password":passWord.value
+    });
+    Register result = Register.fromJson(response);
+    if(result.code != 101){
+      Remind.toast(result.massage);
+    }else{
+      Remind.toast("注册成功");
+      Get.offAndToNamed("login");
+    }
+
 
 
     

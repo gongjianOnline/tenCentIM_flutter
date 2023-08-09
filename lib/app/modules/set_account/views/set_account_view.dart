@@ -18,7 +18,7 @@ class SetAccountView extends GetView<SetAccountController> {
             headerComponent(),
             
             rowComponent(context,"昵称",controller.nickname.value,true),
-            rowComponent(context,"ID",controller.userID.value,false),
+            rowComponent(context,"ID",(controller.userID.value).substring(0,8),false),
             rowComponent(context,"性别",controller.genderName.value,true),
             rowComponent(context,"生日",controller.birthday.value,true),
             rowComponent(context,"好友验证方式",controller.allowTypeName.value,true),
