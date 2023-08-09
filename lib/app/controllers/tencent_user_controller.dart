@@ -26,11 +26,17 @@ class TencentUserController extends GetxController {
   }
 
   /* 腾讯IM登录 */
-  tenCentLogin(userID,userSig)async{
+  tenCentLogin(userID,userSig,userName)async{
     V2TimCallback res = 
       await TencentImSDKPlugin.v2TIMManager.login(userID: userID, userSig: userSig);
     if(res.code == 0){
       print("登录成功");
+      /**获取用户信息 */
+      V2TimUserFullInfo userInfo = await tenCentGetSelfInfo();
+      /**如果昵称为空则设置用户名为昵称 */
+      if(userInfo.nickName == null){
+        await tenCentChangeSelfInfo(V2TimUserFullInfo(nickName:userName));
+      }
       Get.offAndToNamed("/layout");
     }else{
       print("登录失败");

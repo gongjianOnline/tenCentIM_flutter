@@ -1,5 +1,6 @@
 
 
+import 'package:flutter_im/app/common/remind.dart';
 import 'package:get/get.dart';
 
 import '../../../api/login.dart';
@@ -43,7 +44,6 @@ class LoginController extends GetxController {
   /* 确认退出APP */ 
   setLastPopTime(){
     lastPopTime.value = DateTime.now();
-    update();
   }
 
   /*响应式表单数据
@@ -52,19 +52,33 @@ class LoginController extends GetxController {
    */
   handleUserName(val){
     userName.value = val;
-    update();
   }
-  handlePassword(){
-
+  handlePassword(val){
+    password.value = val;
   }
 
   /* 登录 */
   handelLogin()async{
     var response =await LoginApi.login({
-      "name":userName.value
+      "name":userName.value,
+      "password":password.value
     });
+
     Sig sigData = Sig.fromJson(response); // json 字符串转 map
-    tencentUserController.tenCentLogin(userName.value, sigData.sig);
+    if(sigData.code != 101){
+      Remind.toast(sigData.message);
+    }else{
+      /** 调用腾讯云登录API
+       * 服务端的uuid
+       * 服务端的签名
+       * 用户名
+       */
+      tencentUserController.tenCentLogin(
+        sigData.data!.tcUserId, 
+        sigData.data!.sig,
+        sigData.data!.user
+      );
+    }
   }
 
 
