@@ -1,66 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_im/app/common/myTheme.dart';
-
+import 'package:flutter_svg/svg.dart';
 
 import 'package:get/get.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../common/AliIcon.dart';
-import '../controllers/login_controller.dart';
+import '../../../common/myTheme.dart';
+import '../controllers/register_controller.dart';
 
-class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+class RegisterView extends GetView<RegisterController> {
+  const RegisterView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Obx(
-      ()=>WillPopScope(
-        onWillPop: ()async{
-          /* 判断两秒内点击两次返回按钮则退出APP */
-          if(DateTime.now().difference(controller.lastPopTime.value) > const Duration(seconds: 2)){
-            Fluttertoast.showToast(
-              msg: "在按一次退出应用",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Color.fromARGB(57, 0, 0, 0),
-              textColor: Colors.white,
-              fontSize: 16.0
-            );
-            controller.setLastPopTime();
-          }else{
-            /* 退出app */
-            await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-          }
-          return false;
-        },
-        child: Scaffold(
-          body: Container(
-            margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-            width: MediaQuery. of (context).size.width,
-            height: MediaQuery. of (context).size.height,
-            child:Stack(
-              children: [
-                /* banner背景 */
-                bannerComponent(context),
-                /**修饰logo */
-                logoDecorateComponent(),
-                /* logo */
-                logoComponent(),
-                /* 表单  */
-                loginComponent(context),
-                /* 作者 */
-                authorComponent()
-              ],
-            )
-          ),
-        )
+      ()=>Scaffold(
+        body: Container(
+          margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+          width: MediaQuery. of (context).size.width,
+          height: MediaQuery. of (context).size.height,
+          child:Stack(
+            children: [
+              /* banner背景 */
+              bannerComponent(context),
+              /**修饰logo */
+              logoDecorateComponent(),
+              /* logo */
+              logoComponent(),
+              /* 表单  */
+              loginComponent(context),
+              /* 作者 */
+              authorComponent()
+            ],
+          )
+        ),
       )
     );
   }
 
-  /* logo */
+    /* logo */
   logoComponent(){
     return Positioned(
       child:  Align(
@@ -101,13 +77,13 @@ class LoginView extends GetView<LoginController> {
   /* 登录框 */
   loginComponent(context){
     return Positioned(
-      top: 180,
+      top: 150,
       left: 20,
       right: 20,
       child: Container(
         padding: const EdgeInsets.all(40),
         width: MediaQuery.of(context).size.width,
-        height: 300,
+        // height: 600,
         decoration:  BoxDecoration(
           color: const Color.fromRGBO(242, 242, 242, 1),
           borderRadius: BorderRadius.circular(10)
@@ -129,7 +105,7 @@ class LoginView extends GetView<LoginController> {
                     child: TextField(
                       maxLines: 1,
                       decoration: const InputDecoration(
-                        hintText: "账号", // 提示词
+                        hintText: "用户名", // 提示词
                         border: InputBorder.none, // 带边框
                         contentPadding: EdgeInsets.symmetric(vertical:9,horizontal:0),
                         icon:Padding( /*给左边添加图标*/
@@ -148,13 +124,14 @@ class LoginView extends GetView<LoginController> {
 
                   /* 密码 */
                   Container(
+                    margin: const EdgeInsets.only(bottom: 16),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10)
                     ),
-                    child: const TextField(
+                    child:TextField(
                       maxLines: 1,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: "密码", // 提示词
                         border: InputBorder.none, // 带边框
                         contentPadding: EdgeInsets.symmetric(vertical:9,horizontal:0),
@@ -165,18 +142,48 @@ class LoginView extends GetView<LoginController> {
                             color: Color.fromRGBO(228, 228, 228, 1),
                           ),
                         )
-                      )
+                      ),
+                      onChanged: (val)=>{
+                        controller.handlePassWord(val)
+                      },
                     ),
                   ),
 
+                  /*确认密码 */
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: TextField(
+                      maxLines: 1,
+                      decoration:const InputDecoration(
+                        hintText: "确认密码", // 提示词
+                        border: InputBorder.none, // 带边框
+                        contentPadding: EdgeInsets.symmetric(vertical:9,horizontal:0),
+                        icon:Padding( /*给左边添加图标*/
+                          padding:  EdgeInsets.only(left: 10,),
+                          child: Icon(
+                            AliIcon.password,
+                            color: Color.fromRGBO(228, 228, 228, 1),
+                          ),
+                        )
+                      ),
+                      onChanged: (val)=>{
+                        controller.handlePassWords(val)
+                      },
+                    ),
+                  ),
+
+
                   /* 忘记密码 */
                   InkWell(
-                    onTap: (){Get.toNamed("/register");},
+                    onTap: (){Get.offAndToNamed("/login");},
                     child: Container(
-                      margin: const EdgeInsets.only(top: 20),
+                      margin: const EdgeInsets.only(top: 20,bottom: 20),
                       alignment: Alignment.centerRight,
                       child:const Text(
-                        "前往注册",
+                        "已有账号",
                         style: TextStyle(
                           color: MyTheme.themeColor
                         ),
@@ -187,10 +194,10 @@ class LoginView extends GetView<LoginController> {
               ),
             ),
 
-            /* 登录 */
+            /* 注册 */
             InkWell(
               onTap: (){
-                controller.handelLogin();
+                controller.handelRegister();
               },
               child: Container(
                 alignment: Alignment.center,
@@ -201,7 +208,7 @@ class LoginView extends GetView<LoginController> {
                 width:MediaQuery.of(context).size.width,
                 height: 40,
                 child: const Text(
-                  "登录",
+                  "立即注册",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18
@@ -233,7 +240,5 @@ class LoginView extends GetView<LoginController> {
       )
     );
   }
-
-
 
 }

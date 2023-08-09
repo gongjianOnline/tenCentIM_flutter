@@ -4,6 +4,7 @@
 modules文件夹存放页面文件
 - layout 通用页面架构
 - login 登录页面 
+- register 注册页面
 - home 消息首页
 - friend 朋友页面
 - circle 朋友圈

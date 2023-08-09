@@ -60,7 +60,6 @@ class LoginController extends GetxController {
 
   /* 登录 */
   handelLogin()async{
-    print(userName.value);
     var response =await LoginApi.login({
       "name":userName.value
     });

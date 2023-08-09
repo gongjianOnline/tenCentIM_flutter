@@ -12,14 +12,16 @@ import '../modules/circle_separate/bindings/circle_separate_binding.dart';
 import '../modules/circle_separate/views/circle_separate_view.dart';
 import '../modules/friend_info/bindings/friend_info_binding.dart';
 import '../modules/friend_info/views/friend_info_view.dart';
+import '../modules/friend_new/bindings/new_friend_binding.dart';
+import '../modules/friend_new/views/new_friend_view.dart';
 import '../modules/layout/bindings/layout_binding.dart';
 import '../modules/layout/views/layout_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/my_code/bindings/my_code_binding.dart';
 import '../modules/my_code/views/my_code_view.dart';
-import '../modules/friend_new/bindings/new_friend_binding.dart';
-import '../modules/friend_new/views/new_friend_view.dart';
+import '../modules/register/bindings/register_binding.dart';
+import '../modules/register/views/register_view.dart';
 import '../modules/set_account/bindings/set_account_binding.dart';
 import '../modules/set_account/views/set_account_view.dart';
 import '../modules/setting/bindings/setting_binding.dart';
@@ -99,6 +101,11 @@ class AppPages {
       name: _Paths.NEW_FRIEND,
       page: () => NewFriendView(),
       binding: NewFriendBinding(),
+    ),
+    GetPage(
+      name: _Paths.REGISTER,
+      page: () => const RegisterView(),
+      binding: RegisterBinding(),
     ),
   ];
 }
