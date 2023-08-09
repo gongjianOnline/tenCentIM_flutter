@@ -25,6 +25,7 @@ class TencentRelationshipController extends GetxController {
   /*好友列表 */
   RxList<V2TimFriendInfo?> friendList = <V2TimFriendInfo>[].obs;
   
+  
   @override
   void onInit() {
     super.onInit();

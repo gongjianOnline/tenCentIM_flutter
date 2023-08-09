@@ -33,9 +33,9 @@ class TencentUserController extends GetxController {
       print("登录成功");
       /**获取用户信息 */
       V2TimUserFullInfo userInfo = await tenCentGetSelfInfo();
-      /**如果昵称为空则设置用户名为昵称 */
+      /**如果昵称为空则设置用户名为昵称,将验证好友方式改为需要我验证方式 */
       if(userInfo.nickName == null){
-        await tenCentChangeSelfInfo(V2TimUserFullInfo(nickName:userName));
+        await tenCentChangeSelfInfo(V2TimUserFullInfo(nickName:userName,allowType:1));
       }
       Get.offAndToNamed("/layout");
     }else{
