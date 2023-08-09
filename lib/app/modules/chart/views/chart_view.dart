@@ -74,21 +74,27 @@ class ChartView extends GetView<ChartController> {
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 243, 243, 243)
       ),
-      child: ListView(
-        key: const Key("111"),
-        controller: controller.tencentMessageController.scrollController,
-        children: controller.tencentMessageController.historyMessage.map((item){
-          if(item.isSelf as bool){
-            return ChartComponent.sideChart(item.textElem as V2TimTextElem);
-          }else{
-            return ChartComponent.myChart(item.textElem as V2TimTextElem);
-          }
-        }).toList().cast<Widget>(),
-        // children: [
-        //   ChartComponent.myChart(),
-        //   ChartComponent.sideChart()
-        // ],
-      ),
+      child:RefreshIndicator(
+        onRefresh:()async{
+          controller.handelMoreMessage();
+        },
+        child: ListView(
+          key: const Key("111"),
+          controller: controller.tencentMessageController.scrollController,
+          children: controller.tencentMessageController.historyMessage.map((item){
+            if(item.isSelf as bool){
+              return ChartComponent.sideChart(item.textElem as V2TimTextElem);
+            }else{
+              return ChartComponent.myChart(item.textElem as V2TimTextElem);
+            }
+          }).toList().cast<Widget>(),
+          // children: [
+          //   ChartComponent.myChart(),
+          //   ChartComponent.sideChart()
+          // ],
+        ),
+      )
+        
     );
   }
   

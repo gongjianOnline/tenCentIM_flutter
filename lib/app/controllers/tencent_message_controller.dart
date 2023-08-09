@@ -135,7 +135,10 @@ class TencentMessageController extends GetxController {
       //拉取成功
       (getC2CHistoryMessageListRes.data)?.forEach((item) {
         historyMessage.insert(0,item);
-        scrollToBottom();
+        /**首次拉去的时候置地，展示最新的记录，下拉更新时则不需要置底操作 */
+        if(lastMsgID == null){
+          scrollToBottom();
+        }
       });
     }
   }

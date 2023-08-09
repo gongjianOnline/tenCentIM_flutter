@@ -81,6 +81,13 @@ class ChartController extends GetxController {
     tencentMessageController.tencentTextMessage(chartInputController.text,friendID.value);
   }
 
+  /* 下拉更新更多消息 */
+  handelMoreMessage(){
+    tencentMessageController.tencentHistoryMessage(
+      friendID.value, 
+      lastMsgID:tencentMessageController.historyMessage[0].msgID
+    );
+  }
 
 
 }
