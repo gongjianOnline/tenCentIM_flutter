@@ -76,7 +76,7 @@ class HomeController extends GetxController {
 
   /*跳转到聊天页面 */
   handelChart(friendID)async{
-    bool status =   await tencentMessageController.tencentREADMessage(friendID);
+    bool status =  await tencentMessageController.tencentREADMessage(friendID);
     status?Get.toNamed("/chart",arguments: {"friendID":friendID}):null;
   }
 

@@ -50,13 +50,22 @@ class TencentSessionController extends GetxController {
         }else{
           sessionList.addAll(conversationList);
         }
+
         /* 在消息列表中插入最新消息 */
-        if(tencentMessageController.historyMessage[0].userID == conversationList[0].userID){
-          tencentMessageController.historyMessage.add(conversationList[0].lastMessage as V2TimMessage);
-          /*消息列表置㡳 */
-          tencentMessageController.scrollToBottom();
-          /* 消息已读回调 */
-          // tencentMessageController.tencentREADMessage(conversationList[0].userID as String);
+        if(tencentMessageController.historyMessage.isNotEmpty){
+          int messageLength = tencentMessageController.historyMessage.length;
+          /* 判断当前的聊天用户是否一致,当前聊天最后消息和消息列表中最后的消息id是否不一致;追加最新消息 */
+          if(
+            tencentMessageController.historyMessage[0].userID == conversationList[0].userID
+            &&
+            tencentMessageController.historyMessage[messageLength-1].msgID != conversationList[0].lastMessage!.msgID
+          ){
+            tencentMessageController.historyMessage.add(conversationList[0].lastMessage as V2TimMessage);
+            /*消息列表置㡳 */
+            tencentMessageController.scrollToBottom();
+            /* 消息已读回调 */
+            tencentMessageController.tencentREADMessage(conversationList[0].userID as String);
+          }
         }
         
       },
