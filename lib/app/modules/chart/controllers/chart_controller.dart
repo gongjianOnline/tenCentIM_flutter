@@ -77,8 +77,9 @@ class ChartController extends GetxController {
   }
 
   /* 发送消息 */
-  handelSend(){
-    tencentMessageController.tencentTextMessage(chartInputController.text,friendID.value);
+  handelSend()async{
+    await tencentMessageController.tencentTextMessage(chartInputController.text,friendID.value);
+    chartInputController.text = "";
   }
 
   /* 下拉更新更多消息 */
