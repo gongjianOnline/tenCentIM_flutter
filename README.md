@@ -36,6 +36,7 @@ controllers 文件夹存放全局控制器
   - tencent_relationship_controller 监听关系链
   - tencent_session_controller 腾讯IM会话相关控制器
   - tencent_message_controller 腾讯IM消息相关控制器
+  - circle_controller 朋友圈数据控制器
 
 bindings 文件夹用于加载全局控制器
   - global_bindings 加载全局controllers

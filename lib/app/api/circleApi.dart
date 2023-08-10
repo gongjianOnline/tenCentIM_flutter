@@ -13,4 +13,16 @@ class CircleApi {
     }
   }
 
+  /* 拉去朋友圈列表*/
+  static getList(Map<String,dynamic>data)async{
+    try {
+      var response = await http.get("/circle/getTrends",queryParameters:data);
+      return  response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+
+
 }
