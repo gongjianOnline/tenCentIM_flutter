@@ -13,7 +13,7 @@ class Storage{
       if(tempData == null){
         return null;
       }else{
-        return json.decode(tempData!);
+        return json.decode(tempData);
       }
   }
   static removeData(String key) async{

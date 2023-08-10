@@ -4,6 +4,7 @@ import 'package:flutter_im/app/common/remind.dart';
 import 'package:get/get.dart';
 
 import '../../../api/login.dart';
+import '../../../common/storage.dart';
 import '../../../controllers/tencent_user_controller.dart';
 import '../../../model/sigModel.dart';
 
@@ -81,6 +82,7 @@ class LoginController extends GetxController {
         sigData.data!.sig,
         sigData.data!.user
       );
+      Storage.setData("tcUserID", sigData.data!.tcUserId);
     }
   }
 

@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:flutter_im/app/common/remind.dart';
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/enum/V2TimFriendshipListener.dart';
@@ -12,6 +14,9 @@ import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_operation_result.dar
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_value_callback.dart';
 import 'package:tencent_cloud_chat_sdk/tencent_im_sdk_plugin.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_application_result.dart';
+
+import '../api/userApi.dart';
+import '../common/storage.dart';
 /* 监听关系链 */
 class TencentRelationshipController extends GetxController {
 
@@ -61,9 +66,14 @@ class TencentRelationshipController extends GetxController {
         onFriendApplicationListAdded:
             (List<V2TimFriendApplication> applicationList) async {
               print("关系链监听到好友请求信息增加");
-              //好友请求数量增加的回调
-              //applicationList 新增的好友请求信息列表
-              friendApplyList.insertAll(0,applicationList);
+              print(applicationList[0].type);
+              /* 好友请求数量增加的回调 */
+              /* applicationList 新增的好友请求信息列表 */
+              /* 1表示别人发给我的 */
+              if(applicationList[0].type == 1 ){
+                friendApplyList.insertAll(0,applicationList);
+              }
+              
         },
         onFriendApplicationListDeleted: (List<String> userIDList) async {
           print("关系链监听到好友请求信息减少");
@@ -84,6 +94,12 @@ class TencentRelationshipController extends GetxController {
           //好友列表增加人员的回调
           //users 新增的好友信息列表
           friendList.addAll(users);
+          /* 新增好友信息同步到数据库 */
+          var tcUserID = await Storage.getData("tcUserID");
+          UserApi.relation({"data":json.encode([{
+            "userId":tcUserID,
+            "friendId":users[0].userID,
+          }])});
         },
         onFriendListDeleted: (List<String> userList) async {
           print("关系链监听到好友列表减少");
@@ -148,7 +164,10 @@ class TencentRelationshipController extends GetxController {
         print("未读数量-${getFriendApplicationListRes.data?.unreadCount}");
         // friendApplyList.addAll( as Iterable<V2TimFriendApplication>);
         getFriendApplicationListRes.data?.friendApplicationList?.forEach((element) {
-          friendApplyList.add(element as V2TimFriendApplication);
+          /* 判断只添加对发请求的列表 */
+          if(element?.type == 1){
+            friendApplyList.add(element as V2TimFriendApplication);
+          }
         });
       }
 
@@ -191,10 +210,19 @@ class TencentRelationshipController extends GetxController {
         await TencentImSDKPlugin.v2TIMManager
             .getFriendshipManager()
             .getFriendList();
+      var tcUserID = await Storage.getData("tcUserID");
+      List<Map<String,dynamic>> initFriendList = [];
       if(getFriendListRes.code == 0){
         friendList.value = getFriendListRes.data!;
-        print("获取好友列表");
-        print(getFriendListRes.data);
+        getFriendListRes.data?.forEach((item) {
+          initFriendList.add({
+            "userId":tcUserID,
+            "friendId":item.userID,
+          });
+        });
+        
+        /**将好友列表同步到数据库中 */
+        UserApi.relation({"data":json.encode(initFriendList)});
       }
     }
 
