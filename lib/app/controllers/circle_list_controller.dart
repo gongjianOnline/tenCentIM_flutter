@@ -29,6 +29,7 @@ class CircleListController extends GetxController {
 
   /* 拉取朋友圈列表 */
   handelCircleList(userId)async{
+    circleList.value = <CircleListData>[];
     var response = await CircleApi.getList({"userId":userId});
     CircleList initResponse = CircleList.fromJson(response);
     if(initResponse.code == 101){

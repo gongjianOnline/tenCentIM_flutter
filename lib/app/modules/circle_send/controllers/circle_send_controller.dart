@@ -5,9 +5,13 @@ import 'package:flutter_im/app/common/remind.dart';
 import 'package:flutter_im/app/common/storage.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/circle_list_controller.dart';
 import '../../../model/circleSendModel.dart';
 
 class CircleSendController extends GetxController {
+
+  /* 调用朋友圈模块 */
+  CircleListController circleListController = Get.find();
 
   /* 创建视图层和控制器关联 */
   RxString titleName = "发送朋友圈".obs;
@@ -41,6 +45,7 @@ class CircleSendController extends GetxController {
     var tcUserID = await Storage.getData("tcUserID");
     /* 获取系统时间 */
     DateTime date = DateTime.now();
+    print(date.millisecondsSinceEpoch);
     /* 初始化参数 */
     var initData = {
       "content":circleContent.value,
@@ -53,6 +58,8 @@ class CircleSendController extends GetxController {
     CircleSend initResponse =  CircleSend.fromJson(response);
     if(initResponse.code == 101){
       Remind.toast("发布成功");
+      String tcUserID = await Storage.getData("tcUserID");
+      circleListController.handelCircleList(tcUserID);
       Get.offAndToNamed("/layout");
     }else{
       Remind.toast("发布失败");
