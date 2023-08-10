@@ -47,6 +47,7 @@ model 数据模型
   - friendInfoModel 腾讯云获取好友信息自定义数据模型
   - FriendsModel node服务端根据好友名称查询好友ID模型
   - circleSendModel node服务端发送朋友数据模型
+  - circleListModel node服务端拉去朋友圈列表模型
   
 
 api 接口统一管理目录

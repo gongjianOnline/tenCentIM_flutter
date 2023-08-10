@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../model/circleListModel.dart';
+
 class CircleData {
   /**文本模板 */
-  static textComponent(){
+  static textComponent({context="允公允能,日新月异"}){
     return Row(
       children: [
         Expanded(
@@ -10,14 +12,14 @@ class CircleData {
           child: Container(
             padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
             alignment: Alignment.centerLeft,
-            child: const Text("允公允能,日新月异"),
+            child: Text(context),
           )
         )
       ],
     );
   }
   /* 图片模板 */
-  static ImageComponent(){
+  static ImageComponent({imgUrl=""}){
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -26,8 +28,8 @@ class CircleData {
             flex: 1,
             child: Container(
               padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
-              child: Image.asset(
-                "lib/assets/img/cirle.jpg",
+              child: Image.network(
+                imgUrl,
                 fit: BoxFit.cover,
               ),
             )

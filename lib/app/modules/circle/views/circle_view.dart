@@ -4,14 +4,16 @@ import 'package:get/get.dart';
 
 import '../../../common/AliIcon.dart';
 import '../../../common/myTheme.dart';
+import '../../../common/timeFormat.dart';
 import '../../../components/circleData.dart';
+import '../../../model/circleListModel.dart';
 import '../controllers/circle_controller.dart';
 
 class CircleView extends GetView<CircleController> {
   const CircleView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(()=>Scaffold(
       body: Container(
         child: Column(
           children: [
@@ -19,19 +21,22 @@ class CircleView extends GetView<CircleController> {
             Expanded(
               flex: 1,
               child: ListView(
-                children: [
-                  baseCircleComponent(),
-                  baseCircleComponent(),
-                  baseCircleComponent(),
-                  baseCircleComponent(),
-                  const Padding(padding:EdgeInsets.only(top: 50))
-                ],
+                children:controller.circleListController.circleList.map((item){
+                  return baseCircleComponent(item);
+                }).toList().cast<Widget>(),
+                // children: [
+                //   baseCircleComponent(),
+                //   baseCircleComponent(),
+                //   baseCircleComponent(),
+                //   baseCircleComponent(),
+                //   // const Padding(padding:EdgeInsets.only(top: 50))
+                // ],
               )
             )
           ],
         ),
       )
-    );
+    ));
   }
 
   /* 顶部模块 */
@@ -47,7 +52,10 @@ class CircleView extends GetView<CircleController> {
               color:MyTheme.themeColor,
               borderRadius: BorderRadius.circular(16)
             ),
-            child: const Text("好友",style: TextStyle(color: Colors.white),),
+            child: Text(
+              controller.titleName.value,
+              style:const TextStyle(color: Colors.white)
+            ),
           ),
           Material(
             child: InkWell(
@@ -69,7 +77,7 @@ class CircleView extends GetView<CircleController> {
   }
 
   /* 基本信息，包含用户信息，位置，点赞数，评论 */
-  baseCircleComponent(){
+  baseCircleComponent(CircleListData itemData){
     return Container(
       margin: const EdgeInsets.only(left: 10,right: 10,bottom: 20),
       padding: const EdgeInsets.all(20),
@@ -106,19 +114,46 @@ class CircleView extends GetView<CircleController> {
                         child:Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            /* 异步写法 */
                             Container(
-                              child:const Text(
-                                "南开大学网络教育学院",
-                                style: TextStyle(
-                                  color: MyTheme.stressFontColor,
-                                  fontSize: 16
-                                ),
+                              child: FutureBuilder<String>(
+                                future: controller.handelUserInfo(itemData.userId),
+                                builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                                  if (snapshot.connectionState == ConnectionState.waiting) {
+                                    // 如果Future正在加载中，显示一个加载动画或占位符
+                                    return CircularProgressIndicator();
+                                  } else if (snapshot.hasError) {
+                                    // 如果Future返回错误，显示错误消息
+                                    return Text('Error: ${snapshot.error}');
+                                  } else {
+                                    // 如果Future成功返回数据，显示数据
+                                    return Text(
+                                      "${snapshot.data}",
+                                      style: const TextStyle(
+                                        color: MyTheme.stressFontColor,
+                                        fontSize: 16
+                                      ),
+                                    );
+                                  }
+                                },
                               ),
                             ),
+                            /* 同步写法 */
+                            // Container(
+                            //   child:Text(
+                            //     "${controller.handelUserInfo(itemData.userId)}",
+                            //     style: const TextStyle(
+                            //       color: MyTheme.stressFontColor,
+                            //       fontSize: 16
+                            //     ),
+                            //   ),
+                            // ),
+                            /* 时间戳 */
                             Container(
-                              child: const Text(
-                                "1分钟前",
-                                style: TextStyle(
+                              child: Text(
+                                TimeFormat.toText((itemData.time~/1000),formatText:"yyyy-MM-dd H:m"),
+                                // "${itemData.time}",
+                                style: const TextStyle(
                                   color: MyTheme.unimportantFontColor,
                                   fontSize: 12
                                 ),
@@ -145,9 +180,9 @@ class CircleView extends GetView<CircleController> {
           ),
 
           /* 朋友圈内容 */
-          CircleData.textComponent(),
+          CircleData.textComponent(context:itemData.content),
             /* 图片 */
-          CircleData.ImageComponent(),
+          itemData.imgUrl.isNotEmpty?CircleData.ImageComponent(imgUrl:itemData.imgUrl):Container(),
 
           /* 操作模块 */
           Container(

@@ -5,7 +5,7 @@ class MyHttp {
 
   MyHttp() {
     BaseOptions options = BaseOptions(
-      baseUrl: 'http://192.168.205.9:3002',
+      baseUrl: 'http://192.168.3.18:3002',
       connectTimeout: const Duration(seconds: 5),
       receiveTimeout: const Duration(seconds: 3),
     );

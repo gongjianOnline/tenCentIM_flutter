@@ -4,6 +4,7 @@ import 'package:flutter_im/app/common/myTheme.dart';
 
 import 'package:get/get.dart';
 
+import 'app/controllers/circle_list_controller.dart';
 import 'app/controllers/init_tencent_im_controller.dart';
 import 'app/controllers/tencent_message_controller.dart';
 import 'app/controllers/tencent_relationship_controller.dart';
@@ -19,6 +20,7 @@ void main() async {
   Get.put(TencentRelationshipController());
   Get.put(TencentMessageController());
   Get.put(TencentSessionController());
+  Get.put(CircleListController());
   
   
   /*更改状态栏颜色 */
