@@ -106,7 +106,7 @@ class NewFriendView extends GetView<NewFriendController> {
                         ),
                         Container(
                           child: Text(
-                            "ID: ${friendApplyItem.userID}",
+                            "ID: ${friendApplyItem.userID.substring(0,8)}",
                             style:const TextStyle(
                               fontSize: 14,
                               color: MyTheme.unimportantFontColor
