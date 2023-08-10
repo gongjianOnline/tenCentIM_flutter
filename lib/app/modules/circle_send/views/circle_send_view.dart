@@ -10,7 +10,7 @@ class CircleSendView extends GetView<CircleSendController> {
   const CircleSendView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(()=>Scaffold(
       body: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
         child: Column(
@@ -21,7 +21,7 @@ class CircleSendView extends GetView<CircleSendController> {
           ],
         ),
       )
-    );
+    ));
   }
 
    /* 标题模块 */
@@ -60,21 +60,22 @@ class CircleSendView extends GetView<CircleSendController> {
     return Container(
       margin: const EdgeInsets.only(left: 10,right: 10,top: 10),
       padding: const EdgeInsets.only(left: 20,top: 20,right: 20,bottom: 20),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white
       ),
       child: Column(
         children: [
           /* 评论表单 */
           Container(
-            child: const TextField(
+            child: TextField(
               maxLines: 10,
               maxLength: 150,
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
-              decoration: InputDecoration(
+              decoration:const InputDecoration(
                 hintText: "朋友圈内容", // 提示词
                 border: OutlineInputBorder(), // 带边框
-              )
+              ),
+              onChanged: (val){controller.handelCircle(val);},
             ),
           ),
           /* 上传图片 */
@@ -110,15 +111,15 @@ class CircleSendView extends GetView<CircleSendController> {
         ),
         child: InkWell(
           borderRadius:BorderRadius.circular(20),
-          onTap: (){},
+          onTap: (){controller.handelSend();},
           child: Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20)
             ),
-            child:const Text(
-              "发布成功",
-              style: TextStyle(
+            child:Text(
+              controller.titleName.value,
+              style:const TextStyle(
                 color: Colors.white
               ),
             ),
