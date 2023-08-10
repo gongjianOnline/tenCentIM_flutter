@@ -1,3 +1,4 @@
+import 'package:flutter_im/app/api/userApi.dart';
 import 'package:get/get.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_info_result.dart';
@@ -5,6 +6,7 @@ import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
 
 import '../../../controllers/tencent_relationship_controller.dart';
 import '../../../controllers/tencent_user_controller.dart';
+import '../../../model/FriendsModel.dart';
 import '../../../model/friendInfoModel.dart';
 
 class AddFriendController extends GetxController {
@@ -51,7 +53,10 @@ class AddFriendController extends GetxController {
       const Duration(seconds: 1), 
       ()async{
         if(searchValue.value != ""){
-          List<V2TimFriendInfoResult> result = await tencentRelationshipController.tencentGetFriendInfo(searchValue.value);
+          /* 通过好友名称获取好友id,在调取腾讯的API */
+          var response =  await UserApi.getFriendID({"friendName":searchValue.value});
+          Friends initResponse = Friends.fromJson(response);
+          List<V2TimFriendInfoResult> result = await tencentRelationshipController.tencentGetFriendInfo(initResponse.data?[0].tcUserId);
           if(result.isNotEmpty){
             V2TimFriendInfoResult resultItem = result[0];
             friendObj.value = FriendInfo(

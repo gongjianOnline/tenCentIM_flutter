@@ -43,3 +43,9 @@ model 数据模型
   - sigModel node服务端获取时间密钥模型
   - registerModel 服务端注册接口数据模型
   - friendInfoModel 腾讯云获取好友信息自定义数据模型
+  - FriendsModel node服务端根据好友名称查询好友ID模型
+  
+
+api 接口统一管理目录
+  - login 登录注册相关接口
+  - userApi 用户操作相关接口

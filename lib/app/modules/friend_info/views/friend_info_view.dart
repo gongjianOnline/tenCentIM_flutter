@@ -53,7 +53,7 @@ class FriendInfoView extends GetView<FriendInfoController> {
           Container(
             margin: const EdgeInsets.only(top: 4),
             child: Text(
-              "ID: ${controller.friendObj.value.userID}",
+              "ID: ${controller.friendObj.value.userID == ""?"":(controller.friendObj.value.userID).substring(0,8)}",
               style:const TextStyle(
                 fontSize: 14,
                 color: MyTheme.unimportantFontColor

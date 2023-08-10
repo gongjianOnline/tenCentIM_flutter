@@ -193,6 +193,8 @@ class TencentRelationshipController extends GetxController {
             .getFriendList();
       if(getFriendListRes.code == 0){
         friendList.value = getFriendListRes.data!;
+        print("获取好友列表");
+        print(getFriendListRes.data);
       }
     }
 
