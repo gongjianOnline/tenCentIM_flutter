@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../model/circleListModel.dart';
-
 class CircleData {
   /**文本模板 */
   static textComponent({context="允公允能,日新月异"}){

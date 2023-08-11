@@ -118,7 +118,7 @@ class FriendView extends GetView<FriendController> {
   /* 好友信息 */
   friendItem(V2TimFriendInfo friendInfo){
     return InkWell(
-      onTap: (){Get.toNamed("/chart",arguments: {"friendID":friendInfo.userID});},
+      onTap: (){Get.toNamed("/friendInfo",arguments: {"friendId":friendInfo.userID});},
       child: Container(
         padding: const EdgeInsets.only(left: 10,right: 10),
         height: 70,

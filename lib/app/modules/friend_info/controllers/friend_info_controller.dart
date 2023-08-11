@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_info_result.dart';
 
+import '../../../controllers/tencent_message_controller.dart';
 import '../../../controllers/tencent_relationship_controller.dart';
 import '../../../model/friendInfoModel.dart';
 
@@ -8,6 +9,8 @@ class FriendInfoController extends GetxController {
 
   /* 调用腾讯关系链模块 */
   TencentRelationshipController tencentRelationshipController = Get.find();
+  /* 调用腾讯消息模块 */
+  TencentMessageController tencentMessageController = Get.find();
 
   /* 建立视图层和控制器关联 */
   RxString titleName = "添加好友".obs;
@@ -68,6 +71,12 @@ class FriendInfoController extends GetxController {
   /* 添加好友信息 */
   handleAddFriend(){
     tencentRelationshipController.tencentAddFriend(friendId.value);
+  }
+
+  /*跳转到聊天页面 */
+  handelChart()async{
+    bool status =  await tencentMessageController.tencentREADMessage(friendId.value);
+    status?Get.toNamed("/chart",arguments: {"friendID":friendId.value}):null;
   }
 
 
