@@ -151,7 +151,7 @@ class CircleView extends GetView<CircleController> {
                             /* 时间戳 */
                             Container(
                               child: Text(
-                                TimeFormat.toText((itemData.time~/1000),formatText:"yyyy-MM-dd H:m"),
+                                TimeFormat.toText((itemData.time~/1000),formatText:"yyyy-MM-dd H:mm"),
                                 // "${itemData.time}",
                                 style: const TextStyle(
                                   color: MyTheme.unimportantFontColor,
