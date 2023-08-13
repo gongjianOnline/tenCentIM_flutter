@@ -48,6 +48,7 @@ model 数据模型
   - FriendsModel node服务端根据好友名称查询好友ID模型
   - circleSendModel node服务端发送朋友数据模型
   - circleListModel node服务端拉去朋友圈列表模型
+  - circleDetModel node服务端查看朋友圈详情及评论数据模型
   
 
 api 接口统一管理目录

@@ -4,14 +4,16 @@ import 'package:flutter_im/app/common/AliIcon.dart';
 import 'package:get/get.dart';
 
 import '../../../common/myTheme.dart';
+import '../../../common/timeFormat.dart';
 import '../../../components/circleData.dart';
+import '../../../model/circleDetModel.dart';
 import '../controllers/circle_details_controller.dart';
 
 class CircleDetailsView extends GetView<CircleDetailsController> {
   const CircleDetailsView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(() => Scaffold(
       body: Container(
         margin: EdgeInsets.only(top: MediaQuery. of (context).padding.top),
         child: Column(
@@ -30,7 +32,7 @@ class CircleDetailsView extends GetView<CircleDetailsController> {
           ],
         ),
       )
-    );
+    ));
   }
 
   /* 顶部模块 */
@@ -54,9 +56,9 @@ class CircleDetailsView extends GetView<CircleDetailsController> {
             ),
           ),
           Container(
-            child: const Text(
-              "朋友圈",
-              style: TextStyle(
+            child:  Text(
+              controller.titleName.value,
+              style: const TextStyle(
                 color: MyTheme.stressFontColor,
                 fontSize: 18
               ),
@@ -75,13 +77,16 @@ class CircleDetailsView extends GetView<CircleDetailsController> {
           /* 作者详情 */
           singleRowUserInfo(),
           /* 作者发送内容 */
-          CircleData.textComponent(),
-          CircleData.ImageComponent(),
+          controller.circleDet.value.content!.isNotEmpty?CircleData.textComponent(context: controller.circleDet.value.content):Container(),
+          controller.circleDet.value.imgUrl!.isNotEmpty?CircleData.ImageComponent(imgUrl:controller.circleDet.value.imgUrl):Container(),
           /* 评论标题 */
           singleComment(),
           /* 评论项 */
-          singleDataComponent(),
-          singleDataComponent(),
+          // singleDataComponent(),
+          ...List.generate(
+            controller.circleCommit?.length ?? 0,
+            (index)=>singleDataComponent(controller.circleCommit![index])
+          )
         ],
       ),
     );
@@ -106,18 +111,42 @@ class CircleDetailsView extends GetView<CircleDetailsController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        child: const Text(
-                          "南开大学网络教育学院",
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
+                      /* 异步写法 */
+                      controller.circleDet.value.userId == null ?Container() : Container(
+                        child: FutureBuilder<String>(
+                          future: controller.handelUserInfo(controller.circleDet.value.userId),
+                          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              // 如果Future正在加载中，显示一个加载动画或占位符
+                              return CircularProgressIndicator();
+                            } else if (snapshot.hasError) {
+                              // 如果Future返回错误，显示错误消息
+                              return Text('Error: ${snapshot.error}');
+                            } else {
+                              // 如果Future成功返回数据，显示数据
+                              return Text(
+                                "${snapshot.data}",
+                                style: const TextStyle(
+                                  color: MyTheme.stressFontColor,
+                                  fontSize: 16
+                                ),
+                              );
+                            }
+                          },
                         ),
                       ),
+                      // Container(
+                      //   child: const Text(
+                      //     "南开大学网络教育学院",
+                      //     style: TextStyle(
+                      //       fontSize: 16,
+                      //     ),
+                      //   ),
+                      // ),
                       Container(
-                        child: const Text(
-                          "1天前",
-                          style: TextStyle(
+                        child:  Text(
+                          TimeFormat.toText((controller.circleDet.value.time !~/ 1000),formatText:"yyyy-MM-dd H:mm"),
+                          style: const TextStyle(
                             fontSize: 14,
                             color: MyTheme.unimportantFontColor
                           ),
@@ -175,7 +204,7 @@ class CircleDetailsView extends GetView<CircleDetailsController> {
   }
 
   /* 评论内容 */
-  singleDataComponent(){
+  singleDataComponent(CommitList item){
     return Container(
       padding: const EdgeInsets.only(left: 10,right: 10,bottom: 10,top: 10),
       decoration: const BoxDecoration(
@@ -195,27 +224,52 @@ class CircleDetailsView extends GetView<CircleDetailsController> {
                   child: Row(
                     children: [
                       Container(
+                        margin: const EdgeInsets.only(right: 10),
                         width: 40,
                         height: 40,
                         child:Image.asset("lib/assets/img/user.png")
                       ),
+                      /* 异步写法 */
                       Container(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: const Text(
-                          "张三",
-                          style: TextStyle(
-                            color: MyTheme.themeColor
-                          ),
+                        child: FutureBuilder<String>(
+                          future: controller.handelUserInfo(item.userId),
+                          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              // 如果Future正在加载中，显示一个加载动画或占位符
+                              return CircularProgressIndicator();
+                            } else if (snapshot.hasError) {
+                              // 如果Future返回错误，显示错误消息
+                              return Text('Error: ${snapshot.error}');
+                            } else {
+                              // 如果Future成功返回数据，显示数据
+                              return Text(
+                                "${snapshot.data}",
+                                style: const TextStyle(
+                                  color: MyTheme.stressFontColor,
+                                  fontSize: 16
+                                ),
+                              );
+                            }
+                          },
                         ),
-                      )
+                      ),
+                      // Container(
+                      //   padding: const EdgeInsets.only(left: 10),
+                      //   child: const Text(
+                      //     "张三",
+                      //     style: TextStyle(
+                      //       color: MyTheme.themeColor
+                      //     ),
+                      //   ),
+                      // )
                     ],
                   ),
                 ),
                 /* 发表时间 */
                 Container(
                   child: Text(
-                    "15:30",
-                    style: TextStyle(
+                    TimeFormat.toText((item.time !~/ 1000),formatText:"yyyy-MM-dd H:mm"),
+                    style:const TextStyle(
                       color: MyTheme.unimportantFontColor
                     ),
                   ),
@@ -229,9 +283,9 @@ class CircleDetailsView extends GetView<CircleDetailsController> {
           Container(
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.only(left: 10,top: 10),
-            child: const Text(
-              "评论内容评论内容评论内容评论内容评论内容评论内容",
-              style: TextStyle(
+            child: Text(
+              '${item.commit}',
+              style:const TextStyle(
                 color: MyTheme.stressFontColor
               ),
             ),
@@ -253,16 +307,16 @@ class CircleDetailsView extends GetView<CircleDetailsController> {
       child: Row(
         children: [
           /* 语音切换 */
-          InkWell(
-            borderRadius: BorderRadius.circular(20),
-            onTap: (){},
-            child: Container(
-              child:const Icon(
-                Icons.keyboard_voice,
-                color: MyTheme.stressFontColor,
-              ),
-            ),
-          ),
+          // InkWell(
+          //   borderRadius: BorderRadius.circular(20),
+          //   onTap: (){},
+          //   child: Container(
+          //     child:const Icon(
+          //       Icons.keyboard_voice,
+          //       color: MyTheme.stressFontColor,
+          //     ),
+          //   ),
+          // ),
           /**输入框 */
           Expanded(
             flex: 1,
@@ -272,25 +326,47 @@ class CircleDetailsView extends GetView<CircleDetailsController> {
                 color: Color.fromARGB(31, 145, 145, 145),
                 borderRadius: BorderRadius.circular(20)
               ),
-              child: const TextField(
-                decoration: InputDecoration(
+              child: TextField(
+                controller: controller.circleInputController,
+                decoration:const InputDecoration(
                   contentPadding: EdgeInsets.symmetric(vertical:0,horizontal:20), /*调整上下内边距,可改变输入框的高度*/
                   border: InputBorder.none,
                 ) /*不显示下划线*/ 
               ),
             ),
           ),
-          /* 表情按钮 */
+
+          /* 发送 */
           InkWell(
             borderRadius: BorderRadius.circular(20),
-            onTap: (){print("表情");},
+            onTap: (){controller.handelSend();},
             child: Container(
-              child: const Icon(
-                Icons.emoji_emotions,
-                color: MyTheme.stressFontColor,
+              margin: const EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 10,right: 10,top: 4,bottom: 4),
+              decoration: BoxDecoration(
+                color: MyTheme.themeColor,
+                borderRadius: BorderRadius.circular(10)
+              ),
+              child:const Text(
+                "发送",
+                style: TextStyle(
+                  color: Colors.white
+                ),
               ),
             ),
-          ),
+          )
+
+          /* 表情按钮 */
+          // InkWell(
+          //   borderRadius: BorderRadius.circular(20),
+          //   onTap: (){print("表情");},
+          //   child: Container(
+          //     child: const Icon(
+          //       Icons.emoji_emotions,
+          //       color: MyTheme.stressFontColor,
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
