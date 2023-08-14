@@ -168,7 +168,7 @@ class MyView extends GetView<MyController> {
           Expanded(
             flex: 1,
             child:InkWell(
-              onTap:(){Get.toNamed("/circleSeparate");},
+              onTap:(){Get.toNamed("/circleSeparate",arguments: {"userId":controller.selfInfo.value.userID});},
               child: Container(
                 child: Column(
                   children: [

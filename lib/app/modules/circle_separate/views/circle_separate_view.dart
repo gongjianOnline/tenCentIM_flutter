@@ -4,6 +4,7 @@ import 'package:flutter_im/app/components/circleData.dart';
 
 import 'package:get/get.dart';
 
+import '../../../common/AliIcon.dart';
 import '../controllers/circle_separate_controller.dart';
 
 class CircleSeparateView extends GetView<CircleSeparateController> {
@@ -203,10 +204,10 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
             child: Row(
               children: [
                 Container(
-                  child: const Icon(
-                    Icons.fmd_good,
+                  child:const Icon(
+                    AliIcon.position,
                     color: MyTheme.themeColor,
-                    size: 20,
+                    size: 18,
                   ),
                 ),
                 Container(
@@ -233,7 +234,7 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
                   child: Container(
                     padding: const EdgeInsets.only(right: 14),
                     child: const Icon(
-                      Icons.tag_faces,
+                      AliIcon.like,
                       size: 20,
                       color: MyTheme.unimportantFontColor,
                     ),
@@ -243,8 +244,8 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
                 InkWell(
                   onTap: (){Get.toNamed("/circleDetails");},
                   child: Container(
-                    child: const Icon(
-                      Icons.message,
+                    child:  Icon(
+                      AliIcon.comment,
                       size: 20,
                       color: MyTheme.unimportantFontColor,
                     ),

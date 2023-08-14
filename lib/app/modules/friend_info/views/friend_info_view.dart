@@ -3,6 +3,7 @@ import 'package:flutter_im/app/common/myTheme.dart';
 
 import 'package:get/get.dart';
 
+import '../../../common/AliIcon.dart';
 import '../controllers/friend_info_controller.dart';
 
 class FriendInfoView extends GetView<FriendInfoController> {
@@ -123,14 +124,14 @@ class FriendInfoView extends GetView<FriendInfoController> {
           Expanded(
             flex: 1,
             child: InkWell(
-              onTap: (){Get.toNamed("/circleSeparate");},
+              onTap: (){Get.toNamed("/circleSeparate",arguments: {"userId":controller.friendId.value});},
               child: Container(
                 child: Column(
                   children: [
                     Container(
                       margin: const EdgeInsets.only(bottom: 10),
                       child: const Icon(
-                        Icons.camera_alt,
+                        AliIcon.circle,
                         color: MyTheme.unimportantFontColor,
                         size: 32,
                       ),

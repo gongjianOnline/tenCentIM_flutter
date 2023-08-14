@@ -9,9 +9,16 @@ class CircleSeparateController extends GetxController {
   /* 是否显示抬头 */
   RxBool isHeader = false.obs;
 
+  /* 路由信息 */
+  RxString userId = "".obs;
+
   @override
   void onInit() {
     super.onInit();
+    
+    /* 获取路由信息 */
+    userId.value= Get.arguments["userId"];
+
     listViewController.addListener(_scrollListener);
   }
 
@@ -25,6 +32,7 @@ class CircleSeparateController extends GetxController {
     super.onClose();
   }
 
+  /* 监听下拉列表判断是否显示抬头 */
   void _scrollListener(){
     double scrollHeight = listViewController.offset;
     if( scrollHeight > 160 ){
@@ -33,6 +41,10 @@ class CircleSeparateController extends GetxController {
       isHeader.value = false;
     }
   }
+
+  /*  */
+
+
 
 
 }
