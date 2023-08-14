@@ -3,6 +3,7 @@ import 'package:flutter_im/app/bindings/global_bindings.dart';
 import 'package:flutter_im/app/common/myTheme.dart';
 
 import 'package:get/get.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'app/controllers/circle_list_controller.dart';
 import 'app/controllers/init_tencent_im_controller.dart';
@@ -31,6 +32,16 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   runApp(
     GetMaterialApp(
+      /* 翻译中文 */
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales:const [
+        Locale('zh','CN'),
+        Locale('en','US'),
+      ],
       debugShowCheckedModeBanner:false,
       title: "Application",
       theme: ThemeData( 

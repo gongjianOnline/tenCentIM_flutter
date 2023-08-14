@@ -154,8 +154,10 @@ class LoginView extends GetView<LoginController> {
                     ),
                     child:TextField(
                       maxLines: 1,
+                      obscureText:true,
                       decoration:const InputDecoration(
                         hintText: "密码", // 提示词
+
                         border: InputBorder.none, // 带边框
                         contentPadding: EdgeInsets.symmetric(vertical:9,horizontal:0),
                         icon:Padding( /*给左边添加图标*/

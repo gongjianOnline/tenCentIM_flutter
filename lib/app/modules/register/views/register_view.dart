@@ -131,6 +131,7 @@ class RegisterView extends GetView<RegisterController> {
                     ),
                     child:TextField(
                       maxLines: 1,
+                      obscureText:true,
                       decoration: const InputDecoration(
                         hintText: "密码", // 提示词
                         border: InputBorder.none, // 带边框
@@ -157,6 +158,7 @@ class RegisterView extends GetView<RegisterController> {
                     ),
                     child: TextField(
                       maxLines: 1,
+                      obscureText:true,
                       decoration:const InputDecoration(
                         hintText: "确认密码", // 提示词
                         border: InputBorder.none, // 带边框
