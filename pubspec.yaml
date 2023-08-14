@@ -25,6 +25,7 @@ dependencies:
   shared_preferences: ^2.2.0
   flutter_localization: ^0.1.13
   tencentcloud_cos_sdk_plugin: ^1.0.7
+  image_picker: ^1.0.2
   get: 4.6.5
   flutter: 
     sdk: flutter

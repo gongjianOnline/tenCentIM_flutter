@@ -3,7 +3,9 @@
 import 'package:flutter_im/app/api/circleApi.dart';
 import 'package:flutter_im/app/common/remind.dart';
 import 'package:flutter_im/app/common/storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
+
 
 import '../../../controllers/circle_list_controller.dart';
 import '../../../model/circleSendModel.dart';
@@ -18,6 +20,9 @@ class CircleSendController extends GetxController {
 
   /* 朋友圈表单变量 */
   RxString circleContent = "".obs;
+
+  /* 打开相册 */
+  final ImagePicker picker = ImagePicker();
 
   @override
   void onInit() {
@@ -65,5 +70,13 @@ class CircleSendController extends GetxController {
       Remind.toast("发布失败");
     }
   }
+
+  /* 上传图片 */
+  handelPicker()async{
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    print(image!.path);
+  }
+
+
 
 }

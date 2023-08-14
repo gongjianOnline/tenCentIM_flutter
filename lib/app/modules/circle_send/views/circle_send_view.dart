@@ -81,15 +81,18 @@ class CircleSendView extends GetView<CircleSendController> {
           /* 上传图片 */
           Container(
             alignment: Alignment.centerLeft,
-            child: Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                border: Border.all(color:const Color.fromARGB(255, 221, 221, 221),width: 0.5)
-              ),
-              child: const Icon(
-                Icons.add,
-                color: Color.fromARGB(255, 221, 221, 221),
+            child:InkWell(
+              onTap: (){controller.handelPicker();},
+              child:  Container(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  border: Border.all(color:const Color.fromARGB(255, 221, 221, 221),width: 0.5)
+                ),
+                child: const Icon(
+                  Icons.add,
+                  color: Color.fromARGB(255, 221, 221, 221),
+                ),
               ),
             ),
           )
