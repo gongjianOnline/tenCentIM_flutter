@@ -29,6 +29,7 @@ common 文件夹存放公共方法
   - remind 弹窗封装
   - timeFormat 时间格式化封装
   - storage 存储封装
+  - initOBS 初始化腾讯存储桶密钥
 
 controllers 文件夹存放全局控制器
   - init_tencent_im_controller 初始化腾讯IM控制器
@@ -37,6 +38,7 @@ controllers 文件夹存放全局控制器
   - tencent_session_controller 腾讯IM会话相关控制器
   - tencent_message_controller 腾讯IM消息相关控制器
   - circle_controller 朋友圈数据控制器
+  - state_obs_controller 注册腾讯对象存储控制器
 
 bindings 文件夹用于加载全局控制器
   - global_bindings 加载全局controllers
