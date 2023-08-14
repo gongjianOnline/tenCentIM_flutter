@@ -205,7 +205,7 @@ class TencentRelationshipController extends GetxController {
     }
 
     /*获取好友列表 */
-    tencentGetFriendList()async{
+    Future tencentGetFriendList()async{
       V2TimValueCallback<List<V2TimFriendInfo>> getFriendListRes =
         await TencentImSDKPlugin.v2TIMManager
             .getFriendshipManager()
@@ -224,7 +224,7 @@ class TencentRelationshipController extends GetxController {
         /**将好友列表同步到数据库中 */
         UserApi.relation({"data":json.encode(initFriendList)});
       }
+      return 101;
     }
 
-    
 }

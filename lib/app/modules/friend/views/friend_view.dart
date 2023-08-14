@@ -23,7 +23,7 @@ class FriendView extends GetView<FriendController> {
             searchComponent(),
             Expanded(
               flex: 1,
-              child: friendListComponent()
+              child: controller.friendSearch.value.length == 0?friendListComponent():searchFriendListComponent()
             )
           ],
         )
@@ -87,9 +87,9 @@ class FriendView extends GetView<FriendController> {
         color: Color.fromRGBO(242, 242, 242, 1),
         borderRadius: BorderRadius.circular(20)
       ),
-      child: const TextField(
+      child: TextField(
         maxLines: 1,
-        decoration: InputDecoration(
+        decoration:const InputDecoration(
           hintText: "搜索",
           hintStyle:TextStyle(color:Color.fromRGBO(206, 206, 206, 1)),
           contentPadding: EdgeInsets.symmetric(vertical:9,horizontal:-10), // 调整上下内边距
@@ -102,14 +102,24 @@ class FriendView extends GetView<FriendController> {
             ),
           )
         ),
+        onChanged: (val)=>{controller.handelFriendSearch(val)},
       ),
     );
   }
 
-  /*好友列表 */
+  /*好友列表全部 */
   friendListComponent(){
     return ListView(
       children: controller.tencentRelationshipController.friendList.map((item){
+        return  friendItem(item!);
+      }).toList().cast<Widget>(),
+    );
+  }
+
+  /* 查找好友列表 */
+  searchFriendListComponent(){
+    return ListView(
+      children: controller.friendList.map((item){
         return  friendItem(item!);
       }).toList().cast<Widget>(),
     );

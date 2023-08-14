@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_info.dart';
 
 import '../../../controllers/tencent_relationship_controller.dart';
 
@@ -8,12 +10,18 @@ class FriendController extends GetxController {
   RxString titleName = "好友".obs;
   TencentRelationshipController tencentRelationshipController = Get.find();
 
+  /* 搜索表单控制器 */
+  RxString friendSearch = "".obs;
+
+  /* 好友列表 */
+  RxList<V2TimFriendInfo?> friendList = <V2TimFriendInfo>[].obs;
 
   @override
-  void onInit() {
-    super.onInit();
+  void onInit() async {
+    super.onInit();;
     /* 获取好友列表 */
-    tencentRelationshipController.tencentGetFriendList();
+    await tencentRelationshipController.tencentGetFriendList();
+    
   }
 
   @override
@@ -26,5 +34,15 @@ class FriendController extends GetxController {
     super.onClose();
   }
 
-  
+  /* 监听输入框 */
+  handelFriendSearch(val){
+    friendSearch.value = val;
+    List<V2TimFriendInfo?> asFriendList = tencentRelationshipController.friendList;
+    if(friendSearch.value == ""){
+      friendList.value = asFriendList;
+    }else{
+      friendList.value = asFriendList.where((element) => element!.userProfile!.nickName!.contains(friendSearch.value)).toList();
+    }
+  }
+
 }
