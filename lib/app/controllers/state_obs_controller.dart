@@ -8,6 +8,7 @@ import '../common/initOBS.dart';
 
 class StateObsController extends GetxController {
 
+  late TransferTask transferTask;
 
   @override
   void onInit() {
@@ -92,7 +93,7 @@ class StateObsController extends GetxController {
       _uploadId = uploadId;
     }
 
-    TransferTask transferTask = await transferManager.upload(bucket, cosPath,
+    transferTask = await transferManager.upload(bucket, cosPath,
         filePath: srcPath,
         uploadId: _uploadId,
         resultListener: ResultListener(successCallBack, failCallBack),
@@ -101,6 +102,20 @@ class StateObsController extends GetxController {
         initMultipleUploadCallback: initMultipleUploadCallback
     );
   }
+
+  /* 暂停任务 */
+  handelPause(){
+    transferTask.pause();
+  }
+  /* 恢复任务 */
+  handelResume(){
+    transferTask.resume();
+  }
+  /* 取消任务 */
+  handelCancel(){
+    transferTask.cancel();
+  }
+
 
 
 }
