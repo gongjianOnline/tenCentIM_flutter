@@ -4,7 +4,9 @@ import 'package:flutter_im/app/common/myTheme.dart';
 
 import 'package:get/get.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:tencentcloud_cos_sdk_plugin/cos.dart';
 
+import 'app/common/initOBS.dart';
 import 'app/controllers/circle_list_controller.dart';
 import 'app/controllers/init_tencent_im_controller.dart';
 import 'app/controllers/tencent_message_controller.dart';
