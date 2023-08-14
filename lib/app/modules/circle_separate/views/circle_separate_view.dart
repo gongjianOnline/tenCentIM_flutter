@@ -5,6 +5,8 @@ import 'package:flutter_im/app/components/circleData.dart';
 import 'package:get/get.dart';
 
 import '../../../common/AliIcon.dart';
+import '../../../common/timeFormat.dart';
+import '../../../model/circleSeparateModel.dart';
 import '../controllers/circle_separate_controller.dart';
 
 class CircleSeparateView extends GetView<CircleSeparateController> {
@@ -34,8 +36,11 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
                 padding: const EdgeInsets.only(top: 0,bottom: 40),
                 children: [
                   detailsComponent(),
-                  trendsComponent(),
-                  trendsComponent(),
+                  // trendsComponent(),
+                  // trendsComponent(),
+                  ...List.generate(
+                    controller.circlePersonalList!.length, 
+                    (index) => trendsComponent(controller.circlePersonalList![index]))
                 ],
               )
             )
@@ -123,7 +128,7 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
   }
 
   /*  动态信息 */
-  trendsComponent(){
+  trendsComponent(CirclePersonalData item){
     return Container(
       margin: const EdgeInsets.only(left: 10,right: 10,top: 20),
       padding: const EdgeInsets.only(left: 15,right: 15,top: 20,bottom: 20),
@@ -156,18 +161,18 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        child: const Text(
-                          "南开大学网络教育学院",
-                          style: TextStyle(
+                        child: Text(
+                          controller.circleUserInfo.value.nickName,
+                          style:const TextStyle(
                             color: MyTheme.stressFontColor,
                             fontSize: 16
                           ),
                         ),
                       ),
                       Container(
-                        child: const Text(
-                          "1分钟前",
-                          style: TextStyle(
+                        child:  Text(
+                          TimeFormat.toText((item.time~/1000),formatText:"yyyy-MM-dd H:mm"),
+                          style:const TextStyle(
                             color: MyTheme.unimportantFontColor,
                             fontSize: 13
                           ),
@@ -181,11 +186,11 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
           ),
 
           /* 动态信息内容 */
-          CircleData.textComponent(),
-          // CircleData.ImageComponent(),
+          item.content.isEmpty?Container():CircleData.textComponent(context: item.content),
+          item.imgUrl.isEmpty?Container() : CircleData.ImageComponent(imgUrl:item.imgUrl),
 
           /* 操作按钮 */
-          trendsOperateComponent()
+          trendsOperateComponent(item)
 
         ],
       ),
@@ -193,7 +198,7 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
   }
 
   /* 动态信息操作栏 */
-  trendsOperateComponent(){
+  trendsOperateComponent(CirclePersonalData item){
     return Container(
       margin: const EdgeInsets.only(left:10,top: 10),
       child: Row(
@@ -242,9 +247,9 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
                 ),
                 /* 评论 */
                 InkWell(
-                  onTap: (){Get.toNamed("/circleDetails");},
+                  onTap: (){Get.toNamed("/circleDetails",arguments: {"circleId":item.circleId});},
                   child: Container(
-                    child:  Icon(
+                    child: const Icon(
                       AliIcon.comment,
                       size: 20,
                       color: MyTheme.unimportantFontColor,

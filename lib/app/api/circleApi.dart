@@ -43,6 +43,16 @@ class CircleApi {
     }
   }
 
+  /* 获取个人朋友圈 */
+  static getPersonal(Map<String,dynamic> data)async{
+    try {
+      var response = await http.get("/circle/getPersonal",queryParameters:data);
+      return  response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
 
 
 }

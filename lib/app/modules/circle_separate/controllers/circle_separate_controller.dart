@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_im/app/api/circleApi.dart';
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_info_result.dart';
 
 import '../../../controllers/tencent_relationship_controller.dart';
+import '../../../model/circleSeparateModel.dart';
 import '../../../model/friendInfoModel.dart';
 
 class CircleSeparateController extends GetxController {
@@ -21,6 +23,9 @@ class CircleSeparateController extends GetxController {
 
   /* 个人朋友圈的用户资料 */
   Rx<FriendInfo> circleUserInfo = FriendInfo().obs;
+
+  /* 朋友圈个人列表 */
+  RxList<CirclePersonalData>? circlePersonalList = <CirclePersonalData>[].obs;
   
 
   @override
@@ -33,6 +38,8 @@ class CircleSeparateController extends GetxController {
     listViewController.addListener(_scrollListener);
     /* 调用获取用户信息 */
     handleGetUserInfo();
+    /* 拉取个人朋友圈信息 */
+    handelGetCircleList();
   }
 
   @override
@@ -70,7 +77,6 @@ class CircleSeparateController extends GetxController {
         selfSignature  : filterFriendInfo(resultItem.friendInfo?.userProfile?.selfSignature ,"string"),
       );
     }
-    print("打印 ${circleUserInfo.value.selfSignature == ""}");
   }
 
   /* 过滤用户的信息格式 */
@@ -81,6 +87,13 @@ class CircleSeparateController extends GetxController {
       case "string":
         return (data == null || data == "")?"":data;
     }
+  }
+
+  /* 拉去个人朋友圈列表 */
+  handelGetCircleList()async{
+    var response = await CircleApi.getPersonal({"userId":userId.value});
+    CirclePersonal initResponse = CirclePersonal.fromJson(response);
+    circlePersonalList!.value = initResponse.data ?? [];
   }
 
 

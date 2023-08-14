@@ -26,7 +26,6 @@ class FriendInfoController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    print(Get.arguments["friendId"]);
     friendId.value = Get.arguments["friendId"];
     handleGetFriendInfo(Get.arguments["friendId"]);
   }
