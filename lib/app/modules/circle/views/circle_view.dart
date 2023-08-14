@@ -150,6 +150,7 @@ class CircleView extends GetView<CircleController> {
                             // ),
                             /* 时间戳 */
                             Container(
+                              padding: const EdgeInsets.only(top: 3),
                               child: Text(
                                 TimeFormat.toText((itemData.time~/1000),formatText:"yyyy-MM-dd H:mm"),
                                 // "${itemData.time}",
