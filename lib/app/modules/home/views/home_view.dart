@@ -15,9 +15,6 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(()=>Scaffold(
       body: Container(
-        // decoration: const BoxDecoration(
-        //   color:MyTheme.bgColor
-        // ),
         width: MediaQuery. of (context).size.width,
         child: Column(
           children: [

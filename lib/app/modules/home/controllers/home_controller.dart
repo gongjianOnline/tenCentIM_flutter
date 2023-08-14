@@ -45,7 +45,7 @@ class HomeController extends GetxController {
     /**监听扫一扫的结果 */
     scanKit = FlutterScankit();
     scanKit.addResultListen((val) {
-      print(val);
+      Get.toNamed("/friendInfo",arguments:{"friendId":val});
     });
     /* 拉去会话列表 */
     tencentSessionController.tencentSessionList();
