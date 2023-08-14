@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:tencent_cloud_chat_sdk/models/v2_tim_friend_info.dart';
 

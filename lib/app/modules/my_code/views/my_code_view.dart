@@ -10,7 +10,7 @@ class MyCodeView extends GetView<MyCodeController> {
   const MyCodeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(()=>Scaffold(
       body:Container(
         margin: EdgeInsets.only(top:MediaQuery.of(context).padding.top),
         child: Column(
@@ -24,7 +24,7 @@ class MyCodeView extends GetView<MyCodeController> {
           ],  
         ),
       )
-    );
+    ));
   }
 
   /* 头部标题 */
@@ -69,9 +69,9 @@ class MyCodeView extends GetView<MyCodeController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        child:const Text(
-                          "南开大学网络教育学院",
-                          style: TextStyle(
+                        child:Text(
+                          "${controller.userInfo.value.nickName}",
+                          style:const TextStyle(
                             color: MyTheme.stressFontColor,
                             fontSize: 18
                           ),
@@ -102,7 +102,7 @@ class MyCodeView extends GetView<MyCodeController> {
               // color: Colors.black12
             ),
             child: QrImageView(
-              data: '南开大学网络教育学院',
+              data: "${controller.userInfo.value.userID}",
               version: QrVersions.auto,
               padding:EdgeInsets.zero,
               size: 400.0,
@@ -115,9 +115,9 @@ class MyCodeView extends GetView<MyCodeController> {
           /* 文本提示 */
           Container(
             margin: const EdgeInsets.only(top: 10),
-            child: const Text(
-              "扫一扫上面的二维码团，加我为好友",
-              style: TextStyle(
+            child:Text(
+              "${controller.titleName.value}，加我为好友",
+              style:const TextStyle(
                 color: MyTheme.unimportantFontColor
               ),
             ),
