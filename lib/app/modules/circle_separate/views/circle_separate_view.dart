@@ -65,7 +65,7 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
                 ),
               ),
               Container(
-                child:const Text("南开大学网络教育学院",style: TextStyle(color: MyTheme.stressFontColor,fontSize: 18),),
+                child: Text(controller.circleUserInfo.value.nickName,style: const TextStyle(color: MyTheme.stressFontColor,fontSize: 18),),
               )
             ],
           ),
@@ -91,7 +91,7 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
                 Container(
                   alignment: Alignment.centerLeft,
                   child:Text(
-                    controller.titleName.value,
+                    controller.circleUserInfo.value.nickName,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20
@@ -100,10 +100,10 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 4),
-                  child: const Text(
-                    "允公允能 日新月异",
-                    style: TextStyle(
-                      color:const Color.fromRGBO(51,255,204, 1),
+                  child: Text(
+                    controller.circleUserInfo.value.selfSignature == ""?"个签无法满足他的丰富~":controller.circleUserInfo.value.selfSignature,
+                    style:const TextStyle(
+                      color:Color.fromRGBO(51,255,204, 1),
                       fontSize: 16
                     ),
                   ),
@@ -182,7 +182,7 @@ class CircleSeparateView extends GetView<CircleSeparateController> {
 
           /* 动态信息内容 */
           CircleData.textComponent(),
-          CircleData.ImageComponent(),
+          // CircleData.ImageComponent(),
 
           /* 操作按钮 */
           trendsOperateComponent()
