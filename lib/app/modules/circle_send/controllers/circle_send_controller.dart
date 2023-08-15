@@ -81,7 +81,6 @@ class CircleSendController extends GetxController {
   /* 上传图片 */
   handelPicker()async{
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    print(image!.path);
     var path = image!.path;
     var name = path.substring(path.lastIndexOf("/") + 1, path.length);
     stateObsController.handelUpload(path,name);
