@@ -80,9 +80,20 @@ class MyView extends GetView<MyController> {
                 height: 60,
                 child: Stack(
                   children: [
-                    Container(
-                      child:(controller.selfInfo.value.faceUrl == "" || controller.selfInfo.value.faceUrl == null) ? 
-                        Image.asset("lib/assets/img/user.png") : Image.network("${controller.selfInfo.value.faceUrl}"),
+                    ClipOval(
+                      child: Container(
+                        width: 60,
+                        height: 60,
+                        decoration: const BoxDecoration(
+                          color: Colors.black12,
+                          shape: BoxShape.circle,
+                        ),
+                        child:(controller.selfInfo.value.faceUrl == "" || controller.selfInfo.value.faceUrl == null) ? 
+                          Image.asset("lib/assets/img/user.png") : Image.network(
+                            "${controller.selfInfo.value.faceUrl}",
+                            fit: BoxFit.cover,
+                          ),
+                      ),
                     ),
                     Positioned(
                       bottom: 0,

@@ -1,4 +1,6 @@
+import 'package:flutter_im/app/controllers/tencent_user_controller.dart';
 import 'package:get/get.dart';
+import 'package:tencent_cloud_chat_sdk/models/v2_tim_user_full_info.dart';
 import 'package:tencentcloud_cos_sdk_plugin/cos.dart';
 import 'package:tencentcloud_cos_sdk_plugin/cos_transfer_manger.dart';
 import 'package:tencentcloud_cos_sdk_plugin/pigeon.dart';
@@ -7,6 +9,9 @@ import 'package:tencentcloud_cos_sdk_plugin/transfer_task.dart';
 import '../common/initOBS.dart';
 
 class StateObsController extends GetxController {
+  /* 调用腾讯用户模块 */
+  TencentUserController tencentUserController = Get.find();
+
   /* 上传的实例 */
   late TransferTask transferTask;
   /*上传成功的链接 */
@@ -72,7 +77,9 @@ class StateObsController extends GetxController {
       print("上传成功");
       /* 判断是否是用户头像 */
       if(isPhoto){
-        
+        tencentUserController.tenCentChangeSelfInfo(V2TimUserFullInfo(
+          faceUrl:result["accessUrl"]
+        ));
       }else{
         uploadUrl.value = result["accessUrl"];
       }

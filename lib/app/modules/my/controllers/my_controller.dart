@@ -65,8 +65,10 @@ class MyController extends GetxController {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     var path = image!.path;
     var name = path.substring(path.lastIndexOf("/") + 1, path.length);
-    await stateObsController.handelUpload(path,name);
-    handleGetUserInfo();
+    await stateObsController.handelUpload(path,name,isPhoto:true);
+    Future.delayed(const Duration(seconds: 3),(){
+      handleGetUserInfo();
+    });
   }
 
 

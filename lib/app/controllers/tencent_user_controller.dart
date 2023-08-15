@@ -89,7 +89,7 @@ class TencentUserController extends GetxController {
     }
   }
 
-  /* 改变登录用户信息 */
+  /* 修改登录用户信息 */
   Future tenCentChangeSelfInfo(V2TimUserFullInfo selfInfo)async{
     V2TimCallback setSelfInfoRes =
       await TencentImSDKPlugin.v2TIMManager.setSelfInfo(userFullInfo: selfInfo);//用户资料设置信息
