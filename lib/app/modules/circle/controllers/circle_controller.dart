@@ -36,4 +36,13 @@ class CircleController extends GetxController {
     return result[0].friendInfo?.userProfile?.nickName as String;
   }
 
+  /* 获取用户头像 */
+  Future<String> handelUserPhoto(friedId)async{
+    List<V2TimFriendInfoResult> result = await tencentRelationshipController.tencentGetFriendInfo(friedId);
+    return result[0].friendInfo?.userProfile?.faceUrl as String;
+  }
+  
+
+
+
 }

@@ -90,22 +90,22 @@ class HomeView extends GetView<HomeController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               /* 头像 */
-              Container(
-                margin: const EdgeInsets.only(right: 10),
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(60),
-                  // color: const Color.fromRGBO(228, 228, 228, 1),
-                ),
-                child: Image.asset(
-                  "lib/assets/img/user.png",
-                  fit: BoxFit.cover,
+              ClipOval(
+                child:Container(
+                  width: 60,
+                  height: 60,
+                  decoration:const BoxDecoration(
+                    shape: BoxShape.circle,
+                    // color: const Color.fromRGBO(228, 228, 228, 1),
+                  ),
+                  child: (sessionItem!.faceUrl == "" || sessionItem.faceUrl == null)?
+                    Image.asset("lib/assets/img/user.png"):Image.network("${sessionItem.faceUrl}",fit: BoxFit.cover,),
                 ),
               ),
               Expanded(
                 flex: 1,
                 child: Container(
+                  margin: const EdgeInsets.only(left: 10),
                   height: 60,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -118,7 +118,7 @@ class HomeView extends GetView<HomeController> {
                           children: [
                             Container(
                               child:Text(
-                                "${sessionItem!.showName}",
+                                "${sessionItem.showName}",
                                 style:const TextStyle(
                                   color: MyTheme.stressFontColor,
                                   fontSize: 18

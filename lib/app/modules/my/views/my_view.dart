@@ -85,7 +85,6 @@ class MyView extends GetView<MyController> {
                         width: 60,
                         height: 60,
                         decoration: const BoxDecoration(
-                          color: Colors.black12,
                           shape: BoxShape.circle,
                         ),
                         child:(controller.selfInfo.value.faceUrl == "" || controller.selfInfo.value.faceUrl == null) ? 

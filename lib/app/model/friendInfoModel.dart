@@ -7,6 +7,7 @@ class FriendInfo {
   late int gender; /**性别 */
   late String nickName; /**昵称 */
   late String selfSignature; /**签名 */
+  late String faceUrl; /**签名 */
   
 
 
@@ -17,7 +18,8 @@ class FriendInfo {
     this.birthday = 0,
     this.gender = 1,
     this.nickName = "",
-    this.selfSignature = ""
+    this.selfSignature = "",
+    this.faceUrl = ""
   });
 
   FriendInfo.fromJson(Map<String, dynamic> json) {
@@ -28,6 +30,7 @@ class FriendInfo {
     gender = json['gender'];
     nickName = json['nickName'];
     selfSignature = json['selfSignature'];
+    faceUrl = json['faceUrl'];
   }
 
   Map<String, dynamic> toJson() {
@@ -39,6 +42,7 @@ class FriendInfo {
     data['gender'] = gender;
     data['nickName'] = nickName;
     data['selfSignature'] = selfSignature;
+    data['faceUrl'] = faceUrl;
     return data;
   }
 }

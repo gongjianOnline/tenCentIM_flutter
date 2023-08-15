@@ -67,6 +67,7 @@ class AddFriendController extends GetxController {
               gender : filterFriendInfo(resultItem.friendInfo?.userProfile?.gender,"int"),
               nickName : filterFriendInfo(resultItem.friendInfo?.userProfile?.nickName,"string"),
               selfSignature  : filterFriendInfo(resultItem.friendInfo?.userProfile?.selfSignature ,"string"),
+              faceUrl  : filterFriendInfo(resultItem.friendInfo?.userProfile?.faceUrl ,"string"),
             );
           }
         };

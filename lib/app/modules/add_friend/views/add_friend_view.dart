@@ -104,15 +104,21 @@ class AddFriendView extends GetView<AddFriendController> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                width: 52,
-                height: 52,
-                margin: const EdgeInsets.only(right: 10),
-                child: Image.asset("lib/assets/img/user.png"),
+              ClipOval(
+                child:Container(
+                  width: 52,
+                  height: 52,
+                  decoration:const BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  child: (controller.friendObj.value.faceUrl == "")?
+                      Image.asset("lib/assets/img/user.png"):Image.network(controller.friendObj.value.faceUrl,fit: BoxFit.cover,),
+                ),
               ),
               Expanded(
                 flex: 1,
                 child:Container(
+                  margin: const EdgeInsets.only(left: 10),
                   height: 52,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

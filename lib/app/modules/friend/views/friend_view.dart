@@ -136,15 +136,21 @@ class FriendView extends GetView<FriendController> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              width: 52,
-              height: 52,
-              margin: const EdgeInsets.only(right: 10),
-              child: Image.asset("lib/assets/img/user.png"),
+            ClipOval(
+              child: Container(
+                width: 52,
+                height: 52,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                child: (friendInfo.userProfile!.faceUrl == "" || friendInfo.userProfile!.faceUrl == null)?
+                  Image.asset("lib/assets/img/user.png"):Image.network("${friendInfo.userProfile!.faceUrl}",fit: BoxFit.cover,),
+              ),
             ),
             Expanded(
               flex: 1,
               child:Container(
+                padding: const EdgeInsets.only(left: 10),
                 height: 52,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

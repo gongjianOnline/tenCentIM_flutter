@@ -104,10 +104,33 @@ class CircleView extends GetView<CircleController> {
                 Container(
                   child: Row(
                     children: [
-                      Container(
-                        width: 40,
-                        height: 40,
-                        child: Image.asset("lib/assets/img/user.png"),
+                      ClipOval(
+                        child:Container(
+                          width: 40,
+                          height: 40,
+                          decoration:const BoxDecoration(
+                            shape: BoxShape.circle,
+                            // color: const Color.fromRGBO(228, 228, 228, 1),
+                          ),
+                          // child: Image.asset("lib/assets/img/user.png"),
+                          child: FutureBuilder<String>(
+                            future: controller.handelUserPhoto(itemData.userId),
+                            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                // 如果Future正在加载中，显示一个加载动画或占位符
+                                return CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                // 如果Future返回错误，显示错误消息
+                                return Text('Error: ${snapshot.error}');
+                              } else {
+                                // 如果Future成功返回数据，显示数据
+                                return(snapshot.data == "" || snapshot.data == null)?
+                                  Image.asset("lib/assets/img/user.png"):
+                                  Image.network("${snapshot.data}",fit: BoxFit.cover);
+                              }
+                            },
+                          ),
+                        ),
                       ),
                       Container(
                         margin: const EdgeInsets.only(left: 10),

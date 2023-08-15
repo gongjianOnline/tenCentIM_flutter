@@ -36,10 +36,16 @@ class FriendInfoView extends GetView<FriendInfoController> {
       ),
       child: Column(
         children: [
-          Container(
-            width:60,
-            height: 60,
-            child: Image.asset("lib/assets/img/user.png"),
+          ClipOval(
+            child: Container(
+              width:60,
+              height: 60,
+              decoration:const BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child:(controller.friendObj.value.faceUrl == "")?
+                Image.asset("lib/assets/img/user.png"):Image.network(controller.friendObj.value.faceUrl,fit: BoxFit.cover,),
+            ),
           ),
           Container(
             margin: const EdgeInsets.only(top: 14),
