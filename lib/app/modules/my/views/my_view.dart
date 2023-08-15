@@ -78,8 +78,26 @@ class MyView extends GetView<MyController> {
               Container(
                 width:60,
                 height: 60,
-                child:(controller.selfInfo.value.faceUrl == "" || controller.selfInfo.value.faceUrl == null) ? 
-                  Image.asset("lib/assets/img/user.png") : Image.network("${controller.selfInfo.value.faceUrl}"),
+                child: Stack(
+                  children: [
+                    Container(
+                      child:(controller.selfInfo.value.faceUrl == "" || controller.selfInfo.value.faceUrl == null) ? 
+                        Image.asset("lib/assets/img/user.png") : Image.network("${controller.selfInfo.value.faceUrl}"),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: InkWell(
+                        onTap: (){controller.handelPhoto();},
+                        child: const Icon(
+                          Icons.camera_alt,
+                          color: MyTheme.themeColor,
+                          size: 18,
+                        ),
+                      )
+                    ),
+                  ],
+                ),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 14),

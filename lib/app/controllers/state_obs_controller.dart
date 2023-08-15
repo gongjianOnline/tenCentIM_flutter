@@ -56,7 +56,7 @@ class StateObsController extends GetxController {
   }
 
   /* 上传对象 */
-  handelUpload(String localPath,fileName)async{
+  Future handelUpload(String localPath,String fileName,{isPhoto=false})async{
     CosTransferManger transferManager = Cos().getDefaultTransferManger();
     //CosTransferManger transferManager = Cos().getTransferManger("newRegion");
     // 存储桶名称，由 bucketname-appid 组成，appid 必须填入，可以在 COS 控制台查看存储桶名称。 https://console.cloud.tencent.com/cos5/bucket
@@ -65,12 +65,17 @@ class StateObsController extends GetxController {
     String srcPath = localPath; //本地文件的绝对路径
     //若存在初始化分块上传的 UploadId，则赋值对应的 uploadId 值用于续传；否则，赋值 null
     String? _uploadId;
+    
     // 上传成功回调
     successCallBack(result) {
       // todo 上传成功后的逻辑
       print("上传成功");
-      print(result);
-      uploadUrl.value = result["accessUrl"];
+      /* 判断是否是用户头像 */
+      if(isPhoto){
+        
+      }else{
+        uploadUrl.value = result["accessUrl"];
+      }
     }
     //上传失败回调
     failCallBack(clientException, serviceException) {
@@ -107,6 +112,7 @@ class StateObsController extends GetxController {
         progressCallBack: progressCallBack,
         initMultipleUploadCallback: initMultipleUploadCallback
     );
+
   }
 
   /* 暂停任务 */
