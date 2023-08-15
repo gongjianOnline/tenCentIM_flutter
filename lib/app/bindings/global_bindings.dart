@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../controllers/circle_list_controller.dart';
 import "../controllers/init_tencent_im_controller.dart";
+import '../controllers/state_obs_controller.dart';
 import '../controllers/tencent_message_controller.dart';
 import '../controllers/tencent_relationship_controller.dart';
 import '../controllers/tencent_session_controller.dart';
@@ -26,6 +27,9 @@ class GlobalBindings extends Bindings {
     );
     Get.lazyPut<CircleListController>(
       () => CircleListController(),
+    );
+    Get.lazyPut<StateObsController>(
+      () => StateObsController(),
     );
 
 

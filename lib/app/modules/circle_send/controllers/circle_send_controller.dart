@@ -8,12 +8,16 @@ import 'package:get/get.dart';
 
 
 import '../../../controllers/circle_list_controller.dart';
+import '../../../controllers/state_obs_controller.dart';
 import '../../../model/circleSendModel.dart';
 
 class CircleSendController extends GetxController {
 
   /* 调用朋友圈模块 */
   CircleListController circleListController = Get.find();
+
+  /* 腾讯对象存储模块调用 */
+  StateObsController stateObsController = Get.find();
 
   /* 创建视图层和控制器关联 */
   RxString titleName = "发送朋友圈".obs;
@@ -27,6 +31,7 @@ class CircleSendController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    stateObsController.stateOBS();
   }
 
   @override
@@ -55,7 +60,7 @@ class CircleSendController extends GetxController {
     var initData = {
       "content":circleContent.value,
       "time":date.millisecondsSinceEpoch,
-      "imgUrl":"",
+      "imgUrl":stateObsController.uploadUrl.value,
       "userId":tcUserID,
       "circleId":"$tcUserID-${date.millisecondsSinceEpoch}"
     };
@@ -66,6 +71,8 @@ class CircleSendController extends GetxController {
       String tcUserID = await Storage.getData("tcUserID");
       circleListController.handelCircleList(tcUserID);
       Get.offAndToNamed("/layout");
+      stateObsController.uploadUrl.value = "";
+      circleContent.value = "";
     }else{
       Remind.toast("发布失败");
     }
@@ -75,8 +82,16 @@ class CircleSendController extends GetxController {
   handelPicker()async{
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     print(image!.path);
+    var path = image!.path;
+    var name = path.substring(path.lastIndexOf("/") + 1, path.length);
+    stateObsController.handelUpload(path,name);
   }
 
-
+  /* 返回朋友圈 */
+  handelBack(){
+    stateObsController.uploadUrl.value = "";
+    circleContent.value = "";
+    Get.back();
+  }
 
 }

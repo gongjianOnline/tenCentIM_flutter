@@ -181,7 +181,7 @@ class CircleView extends GetView<CircleController> {
           ),
 
           /* 朋友圈内容 */
-          CircleData.textComponent(context:itemData.content),
+          itemData.content.isNotEmpty?CircleData.textComponent(context:itemData.content):Container(),
             /* 图片 */
           itemData.imgUrl.isNotEmpty?CircleData.ImageComponent(imgUrl:itemData.imgUrl):Container(),
 

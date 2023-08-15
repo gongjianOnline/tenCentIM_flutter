@@ -33,7 +33,7 @@ class CircleSendView extends GetView<CircleSendController> {
         children: [
           InkWell(
             borderRadius: BorderRadius.circular(20),
-            onTap: (){Get.back();},
+            onTap: (){controller.handelBack();},
             child: Container(
               child: const Icon(
                 Icons.arrow_back_ios,
@@ -81,19 +81,31 @@ class CircleSendView extends GetView<CircleSendController> {
           /* 上传图片 */
           Container(
             alignment: Alignment.centerLeft,
-            child:InkWell(
-              onTap: (){controller.handelPicker();},
-              child:  Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  border: Border.all(color:const Color.fromARGB(255, 221, 221, 221),width: 0.5)
+            child:Row(
+              children: [
+                controller.stateObsController.uploadUrl.value.isEmpty?Container():Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+
+                  ),
+                  child: Image.network(controller.stateObsController.uploadUrl.value),
                 ),
-                child: const Icon(
-                  Icons.add,
-                  color: Color.fromARGB(255, 221, 221, 221),
-                ),
-              ),
+                controller.stateObsController.uploadUrl.value.isEmpty?InkWell(
+                  onTap: (){controller.handelPicker();},
+                  child:  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      border: Border.all(color:const Color.fromARGB(255, 221, 221, 221),width: 0.5)
+                    ),
+                    child: const Icon(
+                      Icons.add,
+                      color: Color.fromARGB(255, 221, 221, 221),
+                    ),
+                  ),
+                ):Container()
+              ]
             ),
           )
         ],

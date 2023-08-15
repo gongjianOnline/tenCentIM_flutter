@@ -12,7 +12,7 @@ class FetchCredentials implements IFetchCredentials{
     var httpClient = HttpClient();
     try {
       // 临时密钥服务器 url，临时密钥生成服务请参考 https://cloud.tencent.com/document/product/436/14048
-      var stsUrl = "localhost:3002/obs/tencentOBS";
+      var stsUrl = "http://10.1.37.208:3002/obs/tencentOBS";
       var request = await httpClient.getUrl(Uri.parse(stsUrl));
       var response = await request.close();
       if (response.statusCode == HttpStatus.OK) {
@@ -21,11 +21,11 @@ class FetchCredentials implements IFetchCredentials{
         var data = jsonDecode(json);
         // 最后返回临时密钥信息对象
         return SessionQCloudCredentials(
-            secretId: data['credentials']['tmpSecretId'],// 临时密钥 SecretId
-            secretKey: data['credentials']['tmpSecretKey'],// 临时密钥 SecretKey
-            token: data['credentials']['sessionToken'],// 临时密钥 Token
-            startTime: data['startTime'],//临时密钥有效起始时间，单位是秒
-            expiredTime: data['expiredTime']//临时密钥有效截止时间戳，单位是秒
+            secretId: data['data']['credentials']['tmpSecretId'],// 临时密钥 SecretId
+            secretKey: data['data']['credentials']['tmpSecretKey'],// 临时密钥 SecretKey
+            token: data['data']['credentials']['sessionToken'],// 临时密钥 Token
+            startTime: data['data']['startTime'],//临时密钥有效起始时间，单位是秒
+            expiredTime: data['data']['expiredTime']//临时密钥有效截止时间戳，单位是秒
         );
       } else {
         throw ArgumentError();

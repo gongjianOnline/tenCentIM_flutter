@@ -9,6 +9,7 @@ import 'package:tencentcloud_cos_sdk_plugin/cos.dart';
 import 'app/common/initOBS.dart';
 import 'app/controllers/circle_list_controller.dart';
 import 'app/controllers/init_tencent_im_controller.dart';
+import 'app/controllers/state_obs_controller.dart';
 import 'app/controllers/tencent_message_controller.dart';
 import 'app/controllers/tencent_relationship_controller.dart';
 import 'app/controllers/tencent_session_controller.dart';
@@ -24,6 +25,7 @@ void main() async {
   Get.put(TencentMessageController());
   Get.put(TencentSessionController());
   Get.put(CircleListController());
+  Get.put(StateObsController());
   
   
   /*更改状态栏颜色 */

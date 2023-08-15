@@ -7,8 +7,10 @@ import 'package:tencentcloud_cos_sdk_plugin/transfer_task.dart';
 import '../common/initOBS.dart';
 
 class StateObsController extends GetxController {
-
+  /* 上传的实例 */
   late TransferTask transferTask;
+  /*上传成功的链接 */
+  RxString uploadUrl = "".obs;
 
   @override
   void onInit() {
@@ -54,12 +56,12 @@ class StateObsController extends GetxController {
   }
 
   /* 上传对象 */
-  handelUpload(String localPath)async{
+  handelUpload(String localPath,fileName)async{
     CosTransferManger transferManager = Cos().getDefaultTransferManger();
     //CosTransferManger transferManager = Cos().getTransferManger("newRegion");
     // 存储桶名称，由 bucketname-appid 组成，appid 必须填入，可以在 COS 控制台查看存储桶名称。 https://console.cloud.tencent.com/cos5/bucket
     String bucket = "flutter-im-1300219180";
-    String cosPath = "img/"; //对象在存储桶中的位置标识符，即称对象键
+    String cosPath = fileName; //对象在存储桶中的位置标识符，即称对象键
     String srcPath = localPath; //本地文件的绝对路径
     //若存在初始化分块上传的 UploadId，则赋值对应的 uploadId 值用于续传；否则，赋值 null
     String? _uploadId;
@@ -67,15 +69,19 @@ class StateObsController extends GetxController {
     successCallBack(result) {
       // todo 上传成功后的逻辑
       print("上传成功");
+      print(result);
+      uploadUrl.value = result["accessUrl"];
     }
     //上传失败回调
     failCallBack(clientException, serviceException) {
       // todo 上传失败后的逻辑
       if (clientException != null) {
-        print("上传失败");
+        print("上传失败 clientException");
+        print(clientException);
       }
       if (serviceException != null) {
-        print("上传成功");
+        print("上传失败 serviceException");
+        print(serviceException);
       }
     }
     //上传状态回调, 可以查看任务过程
