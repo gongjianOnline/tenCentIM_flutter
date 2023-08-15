@@ -77,8 +77,8 @@ class CircleDetailsView extends GetView<CircleDetailsController> {
           /* 作者详情 */
           singleRowUserInfo(),
           /* 作者发送内容 */
-          controller.circleDet.value.content!.isNotEmpty?CircleData.textComponent(context: controller.circleDet.value.content):Container(),
-          controller.circleDet.value.imgUrl!.isNotEmpty?CircleData.ImageComponent(imgUrl:controller.circleDet.value.imgUrl):Container(),
+          controller.circleDet.value.content != null?CircleData.textComponent(context: controller.circleDet.value.content):Container(),
+          controller.circleDet.value.imgUrl != null?CircleData.ImageComponent(imgUrl:controller.circleDet.value.imgUrl):Container(),
           /* 评论标题 */
           singleComment(),
           /* 评论项 */
@@ -145,7 +145,7 @@ class CircleDetailsView extends GetView<CircleDetailsController> {
                       // ),
                       Container(
                         child:  Text(
-                          TimeFormat.toText((controller.circleDet.value.time !~/ 1000),formatText:"yyyy-MM-dd H:mm"),
+                          controller.circleDet.value.time == null?"":TimeFormat.toText((controller.circleDet.value.time !~/ 1000),formatText:"yyyy-MM-dd H:mm"),
                           style: const TextStyle(
                             fontSize: 14,
                             color: MyTheme.unimportantFontColor
@@ -169,14 +169,15 @@ class CircleDetailsView extends GetView<CircleDetailsController> {
                   child: const Icon(
                     AliIcon.position,
                     color: MyTheme.unimportantFontColor,
-                    size: 20,
+                    size: 17,
                   ),
                 ),
                 Container(
                   child:const Text(
                     "天津 西青区",
                     style: TextStyle(
-                      color: MyTheme.unimportantFontColor
+                      color: MyTheme.unimportantFontColor,
+                      fontSize: 14
                     ),
                   )
                 )
@@ -197,7 +198,7 @@ class CircleDetailsView extends GetView<CircleDetailsController> {
         "评论",
         style: TextStyle(
           color: MyTheme.stressFontColor,
-          fontSize: 20
+          fontSize: 18
         ),
       ),
     );

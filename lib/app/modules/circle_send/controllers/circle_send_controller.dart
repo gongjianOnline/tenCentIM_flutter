@@ -51,6 +51,11 @@ class CircleSendController extends GetxController {
 
   /* 发送朋友圈 */
   handelSend()async{
+    if(stateObsController.uploadUrl.value == "" && circleContent.value == ""){
+      Remind.toast("请输入朋友圈内容");
+      return;
+    }
+
     /* 获取腾讯用户ID */
     var tcUserID = await Storage.getData("tcUserID");
     /* 获取系统时间 */
