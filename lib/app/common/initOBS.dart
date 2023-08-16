@@ -12,7 +12,7 @@ class FetchCredentials implements IFetchCredentials{
     var httpClient = HttpClient();
     try {
       // 临时密钥服务器 url，临时密钥生成服务请参考 https://cloud.tencent.com/document/product/436/14048
-      var stsUrl = "http://10.1.37.208:3002/obs/tencentOBS";
+      var stsUrl = "http://10.1.37.208:3000/obs/tencentOBS";
       var request = await httpClient.getUrl(Uri.parse(stsUrl));
       var response = await request.close();
       if (response.statusCode == HttpStatus.OK) {
