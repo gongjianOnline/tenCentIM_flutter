@@ -5,7 +5,7 @@ class MyHttp {
 
   MyHttp() {
     BaseOptions options = BaseOptions(
-      baseUrl: 'http://114.115.218.92:3000',
+      baseUrl: 'http://flutterim.gjweb.pro',
       connectTimeout: const Duration(seconds: 5),
       receiveTimeout: const Duration(seconds: 3),
     );
